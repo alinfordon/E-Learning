@@ -80,6 +80,18 @@ const TopNav = ({becomeInstructor, createCourse, instructorT, onlineCourse, logi
           </Link>
         </Item>
       )}
+
+      {user && user.role && user.role.includes("999U999") && (
+        <Item
+          key="/admin"
+          onClick={(e) => setCurrent(e.key)}
+          icon={<TeamOutlined />}
+        >
+          <Link href="/admin">
+            <a>Admin Staff</a>
+          </Link>
+        </Item>
+      )}
       
       
       {user === null && (
