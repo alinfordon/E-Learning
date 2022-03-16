@@ -14,6 +14,7 @@ import {
   currentAdmin,
   forgotPassword,
   resetPassword,
+  findUser,
 } from "../controllers/auth";
 
 router.post("/register", register);
@@ -23,5 +24,6 @@ router.get("/current-user", requireSignin, currentUser);
 router.get("/current-admin", requireSignin, currentAdmin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
+router.post("/find-user", requireSignin, findUser);
 
 module.exports = router;

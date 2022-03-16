@@ -28,7 +28,7 @@ const CourseCreateForm = ({
               className="form-control"
               placeholder="Name"
               value={values.name}
-              onChange={handleChange}
+              onChange={handleChange} 
             />
           </div>
 

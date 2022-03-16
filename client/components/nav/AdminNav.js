@@ -21,10 +21,15 @@ const AdminNav = () => {
   }, [process.browser && window.location.pathname]);
 
   return (
-    <div className="nav flex-column nav-pills">
+    <div className="nav flex-column nav-pills mt-4">
       <Link href="/admin">
         <a className={`nav-link ${current === "/admin" && "active"}`}>
           Dashboard
+        </a>
+      </Link>
+      <Link href="/admin/create-instructor">
+        <a className={`nav-link ${current === "/admin/create-instructor" && "active"}`}>
+          Create Instructor
         </a>
       </Link>
     </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { SyncOutlined } from "@ant-design/icons";
-import UserNav from "../nav/UserNav";
+import AdminNav from "../nav/AdminNav";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import TopNav from "../TopNav";
@@ -63,7 +63,7 @@ const AdminRoute = ({ children, showNav = true }) => {
         <Content style={{ padding: '0 50px'}}> 
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-2">{showNav && <UserNav dashboard={t("user:user-dashboard")} />}</div>
+            <div className="col-md-2">{showNav && <AdminNav dashboard={t("user:user-dashboard")} />}</div>
             <div className="col-md-10">{children}</div>
           </div>
         </div>

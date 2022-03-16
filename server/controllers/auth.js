@@ -94,6 +94,18 @@ export const currentUser = async (req, res) => {
   }
 };
 
+export const findUser = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.find({email}).select("-password -stripe_seller").exec();
+    if (!user) return res.status(400).send("User not found");
+    console.log("CURRENT_USER", user);
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const currentAdmin = async (req, res) => {
   try {
     let user = await User.findById(req.user._id).select("-password").exec();

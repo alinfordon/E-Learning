@@ -58,6 +58,24 @@ export const getAccountStatus = async (req, res) => {
   }
 };
 
+export const addInstructorRole = async (req, res) => {  
+  try {
+    const user = await User.findById(req.user._id).exec();
+    const statusUpdated = await User.findByIdAndUpdate(
+      user._id,
+      {        
+        $addToSet: { role: "Instructor" },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .exec();
+    res.json(statusUpdated);
+  }catch (err) {
+    console.log(err)
+  }
+};
+
 export const currentInstructor = async (req, res) => {
   try {
     let user = await User.findById(req.user._id).select("-password").exec();

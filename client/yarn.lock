@@ -417,6 +417,11 @@
   "resolved" "https://registry.npmjs.org/entities/-/entities-2.2.0.tgz"
   "version" "2.2.0"
 
+"es6-object-assign@^1.1.0":
+  "integrity" "sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw="
+  "resolved" "https://registry.npmjs.org/es6-object-assign/-/es6-object-assign-1.1.0.tgz"
+  "version" "1.1.0"
+
 "escape-html@~1.0.3":
   "integrity" "sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg="
   "resolved" "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz"
@@ -926,6 +931,11 @@
     "nanoid" "^3.1.30"
     "picocolors" "^1.0.0"
     "source-map-js" "^1.0.1"
+
+"promise-polyfill@^6.0.2":
+  "integrity" "sha1-36lpQ+qcEh/KTem1hoyznTRy4Fc="
+  "resolved" "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-6.1.0.tgz"
+  "version" "6.1.0"
 
 "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
@@ -1492,6 +1502,14 @@
   "integrity" "sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA=="
   "resolved" "https://registry.npmjs.org/styled-jsx/-/styled-jsx-5.0.0.tgz"
   "version" "5.0.0"
+
+"sweetalert@^2.1.2":
+  "integrity" "sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA=="
+  "resolved" "https://registry.npmjs.org/sweetalert/-/sweetalert-2.1.2.tgz"
+  "version" "2.1.2"
+  dependencies:
+    "es6-object-assign" "^1.1.0"
+    "promise-polyfill" "^6.0.2"
 
 "to-regex-range@^5.0.1":
   "integrity" "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="
