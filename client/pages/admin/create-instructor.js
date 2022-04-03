@@ -36,15 +36,28 @@ const CreateInstructor = () => {
       setUserChange(data[0]);
     };
 
-    const addInstructor = async (e) => {
+    const addAdmin = async (e) => {
       e.preventDefault();
-      const { data } = await axios.post(`/api/add-instructor`);
+      const { data } = await axios.post(`/api/admin/add-role`, {
+        email: email,
+      });
       console.log("User Find => ", data[0]);
       setUserChange(data[0]);
       loadUser();
     }
 
-    const handleDeleteUser = async () => {    
+    const addInstructor = async (e) => {
+      e.preventDefault();
+      const { data } = await axios.post(`/api/add-instructor`, {
+        email: email,
+      });
+      console.log("User Find => ", data[0]);
+      setUserChange(data[0]);
+      loadUser();
+    }
+
+    const handleDeleteUser = async (role) => {    
+      console.log(role);
       const willDelete = await swal({
         title: "Are you sure you want to delete?",
         icon: "warning",
@@ -52,16 +65,15 @@ const CreateInstructor = () => {
         dangerMode: true,
       })
       if (willDelete) {
-        try {
-          setLoading(true);
-          const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/user/delete/send`, { name: user.name, email: user.email });            
-          if(data.ok){
-              toast("Cerere trimisa.");            
-              setLoading(false);
-          }            
+        try {          
+          const { data } = await axios.post(`/api/delete/${role}`, {
+            email: email,
+          });  
+              setUserChange(data[0]); 
+              loadUser();     
+              toast("Instructor rights have been removed."); 
         } catch (err) {
-          toast("Nu am trimis cererea, Incercati din nou");
-          setLoading(false);
+          toast("Try again!");          
         }       
       }
     };
@@ -92,7 +104,7 @@ const CreateInstructor = () => {
 
     return (
         <AdminRoute>
-            <h1 className="text-center p-4">Create Instructor</h1>
+            <h1 className="text-center p-4">Edit user rights</h1>
             <div className="container">
               <div className="row d-flex justify-content-center">
               <div className="col-md-5">
@@ -142,14 +154,13 @@ const CreateInstructor = () => {
                   </Avatar>
                   
                   <p className="text-center h5" >{userChange && userChange.name}
-                  <br/>{userChange && userChange.email}</p>
-                  <hr />
-                  {userChange && <h5>This user has {userChange.courses.length} Courses</h5>}<br />
+                  <br/>{userChange && userChange.email} <br /><span className="font-italic text-warning h6">This user has {userChange.courses.length} Courses</span></p>
+                  <hr />                  
                   <ul className="nav justify-content-start">                  
                   <h5>This user's rights: </h5>
                     {userChange && userChange.role.map((r) => (
                       <li className="nav-item ml-2 mr-2" key={r}>
-                        <Badge count='X' onClick={handleDeleteUser} className="pointer" alt={ <DeleteOutlined />}>
+                        <Badge count='X' onClick={() => handleDeleteUser(r)} className="pointer" alt={ <DeleteOutlined />}>
                           <Button disabled shape="round" className="text-success"> {r}</Button>  
                         </Badge>
                       </li>
@@ -157,15 +168,24 @@ const CreateInstructor = () => {
                  </ul>    
                  <hr />
                  <div className="">
-                 <h5>Add instructor rights: </h5>
+                 <h5>Add user rights: </h5>
                  <Button 
-                    disabled={loading}
-                    className="btn btn-primary"
+                    disabled={userChange && userChange.role.includes("Instructor")}
+                    className="btn btn-primary mt-2"
                     loading={loading}
                     type="primary"
                     size="large"
                     shape="round" 
                     onClick={addInstructor}> Make Instructor</Button>
+                    <span className="m-4"></span>
+                    <Button 
+                    disabled={userChange && userChange.role.includes("999U999")}
+                    className="btn btn-primary mt-2"
+                    loading={loading}
+                    type="primary"
+                    size="large"
+                    shape="round" 
+                    onClick={addAdmin}> Make Administrator</Button>
                  </div>                      
                 </div> : 
                 <div className="mt-4 text-center">

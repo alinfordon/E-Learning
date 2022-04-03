@@ -21,7 +21,7 @@ const InstructorIndex = () => {
 
   return (
     <InstructorRoute>
-      <h1 className="jumbotron text-center square">Instructor Dashboard</h1>
+      <h1 className="text-center text-primary">Instructor Dashboard</h1>
       {/* <pre>{JSON.stringify(courses, null, 4)}</pre> */}
 
       {courses &&

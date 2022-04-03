@@ -106,6 +106,42 @@ export const findUser = async (req, res) => {
   }
 };
 
+export const addAdminRole = async (req, res) => {  
+  try {
+    const { email } = req.body;
+    const statusUpdated = await User.findOneAndUpdate(
+      {email},
+      {        
+        $addToSet: { role: "999U999" },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .exec();
+    res.json(statusUpdated);
+  }catch (err) {
+    console.log(err)
+  }
+};
+
+export const deleteAdminRole = async (req, res) => {  
+  try {
+    const { email } = req.body;
+    const statusUpdated = await User.findOneAndUpdate(
+      {email},
+      {        
+        $pull: { role: "999U999" },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .exec();
+    res.json(statusUpdated);
+  }catch (err) {
+    console.log(err)
+  }
+};
+
 export const currentAdmin = async (req, res) => {
   try {
     let user = await User.findById(req.user._id).select("-password").exec();

@@ -50,7 +50,7 @@ const UserIndex = () => {
           className="d-flex justify-content-center display-1 text-danger p-5"
         />
       )}
-      <h1 className="jumbotron text-center square">{t("user:user-dashboard")}</h1>
+      <h1 className="text-center text-primary">My courses</h1>
 
       {/* show list of courses */}
 

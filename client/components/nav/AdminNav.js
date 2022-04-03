@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import TopNav from "../TopNav";
 
+
 export async function getStaticProps({locale}) {
   return {
     props: {
@@ -29,7 +30,7 @@ const AdminNav = () => {
       </Link>
       <Link href="/admin/create-instructor">
         <a className={`nav-link ${current === "/admin/create-instructor" && "active"}`}>
-          Create Instructor
+          User Rights
         </a>
       </Link>
     </div>

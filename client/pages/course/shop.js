@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 import { Select, Layout, Menu, Breadcrumb } from 'antd';
 import axios from "axios";
-import CourseCard from "../components/cards/CourseCard";
+import CourseCard from "../../components/cards/CourseCard";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import locale from "antd/lib/date-picker/locale/en_US";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import TopNav from "../components/TopNav";
-import HomeBaner from "../components/home/baner";
-import OurCourses from "../components/home/OurCourses";
+import TopNav from "../../components/TopNav";
+
 
 
 
 const { Option } = Select;
 const { Content, Footer, Header } = Layout;
 
-const Index = ({courses}) => {
+const Shop = ({courses}) => {
   const router = useRouter();
   const { t } = useTranslation();
 /*
@@ -43,11 +42,21 @@ const Index = ({courses}) => {
               instructorT={t("home:instructor")}
               createCourse={t("home:create-course")}
         />
-      </Header>
-      <HomeBaner /> 
-      <OurCourses />     
+      </Header>      
+      <h1 className="jumbotron text-center bg-primary square">
+      {t("home:online-education-marketplace")}
+      </h1>
       <Content style={{ padding: '0 50px'}}>    
-        
+         
+      <div className="container-fluid">
+        <div className="row">
+          {courses.map((course) => (
+            <div key={course._id} className="col-md-4">
+              <CourseCard course={course} />
+            </div>
+          ))}
+        </div>
+      </div>     
       </Content>
       <Footer style={{ textAlign: 'center' }}> 
       <ul className="nav justify-content-end">
@@ -76,4 +85,4 @@ export async function getServerSideProps({locale}) {
   };
 }
 
-export default Index;
+export default Shop;

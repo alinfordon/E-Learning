@@ -15,6 +15,8 @@ import {
   forgotPassword,
   resetPassword,
   findUser,
+  addAdminRole,
+  deleteAdminRole,
 } from "../controllers/auth";
 
 router.post("/register", register);
@@ -25,5 +27,7 @@ router.get("/current-admin", requireSignin, currentAdmin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
 router.post("/find-user", requireSignin, findUser);
+router.post("/admin/add-role", requireSignin, addAdminRole);
+router.post("/delete/999U999", requireSignin, deleteAdminRole);
 
 module.exports = router;

@@ -6,7 +6,7 @@ import {
   AppstoreOutlined,
   CoffeeOutlined,
   LoginOutlined,
-  LogoutOutlined,
+  ShopOutlined,
   UserAddOutlined,
   CarryOutOutlined,
   TeamOutlined,
@@ -55,6 +55,16 @@ const TopNav = ({becomeInstructor, createCourse, instructorT, onlineCourse, logi
         icon={<AppstoreOutlined />}
       >
         <Link href="/">
+          <a>Home</a>
+        </Link>
+      </Item>
+
+      <Item
+        key="/course/shop"
+        onClick={(e) => setCurrent(e.key)}
+        icon={<ShopOutlined />}
+      >
+        <Link href="/course/shop">
           <a>{onlineCourse}</a>
         </Link>
       </Item>

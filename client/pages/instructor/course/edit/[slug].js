@@ -203,7 +203,7 @@ const CourseEdit = () => {
 
   return (
     <InstructorRoute>
-      <h1 className="jumbotron text-center square">Update Course</h1>
+      <h1 className="text-center text-primary">Update Course</h1>
       {/* {JSON.stringify(values)} */}
       <div className="pt-3 pb-3">
         <CourseCreateForm

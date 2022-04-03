@@ -15,10 +15,12 @@ import {
   instructorBalance,
   instructorPayoutSettings,
   addInstructorRole,
+  deleteInstructorRole,
 } from "../controllers/instructor";
 
 router.post("/make-instructor", requireSignin, makeInstructor);
 router.post("/add-instructor", requireSignin, addInstructorRole);
+router.post("/delete/Instructor", requireSignin, deleteInstructorRole);
 router.post("/get-account-status", requireSignin, getAccountStatus);
 router.get("/current-instructor", requireSignin, currentInstructor);
 
