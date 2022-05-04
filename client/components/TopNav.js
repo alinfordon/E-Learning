@@ -68,29 +68,7 @@ const TopNav = ({becomeInstructor, createCourse, instructorT, onlineCourse, logi
           <a>{onlineCourse}</a>
         </Link>
       </Item>
-
-      {user && user.role && user.role.includes("Instructor") ? (
-        <Item
-          key="/instructor/course/create"
-          onClick={(e) => setCurrent(e.key)}
-          icon={<CarryOutOutlined />}
-        >
-          <Link href="/instructor/course/create">
-            <a>{createCourse}</a>
-          </Link>
-        </Item>
-      ) : (
-        <Item
-          key="/user/become-instructor"
-          onClick={(e) => setCurrent(e.key)}
-          icon={<TeamOutlined />}
-        >
-          <Link href="/user/become-instructor">
-            <a>{becomeInstructor}</a>
-          </Link>
-        </Item>
-      )}
-
+      
       {user && user.role && user.role.includes("999U999") && (
         <Item
           key="/admin"
@@ -142,27 +120,22 @@ const TopNav = ({becomeInstructor, createCourse, instructorT, onlineCourse, logi
                 <a>{dashboard}</a>
               </Link>
             </Item>
+            {user && user.role && user.role.includes("Instructor") && (
+            <Item
+              key="/instructor"
+              onClick={(e) => setCurrent(e.key)}
+              //icon={<TeamOutlined />}
+              //className="float-right"
+            >
+              <Link href="/instructor">
+                <a>{instructorT}</a>
+              </Link>
+            </Item>
+      )}
             <Item onClick={logout}>{logoutT}</Item>
           </ItemGroup>
         </SubMenu>
-      )}
-
-      {user && user.role && user.role.includes("Instructor") && (
-        <Item
-          key="/instructor"
-          onClick={(e) => setCurrent(e.key)}
-          icon={<TeamOutlined />}
-          className="float-right"
-        >
-          <Link href="/instructor">
-            <a>{instructorT}</a>
-          </Link>
-        </Item>
-      )}
-      <Item  >
-       
-      </Item>
-      
+      )}      
     </Menu>
   );
 };
