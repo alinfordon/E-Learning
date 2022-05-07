@@ -48,7 +48,8 @@ const TopNav = ({becomeInstructor, createCourse, instructorT, onlineCourse, logi
       mode="horizontal"
       selectedKeys={[current]}
       className="mb-2"
-    >
+      
+    >      
       <Item
         key="/"
         onClick={(e) => setCurrent(e.key)}

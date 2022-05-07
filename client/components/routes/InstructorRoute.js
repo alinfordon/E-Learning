@@ -57,7 +57,7 @@ const InstructorRoute = ({ children }) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>  
      <Sider className="d-none d-lg-block" collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className="logo" />
+          <div className="mt-2" />
           <div style={{minHeight: "60px"}}>{!collapsed && <h4 className="text-light text-center pt-2">Instructor</h4>}</div>
         <Menu theme="dark" defaultSelectedKeys={[current]} mode="inline" >
           <Menu.Item key="/instructor" onClick={(e) => setCurrent(e.key)}  icon={<PieChartOutlined />}>

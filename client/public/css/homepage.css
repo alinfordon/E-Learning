@@ -1,0 +1,259 @@
+/*================================================
+Main Banner Two Area CSS
+=================================================*/
+.main-banner-two {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height: 800px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#370b6f), color-stop(#00429b), color-stop(#006dba), color-stop(#0095ce), to(#2dbcdc));
+    background: linear-gradient(to bottom, #370b6f, #00429b, #006dba, #0095ce, #2dbcdc);
+  }
+  
+.main-banner-two .container-fluid {
+    max-width: 1920px;
+  }
+  
+.main-banner-two .banner-image {
+    margin-top: 150px;
+    position: relative;
+  }
+  
+.main-banner-two .banner-image img {
+    position: absolute;
+  }
+  
+.main-banner-two .banner-image img:nth-child(1) {
+    top: -307px;
+    left: 9%;
+  }
+  
+.main-banner-two .banner-image img:nth-child(2) {
+    right: 20%;
+    top: -236px;
+  }
+  
+.main-banner-two .banner-image img:nth-child(3) {
+    left: 0;
+    z-index: 999;
+    top: -70px;
+  }
+  
+.main-banner-two .banner-image img:nth-child(4) {
+    right: 22%;
+    top: -65px;
+    z-index: 999;
+  }
+  
+.main-banner-two .banner-image img:nth-child(5) {
+    left: 12%;
+    top: -138px;
+    z-index: 1;
+  }
+  
+.main-banner-two .banner-image img:last-child {
+    display: none;
+  }
+  
+.main-banner-two .circle-img {
+    position: absolute;
+    top: -350px;
+    right: 50px;
+    width: 800px;
+  }
+  
+.main-banner-two .circle-img img {
+    -webkit-animation-name: rotateMe;
+            animation-name: rotateMe;
+    -webkit-animation-duration: 35s;
+            animation-duration: 35s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+  }
+  
+.main-banner-two .creative-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+  }
+  
+  
+.main-banner-two .shape-dot {
+    position: absolute;
+    z-index: -1;
+    -webkit-animation: movebounce 5s linear infinite;
+    animation: movebounce 5s linear infinite;
+  }
+  
+@keyframes rotateMe {
+    from {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+
+.d-table {
+    width: 100%;
+    height: 100%;
+  }
+  
+.d-table-cell {
+    vertical-align: middle;
+  }
+
+.align-items-center{
+      -ms-flex-align:center!important;
+      align-items:center!important
+    }
+
+.main-banner-content {
+  max-width: 550px;
+  margin-left: auto;
+}
+
+.main-banner-content h1 {
+  font-size: 75px;
+  color: #ffffff;
+  margin: 0 0 30px 0;
+}
+
+.main-banner-content p {
+  color: #ffffff;
+  margin: 0 0 0 0;
+}
+
+.main-banner-content .banner-btn {
+  margin-top: 35px;
+}
+
+.main-banner-content .banner-btn .video-btn {
+  display: inline-block;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  top: -15px;
+}
+
+.main-banner-content .banner-btn .video-btn i {
+  color: #ffffff;
+  margin-right: 8px;
+  position: relative;
+  top: 2px;
+}
+
+.main-banner-content .banner-btn .video-btn i::before {
+  font-size: 20px;
+  font-weight: normal;
+  font-weight: bold;
+}
+
+.main-banner-content .banner-btn .video-btn:hover {
+  text-decoration: underline;
+}
+
+.default-btn-one {
+    border: none;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    color: #00b0ee;
+    background-color: #ffffff;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 5px;
+    margin-right: 25px;
+  }
+  
+.default-btn-one span {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #3e57d0;
+    -webkit-transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 5px;
+  }
+  
+.default-btn-one:hover, .default-btn-one:focus {
+    color: #ffffff;
+  }
+  
+.default-btn-one:hover span, .default-btn-one:focus span {
+    width: 225%;
+    height: 562.5px;
+  }
+
+.default-btn {
+    border: none;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    color: #ffffff;
+    background-color: #00b0ee;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+.default-btn span {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #3e57d0;
+    -webkit-transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 5px;
+  }
+  
+.default-btn:hover, .default-btn:focus {
+    color: #ffffff;
+  }
+  
+.default-btn:hover span, .default-btn:focus span {
+    width: 225%;
+    height: 562.5px;
+  }
+
+.about-section {
+  background-color: #ffffff;  
+}
