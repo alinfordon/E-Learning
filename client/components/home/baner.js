@@ -11,9 +11,8 @@ const HomeBaner = () => {
                         <div className="row align-items-center">
                             <div className="col-lg-6 col-md-12">
                                 <div className="main-banner-content">
-                                    <h1>Free online courses</h1>
-                                    <p>Enter the online educational platform, dedicated to everyone for free, 
-                                        and you will receive the support and information you lacked to fulfill your dreams!</p>
+                                    <h1>RAINBOW PROJECT</h1>
+                                    <p> Raising the digital literacy of professionals to address inequalities and exclusion of LGBTQI community</p>
                                     <div className="banner-btn">
                                         <a className="default-btn-one" href="/user">E-Learning Platform<span></span></a>                                        
                                     </div>

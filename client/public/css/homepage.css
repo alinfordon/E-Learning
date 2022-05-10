@@ -230,13 +230,20 @@ Main Banner Two Area CSS
     padding-bottom: 12px;
   }
   
+.nav-language {
+  border: none;  
+  background: transparent;
+  padding: 10px;
+  margin-left: 10px;
+}
 .default-btn span {
     position: absolute;
     display: block;
     width: 0;
     height: 0;
     border-radius: 50%;
-    background-color: #3e57d0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4b43c5), color-stop(#385bd5), color-stop(#2270e2), color-stop(#0c84ec), to(#1397f3));
+    background: linear-gradient(to bottom, #ff0000, #ffee00, #3e57d0, #3e57d0, #fbff00, #fc0000);
     -webkit-transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
     transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
     -webkit-transform: translate(-50%, -50%);

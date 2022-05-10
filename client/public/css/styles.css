@@ -18,6 +18,24 @@
   padding: 5px;
 }
 
+.logo-partners {
+  width: auto;
+  height: 130px;
+  padding: 5px;
+}
+
+.footer-logo {
+ 
+  padding: 15px;
+}
+
+.section-footer-logo {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&display=swap);
 /*!
@@ -749,7 +767,7 @@ Navbar Area CSS
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999999;
+  z-index: 100;
   -webkit-box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.06);
           box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.06);
   background: #ffffff !important;
@@ -1304,9 +1322,8 @@ About Section CSS
 }
 
 .about-content .about-list li {
-  font-size: 16px;
-  font-weight: 600;
-  color: #393953;
+  font-size: 14px;
+  font-weight: 400;  
   list-style-type: none;
   padding-bottom: 15px;
 }
@@ -4606,10 +4623,7 @@ blockquote::after, .blockquote::after {
 Footer Section CSS
 =================================================*/
 .footer-section {
-  background-image: url(/_next/static/images/footer-bg-c1d4622a60a5bb2865c688ec77cd0e7e.jpg);
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: transparent;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -4619,8 +4633,7 @@ Footer Section CSS
   position: absolute;
   content: "";
   height: 100%;
-  width: 100%;
-  background-color: #393953;
+  width: 100%;  
   left: 0;
   right: 0;
   top: 0;

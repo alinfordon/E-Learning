@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Select, Layout, Menu, Breadcrumb } from 'antd';
+import { Select, Layout, Modal, Breadcrumb } from 'antd';
 import axios from "axios";
 import CourseCard from "../components/cards/CourseCard";
 import { useRouter } from "next/router";
@@ -13,7 +13,9 @@ import OurCourses from "../components/home/OurCourses";
 import AboutUs from "../components/home/AboutUs";
 import OurProjects from "../components/home/OurProjects";
 import OurPartners from "../components/home/OurPartners";
+import Contact from "../components/home/Contact";
 import HomeNav from "../components/home/HomeNav";
+import { FacebookFilled , TwitterSquareFilled , FacebookOutlined, TwitterOutlined } from "@ant-design/icons";
 
 
 
@@ -24,17 +26,28 @@ const Index = ({courses}) => {
   const router = useRouter();
   const { t } = useTranslation();
   const [toggle, setToggle] = useState(false);
-  const [isTop, setIsTop] = useState(false);
+  const [isTop, setIsTop] = useState(false);  
+  const { pathname, asPath, query } = router
+
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   useEffect(() => {
     document.addEventListener('scroll', () => {
-      console.log(window.scrollY)
+      //console.log(window.scrollY)
       isTop = window.scrollY < 300;      
           setIsTop(!isTop)      
     });
   }, [isTop]);
 
-  console.log(isTop)
+  function handleChange(value) {    
+    //locale={value};       
+    router.push({ pathname, query }, asPath, { locale: value })
+  }
+
+  console.log("LOCAL", router.locale)
 /*
   const [courses, setCourses] = useState([]);
 
@@ -65,10 +78,19 @@ const Index = ({courses}) => {
                                         <a className="nav-link" href="#about">About us</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#projects">Projects </a>                                        
+                                        <a className="nav-link" href="#projects">About Project </a>                                        
                                     </li>  
                                     <li className="nav-item">
                                         <a className="nav-link" href="#contact">Contact Us</a>
+                                    </li>
+                                    <li  className="">
+                                    <Select className="nav-language" defaultValue={router.locale.toString()} style={{ width: 80 }} onChange={handleChange}>
+                                    {router.locales.map((locale) => (
+                                      <Option value={locale} className="nav-item text-dark" key={locale}>
+                                        {locale}
+                                      </Option>
+                                    ))}                                      
+                                    </Select>
                                     </li>
                                 </ul>
                                 <div className="others-options">
@@ -81,22 +103,38 @@ const Index = ({courses}) => {
             </div>    
             <div id="home"><HomeBaner /></div>
             <div id="about"><AboutUs /></div>
-            <div id="projects"><OurProjects  />  </div>  
-      <Content>    
-        
-      </Content>
-      <div id="partners"><OurPartners  />  </div>
-      <Footer style={{ textAlign: 'center' }}> 
-      <ul className="nav justify-content-end">
-              {router.locales.map((locale) => (
-                <li className="nav-item" key={locale}>
-                  <Link href={router.asPath} locale={locale}>
-                    <a className="nav-link">{locale}</a>  
-                  </Link>  
-                </li>
-              ))}
-        </ul>
-        --© {(new Date().getFullYear())} WebNode, All Rights Reserved
+            <div id="projects"><OurProjects  /></div>  
+            <div id="partners"><OurPartners  />  </div>
+            <div id="contact"><Contact  />  </div>      
+      <Footer style={{ textAlign: 'center' }}>       
+      <section className="footer-section mt-4"><div className="container">            
+                <div className="row"><div className="col-lg-4 col-md-6">                
+                <ul className="list-unstyled">
+                    <li><span className="ml-2 h5"> Follow Us: </span></li>                                    
+                    <li>
+                      <a href="https://twitter.com/Ka2Rainbo?fbclid=IwAR1nghwB16-psE6Fd2EtbnBPmvO-kIo2LiQ8NjfwVWx4KhaSfcEUQSVQE2s" target="_blank" > <TwitterSquareFilled   className="h5" /></a>
+                      <a href="https://www.facebook.com/Rainboproject" target="_blank"> <span className="ml-2"> <FacebookFilled  className="h5" /> </span></a>
+                    </li>                                                 
+                </ul>  
+                </div>
+            <div className="col-lg-4 col-md-6">
+            <ul className="list-unstyled footer-list text-dark">                            
+                            <li>Marketing: 0770000000</li>
+                            <li>Email: email@email.com</li>
+                            <li>Adresa companie: Oradea</li>
+                        </ul>    
+            </div>
+            <div className="col-lg-4 col-md-6">
+            <ul className="list-unstyled footer-list">
+                <li>Confidentialitate  </li>
+                <li>Privacy</li>
+                <li>Termeni</li>
+            </ul>     
+           </div></div>
+        </div>
+        </section>               
+        <hr />                 
+        <span className="text-center">--© {(new Date().getFullYear())} WebNode, All Rights Reserved</span>
       </Footer>
     </Layout>    
   );
