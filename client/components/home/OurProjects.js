@@ -1,7 +1,17 @@
 import React from "react";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next'
+
+export async function getStaticProps({locale}) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["homepage"])),
+      },
+    };
+  }
 
 const OurProjects = () => {
-
+    const { t } = useTranslation();
 
     return(
         <section className="about-section pt-100 pb-70 bg-white">
@@ -14,19 +24,14 @@ const OurProjects = () => {
                  </div>
                  <div className="col-lg-6">
                      <div className="about-content">
-                         <span>About Project</span>
-                         <h2>Project objectives:</h2>
+                         <span>{t('homepage:about-project')}</span>
+                         <h2>{t('homepage:project-objectives')}:</h2>
                          <ul className="about-list">
-                             <li><i className="flaticon-tick"></i>To support professionals, relief aid officers, social workers, 
-                             mental health, health care providers on how to better include intersectionality and LGBTQI perspectives in their activities</li>
-                             <li><i className="flaticon-tick"></i>To enhance their acquisition of digital competences and enable to incorporate in their 
-                             work do delivery high quality and inclusive support in order to meet the needs of LGBTQI beneficiaries</li>
-                             <li><i className="flaticon-tick"></i>To create and incentive for VET, adult education, professionals, 
-                             and stakeholder to adopt the project approach after project closure</li>
-                             <li><i className="flaticon-tick"></i>To strengthen transnational learning and cooperation’s networks of institutions, 
-                             CSO’s, public bodies/services, community centers, helplines, professionals and foster social inclusion and equality, 
-                             ensuring that LGBTQI people is included in all health, humanitarian and economic relief efforts</li>
-                             <li><i className="flaticon-tick"></i>To raise awareness of medical and mental health inequalities faced by the LGBTQI community</li>
+                             <li><i className="flaticon-tick"></i>{t('homepage:project-p-1')}</li>
+                             <li><i className="flaticon-tick"></i>{t('homepage:project-p-2')}</li>
+                             <li><i className="flaticon-tick"></i>{t('homepage:project-p-3')}</li>
+                             <li><i className="flaticon-tick"></i>{t('homepage:project-p-4')}</li>
+                             <li><i className="flaticon-tick"></i>{t('homepage:project-p-5')}</li>
                          </ul>
                      </div>
                  </div>

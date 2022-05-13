@@ -1,14 +1,25 @@
-import { useState, useEffect } from "react";
-import { Select, Layout, Modal, Breadcrumb } from 'antd';
+import { useState } from "react";
+import { Modal } from 'antd';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next'
+
+export async function getStaticProps({locale}) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["homepage"])),
+      },
+    };
+  }
 
 const OurPartners = () => {
     const [isHipVisible, setIsHipVisible] = useState(false);
+    const { t } = useTranslation();
 
     return(
         <div className="partner-section pt-100 pb-70">
             <div className="container">
                 <div className="partner-title">
-                <span>Parteners</span><h2>PARTNER ORGANIZATIONS</h2>
+                <span>{t('homepage:partners')}</span><h2>{t('homepage:partners-organization')}</h2>
             </div>
             <div className="partner-list">
             <div className="partner-item">

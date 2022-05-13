@@ -1,7 +1,17 @@
 import React from "react";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next'
+
+export async function getStaticProps({locale}) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["homepage"])),
+      },
+    };
+  }
 
 const HomeBaner = () => {
-
+    const { t } = useTranslation();
 
     return(
         <div className="main-banner-two">
@@ -12,9 +22,9 @@ const HomeBaner = () => {
                             <div className="col-lg-6 col-md-12">
                                 <div className="main-banner-content">
                                     <h1>RAINBOW PROJECT</h1>
-                                    <p> Raising the digital literacy of professionals to address inequalities and exclusion of LGBTQI community</p>
+                                    <p> {t('homepage:home-title')}</p>
                                     <div className="banner-btn">
-                                        <a className="default-btn-one" href="/user">E-Learning Platform<span></span></a>                                        
+                                        <a className="default-btn-one" href="/user">{t('homepage:e-learning')}<span></span></a>                                        
                                     </div>
                                 </div>
                             </div>

@@ -72,16 +72,16 @@ const Index = ({courses}) => {
                             <div className={toggle ? "collapsed navbar-collapse" : "collapse navbar-collapse"} id="navbarSupportedContent">
                                 <ul className="navbar-nav">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#home">Home </a>                                       
+                                        <a className="nav-link" href="#home">{t('homepage:home')} </a>                                       
                                         </li>
                                         <li className="nav-item">
-                                        <a className="nav-link" href="#about">About us</a>
+                                        <a className="nav-link" href="#about">{t('homepage:about-us')}</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#projects">About Project </a>                                        
+                                        <a className="nav-link" href="#projects">{t('homepage:about-project')} </a>                                        
                                     </li>  
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#contact">Contact Us</a>
+                                        <a className="nav-link" href="#contact">{t('homepage:contact-us')}</a>
                                     </li>
                                     <li  className="">
                                     <Select className="nav-language" defaultValue={router.locale.toString()} style={{ width: 80 }} onChange={handleChange}>
@@ -94,7 +94,7 @@ const Index = ({courses}) => {
                                     </li>
                                 </ul>
                                 <div className="others-options">
-                                <Link href="/user"><a className="default-btn">E-Learnig Platform<span></span></a></Link>
+                                <Link href="/user"><a className="default-btn">{t('homepage:e-learning')}<span></span></a></Link>
                                 </div>
                             </div>
                         </nav>
@@ -110,7 +110,7 @@ const Index = ({courses}) => {
       <section className="footer-section mt-4"><div className="container">            
                 <div className="row"><div className="col-lg-4 col-md-6">                
                 <ul className="list-unstyled">
-                    <li><span className="ml-2 h5"> Follow Us: </span></li>                                    
+                    <li><span className="ml-2 h5"> {t('homepage:follow-us')}: </span></li>                                    
                     <li>
                       <a href="https://twitter.com/Ka2Rainbo?fbclid=IwAR1nghwB16-psE6Fd2EtbnBPmvO-kIo2LiQ8NjfwVWx4KhaSfcEUQSVQE2s" target="_blank" > <TwitterSquareFilled   className="h5" /></a>
                       <a href="https://www.facebook.com/Rainboproject" target="_blank"> <span className="ml-2"> <FacebookFilled  className="h5" /> </span></a>
@@ -119,22 +119,21 @@ const Index = ({courses}) => {
                 </div>
             <div className="col-lg-4 col-md-6">
             <ul className="list-unstyled footer-list text-dark">                            
-                            <li>Marketing: 0770000000</li>
-                            <li>Email: email@email.com</li>
-                            <li>Adresa companie: Oradea</li>
+                            <li>{t('homepage:phone')}: 0770000000</li>
+                            <li>{t('homepage:email')}: email@email.com</li>
+                            <li>{t('homepage:adress')}: Oradea</li>
                         </ul>    
             </div>
             <div className="col-lg-4 col-md-6">
             <ul className="list-unstyled footer-list">
-                <li>Confidentialitate  </li>
-                <li>Privacy</li>
-                <li>Termeni</li>
+                <li>{t('homepage:terms')}</li>
+                <li>{t('homepage:privacy')}</li>                
             </ul>     
            </div></div>
         </div>
         </section>               
         <hr />                 
-        <span className="text-center">--© {(new Date().getFullYear())} WebNode, All Rights Reserved</span>
+        <span className="text-center">--© {(new Date().getFullYear())} WebNode, {t('homepage:rights')}</span>
       </Footer>
     </Layout>    
   );
@@ -146,7 +145,7 @@ export async function getServerSideProps({locale}) {
   return {
     props: {
       courses: data,
-      ...(await serverSideTranslations(locale, ["home"])),
+      ...(await serverSideTranslations(locale, ["homepage"])),
     },
   };
 }

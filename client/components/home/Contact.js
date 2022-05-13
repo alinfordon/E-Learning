@@ -1,8 +1,18 @@
 import { Button } from "antd";
 import React from "react";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next'
+
+export async function getStaticProps({locale}) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ["homepage"])),
+      },
+    };
+  }
 
 const Contact = () => {
-
+    const { t } = useTranslation();
 
     return(
         <section className="project-section pt-100 pb-70 bg-white">
@@ -10,12 +20,9 @@ const Contact = () => {
                 <div className="row align-items-center">
                     <div className="col-lg-6">
                         <div className="productive-content">
-                            <span>Contact</span>
-                            <h3>FUNDING</h3>
-                            <p>Co-funded by the Erasmus+ Programme of the European Union.
-                                    Project number: 2020-1-UK01-KA226-VET-094572
-                                    The content of the website reflects only the author’s view and that the Commission is not responsible 
-                                    for any use that may be made of the information that the website contains.</p>
+                            <span>{t('homepage:contact-us')}</span>
+                            <h3>{t('homepage:funding')}</h3>
+                            <p>{t('homepage:funding-p')}</p>
                             <div className="section-footer-logo">
                                 <img src="/images/eramus.png" className="footer-logo" alt="logo" /> 
                             </div>
@@ -23,28 +30,28 @@ const Contact = () => {
                     </div>
                     <div className="col-lg-6">
                         <div className="">
-                            <h3>Contact Us Form</h3>
+                            <h3>{t('homepage:contact-us')}</h3>
                             <form>
                             <input
                                 type="text"
                                 className="form-control mt-3 square"   
-                                placeholder="Name"                                
+                                placeholder={t('homepage:name')}                               
                                 required
                                 />
                             <input
                                 type="email"
                                 className="form-control mt-3 square"   
-                                placeholder="Email"                                
+                                placeholder={t('homepage:email')}                                
                                 required
                                 />
                             <textarea
                                     className="form-control mt-3"
                                     cols="7"
                                     rows="4"
-                                    placeholder="Content"
+                                    placeholder={t('homepage:content')}
                             ></textarea>
                             <div className="mt-3">                                
-                                <Button type="primary" shape="round" size="large" className="float-right ">Submit</Button>
+                                <Button type="primary" shape="round" size="large" className="float-right ">{t('homepage:submit')}</Button>
                             </div>
                             </form>
                         </div>
