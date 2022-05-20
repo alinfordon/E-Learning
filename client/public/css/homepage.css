@@ -253,7 +253,7 @@ Main Banner Two Area CSS
   }
   
 .default-btn:hover, .default-btn:focus {
-    color: #ffffff;
+    color: #f3f3f3;
   }
   
 .default-btn:hover span, .default-btn:focus span {
@@ -263,4 +263,51 @@ Main Banner Two Area CSS
 
 .about-section {
   background-color: #ffffff;  
+}
+
+.modalStyle {
+  min-width: 700px;    
+}
+
+@media only screen and (max-width: 576px) {
+  .modalStyle {
+    min-width: 300px;
+  }
+}
+
+.modalStyle .ant-modal-header {
+  border-radius: 20px 20px 0 0; 
+}
+
+.modalStyle .ant-modal-title {  
+  font-size: 18px;
+  color: #00429b;
+}
+
+.newStyle {
+  border-radius: 20px; 
+}
+
+.ant-modal-content {
+  border-radius: 20px;
+  font-size: 14px;
+  color: #737b9a;
+}
+
+.modalStyle2 {
+  border-radius: 20px;
+}
+.modalStyle .ant-modal-content {
+  background-color: #eeeeee;
+}
+
+.img-container {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.fake-img { 
+  padding: 10px;
 }

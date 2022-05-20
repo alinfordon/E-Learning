@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Modal } from 'antd';
+import { Modal, Button } from 'antd';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next';
+import { DoubleRightOutlined  } from "@ant-design/icons";
+
 
 export async function getStaticProps({locale}) {
     return {
@@ -13,6 +15,10 @@ export async function getStaticProps({locale}) {
 
 const OurPartners = () => {
     const [isHipVisible, setIsHipVisible] = useState(false);
+    const [isCCWVisible, setIsCCWVisible] = useState(false);
+    const [isSIMVisible, setIsSIMVisible] = useState(false);
+    const [isAKMVisible, setIsAKMVisible] = useState(false);
+    const [isSPELVisible, setIsSPELisible] = useState(false);
     const { t } = useTranslation();
 
     return(
@@ -23,32 +29,174 @@ const OurPartners = () => {
             </div>
             <div className="partner-list">
             <div className="partner-item">
-            <Modal title="Hub for Innovation Policy (HIP)" visible={isHipVisible} onOk={() => setIsHipVisible(false)} onCancel={() => setIsHipVisible(false)}>
+            <Modal title="Hub for Innovation Policy (HIP)" 
+                    className="modalStyle"
+                    visible={isHipVisible} 
+                    onOk={() => setIsHipVisible(false)} 
+                    onCancel={() => setIsHipVisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://hubinno.eu/"
+                          type="link"  
+                          target="_blank"                      
+                          onClick={() => setIsHipVisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                    >
                 <p>Hub for Innovation Policy (HIP) is a start-up company focusing on the mission of utilizing innovation and technology for advancing and empowering the services of business and social actors. The main vehicles that we utilize for this purpose include ICT tools, Capacity Building Programmes and Consulting services.</p>
                 <p>Our team includes experts coming from multidisciplinary backgrounds, but with solid background and expertise in working with market stakeholders and the Third Sector at international level. Our cumulative experience and track record includes successful collaboration with companies of various industries and economic sectors, institutions and Local Authorities in various EU countries, the European Commission and NGOs & Organizations active in the field of human rights.</p>
                 <p>Our approach is customer-driven, based on close and regular cooperation and interaction with our customers and partners, for achieving actually tailor-made solutions meeting their particular needs and challenges.</p>
             </Modal>
             <a onClick={() => setIsHipVisible(true)}>
-            <img src="/images/logo/Hip.jpg" className="logo-partners" alt="image" />
+                <div className="img-container">
+                    <img src="/images/logo/Hip-150.jpg" className="fake-img" alt="image" />
+                </div>            
             </a>
             </div>
             <div className="partner-item">
-            <a href="/">
-            <img src="/images/logo/CCW.jpg" className="logo-partners" alt="image" />
+            <Modal title="CCW-Training Academy" 
+                    className="modalStyle"
+                    visible={isCCWVisible} 
+                    onOk={() => setIsCCWVisible(false)} 
+                    onCancel={() => setIsCCWVisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://www.careerchangewales.co.uk"
+                          type="link"    
+                          target="_blank"                      
+                          onClick={() => setIsCCWVisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                      >
+                <p>CCW-Training Academy provide Vocational Training in Cardiff. CCW-Training Academy is an accredited ilm, BCS, AAT, and CIHT approved training provider and test centre in Wales. We are built on passion, creativity and excellence. We are a totally customer focused and our objectives encompasses full customer satisfaction. We are therefore flexible and responsive to our client needs and requirements.</p>
+                <p>Our training academy offers many open and bespoke training courses. Our blended long-term training experience, and working with over 100 SMEs, public and private sector organisations in United Kingdom and Europe gives us an edge in the training sector</p>
+                <p>We offer consultancy services in the following specialist areas: Personal coaching and mentoring services bespoke to any company; Health & Safety training and Consultancy works; and bespoke Bid Writing services</p>
+            </Modal>
+            <a onClick={() => setIsCCWVisible(true)}>
+                <div className="img-container">
+                    <img src="/images/logo/CCW-150.jpg" className="fake-img" alt="image" />
+                </div>            
             </a>
             </div>
             <div className="partner-item">
-            <a href="/">
-            <img src="/images/logo/Symplexis.png" className="logo-partners" alt="image"/></a>
-            </div>
-            <div className="partner-item">
-            <a href="/">
-            <img src="/images/logo/KEK.png" style={{padding: '20px'}}  alt="image" />
+            <Modal title="SYMPLEXIS short Bio" 
+                    className="modalStyle"                    
+                    visible={isSIMVisible} 
+                    onOk={() => setIsSIMVisible(false)} 
+                    onCancel={() => setIsSIMVisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://symplexis.eu/"
+                          type="link"    
+                          target="_blank"                      
+                          onClick={() => setIsSIMVisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                      >
+                <p>Symplexis is a Greek non-for-profit organization that strives to ensure equal opportunities for all through actions and measures that build skills, empower and promote active engagement and participation focusing on the most vulnerable categories of the population and particularly those with fewer opportunities. Symplexis’ mission is to elevate social cohesion through integrated actions and project-based activities that aim at promoting the inclusion of disadvantaged groups at risk of marginalization and exclusion, while promoting and protecting the rights of various types of population groups that face discrimination focusing on the empowerment and support of victims, awareness raising and information sharing at all level.</p>
+                <p>Symplexis’ activity builds on user-led approaches and interventions around four main axes of expertise, namely:</p>
+                <ul> 
+                    <li>The social and economic inclusion of those most in need comprising a wide variety of activities aimed at reducing poverty, preventing marginalisation and promoting the sustainable integration of disadvantaged groups, particularly focusing on Third Country Nationals.</li>
+                    <li>The protection and promotion of human rights through activities and interventions that address the needs of a wide range of discriminated population groups, such as women, children and elderly people, victims of violence and human trafficking, the LGBTQI community, Roma and unaccompanied minors, migrants and asylum seekers/ refugees. </li>
+                    <li>Upskilling, capacity building and empowerment of vulnerable groups with the aim to promote equal access to formal and non-formal education for all and promote lifelong learning focusing on low-skills individuals that face difficulties in (re) the labour market. </li>
+                    <li>Child and youth development through actions and projects designed to reduce youth poverty, promote child protection and stimulate social inclusion and development.</li>
+                </ul>                
+            </Modal>
+            <a onClick={() => setIsSIMVisible(true)}>
+                <div className="img-container">
+                    <img className="fake-img" src="/images/logo/Symplexis-150.png"  alt="image"/>
+                </div>
             </a>
             </div>
             <div className="partner-item">
-            <a href="/">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABYCAMAAABVnIDyAAAC61BMVEWx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/WaZP5HAAAA+HRSTlMAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl9gYWJj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" alt="image"/>
+            <Modal title="Short presentation of the organization" 
+                    className="modalStyle"                    
+                    visible={isAKMVisible} 
+                    onOk={() => setIsAKMVisible(false)} 
+                    onCancel={() => setIsAKMVisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://www.akmi-kek.gr/"
+                          type="link"    
+                          target="_blank"                      
+                          onClick={() => setIsAKMVisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                      >
+                <p>Universal Education was established in 2000 and was certified as a Level 2 National Centre for Vocational Training (K.D.V.M.2) by the National Organization for the Certification of Qualifications and Vocational Guidance (EOPPEP). It has more than 25 years of experience in the field of Vocational Education and Training and Lifelong Learning, focusing on pioneering learning methodologies/activities and having presence in Athens and Thessaloniki.</p>
+                <p>Currently, it offers both long-term and short-term courses in a variety of fields and provides a "hands-on" orientation by operating fully equipped laboratories, simulating the real conditions of everyday professional life or supporting the courses with WBL assignments.</p>
+                <p>The thematic fields of training are:</p>
+                <ul> 
+                    <li>Economy and Management  </li>
+                    <li>Informatics, Tourism & Provision of Services</li>
+                    <li>Culture & Sports, Environment</li>
+                    <li>Health & Providence</li>
+                    <li>Pedagogy  </li>
+                    <li>Agricultural & Rural</li>
+                    <li>Technical & Transportation</li>
+                </ul>   
+                <p>In addition, Universal Education also holds a strong background in adult education; it attracts a wide range of learners from various ages and social groups. The main target groups are between 18-29 and 30-45 and come from different socio-economic environments, including vulnerable groups, such as the long-term unemployed, migrants, people living in marginalized areas etc.</p>             
+                <p>Furthermore, the organization has a vast experience in the implementation of national and EU-funded projects focusing on: </p>
+                <ul> 
+                    <li>Continuing vocational training programs funded by the ESF and addressed mostly to adults (people over 18 years old)  </li>
+                    <li>Training programs for personnel by Manpower Employment Organization</li>
+                    <li>National/Transnational/EU-funded Projects</li>
+                    <li>Complementary and supportive actions and services towards employment, integration of disadvantaged groups, social cohesion, equal opportunities and environmental protection</li>                    
+                </ul>  
+                <p>Partnership in EU-funded projects</p>
+                <ul> 
+                    <li>Tour2Include (2019-1-DE02-KA204-006478)</li>
+                    <li>Cooking Cultures (2019-1-TR01-KA204-074418)</li>
+                    <li>First Step (CY/2019/AMIF/SO2.NO2.2)</li>
+                    <li>WildMapsFit (KA202-C749E635)</li>
+                    <li>Restore (2021-1-DE02-KA220-ADU-000029489)</li>
+                    <li>MigrAction (2021-1-DE02-KA202-ADU-000026992</li>                   
+                </ul> 
+            </Modal>
+            <a onClick={() => setIsAKMVisible(true)}>
+                <div className="img-container">
+                    <img className="fake-img" src="/images/logo/KEK-150.png"  alt="image" />
+                </div>
+            </a>
+            </div>
+            <div className="partner-item">
+            <Modal title="Sociedade Promotora de Estabelecimentos de Ensino, Lda" 
+                    className="modalStyle"
+                    visible={isSPELVisible} 
+                    onOk={() => setIsSPELisible(false)} 
+                    onCancel={() => setIsSPELisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://spel.com.pt"
+                          type="link"    
+                          target="_blank"                      
+                          onClick={() => setIsSPELisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                      >
+                <p>SPEL participates in this project as a pedagogical innovator and pilot-tester and will provide the perspective of a country with high inequality of opportunities on education, high qualification needs for the teachers and also high motivational needs for the teachers to participate in professional development activities. SPEL is a network of schools especially focused on pilot-testing, incorporating and further transferring innovative good practices on psycho-socio-pedagogies for the integration and empowerment of socio-economically vulnerable people. </p>
+                <p>SPEL will adapt and incorporate the project outputs into the Educational Plan of its schools and will sustainably transfer it to the future teachers, by incorporating the good practices of the project into the Train-the-Trainers training programme, which is mandatory by law for technicians that want to become VET trainers.</p>
+                
+            </Modal>
+            <a onClick={() => setIsSPELisible(true)}>
+                <div className="img-container">
+                    <img className="fake-img" src="/images/logo/SPEL-150.png" alt="image"/>
+                </div>            
             </a>
             </div>
             <div className="partner-item">

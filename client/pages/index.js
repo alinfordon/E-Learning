@@ -106,34 +106,25 @@ const Index = ({courses}) => {
             <div id="projects"><OurProjects  /></div>  
             <div id="partners"><OurPartners  />  </div>
             <div id="contact"><Contact  />  </div>      
-      <Footer style={{ textAlign: 'center' }}>       
-      <section className="footer-section mt-4"><div className="container">            
-                <div className="row"><div className="col-lg-4 col-md-6">                
+      <Footer className="footer-root">       
+      <section className="footer-section">
+        <div className="container">            
+            <div className="row"><div className="col-md-2">                
                 <ul className="list-unstyled">
-                    <li><span className="ml-2 h5"> {t('homepage:follow-us')}: </span></li>                                    
-                    <li>
+                    <li><span className="h5"> {t('homepage:follow-us')}: </span></li>                                    
+                    <li className="p-2">
                       <a href="https://twitter.com/Ka2Rainbo?fbclid=IwAR1nghwB16-psE6Fd2EtbnBPmvO-kIo2LiQ8NjfwVWx4KhaSfcEUQSVQE2s" target="_blank" > <TwitterSquareFilled   className="h5" /></a>
                       <a href="https://www.facebook.com/Rainboproject" target="_blank"> <span className="ml-2"> <FacebookFilled  className="h5" /> </span></a>
-                    </li>                                                 
+                    </li> 
+                    <hr />       
+                    <li className="h6"><a href="#">Terms & Conditions</a></li>                                        
                 </ul>  
                 </div>
-            <div className="col-lg-4 col-md-6">
-            <ul className="list-unstyled footer-list text-dark">                            
-                            <li>{t('homepage:phone')}: 0770000000</li>
-                            <li>{t('homepage:email')}: email@email.com</li>
-                            <li>{t('homepage:adress')}: Oradea</li>
-                        </ul>    
             </div>
-            <div className="col-lg-4 col-md-6">
-            <ul className="list-unstyled footer-list">
-                <li>{t('homepage:terms')}</li>
-                <li>{t('homepage:privacy')}</li>                
-            </ul>     
-           </div></div>
         </div>
         </section>               
         <hr />                 
-        <span className="text-center">--© {(new Date().getFullYear())} WebNode, {t('homepage:rights')}</span>
+        <span className="text-center">--© {(new Date().getFullYear())} Rainbo Project, {t('homepage:rights')}</span>
       </Footer>
     </Layout>    
   );

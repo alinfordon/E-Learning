@@ -15,7 +15,7 @@ const Contact = () => {
     const { t } = useTranslation();
 
     return(
-        <section className="project-section pt-100 pb-70 bg-white">
+        <section className="project-section pt-100 pb-100 bg-white">
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6">

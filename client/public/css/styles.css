@@ -2378,6 +2378,7 @@ Partner Section CSS
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
+  align-items: center;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -5px;
@@ -2398,6 +2399,12 @@ Partner Section CSS
   text-align: center;
   position: relative;
   margin-bottom: 30px;  
+}
+
+.partner-list .partner-item li {
+  font-size: 18px; 
+  font-weight: 600;
+  color: #002752;
 }
 
 .partner-list .partner-item:nth-child(6) {
@@ -4622,6 +4629,18 @@ blockquote::after, .blockquote::after {
 /*================================================
 Footer Section CSS
 =================================================*/
+.footer-root {
+  background-image: url("/images/literature.jpg");
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  height: 250px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end;
+}
+
 .footer-section {
   background: transparent;
   position: relative;
@@ -5916,7 +5935,7 @@ Go Top CSS
     -ms-flex: 0 0 50%;
     -webkit-box-flex: 0;
     flex: 0 0 33%;
-    max-width: 33%;
+    max-width: 33%;    
   }
   .partner-list .partner-item:nth-child(6) {
     margin-left: 0;

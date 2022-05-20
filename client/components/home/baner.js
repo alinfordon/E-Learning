@@ -21,7 +21,7 @@ const HomeBaner = () => {
                         <div className="row align-items-center">
                             <div className="col-lg-6 col-md-12">
                                 <div className="main-banner-content">
-                                    <h1>RAINBOW PROJECT</h1>
+                                    <h1>RAINBO PROJECT</h1>
                                     <p> {t('homepage:home-title')}</p>
                                     <div className="banner-btn">
                                         <a className="default-btn-one" href="/user">{t('homepage:e-learning')}<span></span></a>                                        
