@@ -10,14 +10,7 @@ const CreateQuizz = () => {
     // state
     const [values, setValues] = useState({
         title: "",
-        questions: [
-            {
-                question: '',
-                answers: [{answer: ''}],
-                points: '',
-        }
-        ],     
-        loading: false,
+        description: "",
     });
     // router
     const router = useRouter();
@@ -30,7 +23,7 @@ const CreateQuizz = () => {
         e.preventDefault();
         try {
           // console.log(values);
-          const { data } = await axios.post("/api/quizz/create", {
+          const { data } = await axios.post("/api/quizz", {
             ...values
           });
           toast("Great! Now you can start adding quizz");

@@ -21,31 +21,21 @@ const questionsSchema = new mongoose.Schema(
   {
     question: {
       type: String,
-      trim: true,
-      minlength: 3,
-      maxlength: 320,
+      trim: true,      
       required: true,
-    },
-    slug: {
-      type: String,
-      lowercase: true,
-    },    
+    },        
     answers: [answersSchema],
     pionts: {
-        type: Numeric,
+        type: Number,
         default: 0,
-    },
-    correct: {
-      type: Boolean,
-      default: false,
-    },
+    },    
   },
   { timestamps: true }
 );
 
 const quizzSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       trim: true,
       minlength: 3,
@@ -57,18 +47,12 @@ const quizzSchema = new mongoose.Schema(
       lowercase: true,
     },
     description: {
-      type: {},
-      minlength: 200,
-      required: true,
+      type: {}, 
     },    
     published: {
       type: Boolean,
       default: false,
-    },
-    paid: {
-      type: Boolean,
-      default: true,
-    },
+    },   
     instructor: {
       type: ObjectId,
       ref: "User",

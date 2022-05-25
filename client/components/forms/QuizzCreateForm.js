@@ -3,62 +3,47 @@ import React, { useState, useEffect } from "react";
 
 const QuizzCreateForm = ({
     values,
-    setValues,
-    handleSubmit,    
-    fields,
+    setValues,    
+    handleSubmit, 
   }) => {
-      const fields = ['test'];
-      console.log(fields)
-      const [isQuestion, setIsQuestion] = useState(false);
-      const [question, setQuestion] = useState();
-      const [Aanswer, setAnswer] = useState();
-
+     console.log(values)
     return(
         <div className="container pt-3">
-        <form onSubmit={handleSubmit}>
-        <label>Quizz Title</label>
-          <input
-            type="text"
-            className="form-control square"
-            onChange={(e) => setValues({ ...values, title: e.target.value })}
-            value={values.title}
-            placeholder="Title"
-            autoFocus
-            required
-          />        
-        <Button
-            onClick={() => setIsQuestion(true)}
-            className="col-md-3 mt-3 float-right"
-            size="large"
-            type="primary"            
-            shape="round"
-          >
-            Add Question
-        </Button>
-        {isQuestion && 
-            <div>
-                <input
-                type="text"
-                className="form-control square"
-                onChange={(e) => setValues({ ...values, question: e.target.value })}
-                value={values.question}
-                placeholder="Your Question"
-                autoFocus
-                required
-            /> 
+          {values &&
+          <form onSubmit={handleSubmit}>
+          <label>Quizz Title</label>
+            <input
+              type="text"
+              className="form-control square"              
+              value={values.name}
+              placeholder="Title"
+              autoFocus
+              onChange={(e) => setValues({ ...values, title: e.target.value })}
+              required
+            />       
+           <div className="form-group pt-3">
+              <textarea
+                name="description"
+                cols="7"
+                rows="7"
+                value={values.description}
+                className="form-control"
+                onChange={(e) => setValues({ ...values, description: e.target.value })}
+              ></textarea>
             </div>
-        }
-        <Button
-            onClick={handleSubmit}
-            className="col mt-3"
-            size="large"
-            type="primary"            
-            shape="round"
-          >
-            Save
-        </Button>
-        </form>
-        <pre>{JSON.stringify(fields, null, 4)}</pre>
+          
+          <Button
+              onClick={handleSubmit}
+              className="col mt-3"
+              size="large"
+              type="primary"            
+              shape="round"
+            >
+              Save
+          </Button>
+          </form>
+          }        
+        <pre>{JSON.stringify(values, null, 4)}</pre>
       </div>
     )
 }
