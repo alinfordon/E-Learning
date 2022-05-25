@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { SyncOutlined, EditOutlined, PieChartOutlined, DollarOutlined } from "@ant-design/icons";
+import { SyncOutlined, EditOutlined, PieChartOutlined, QuestionCircleOutlined  } from "@ant-design/icons";
 import InstructorNav from "../nav/InstructorNav";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -70,9 +70,9 @@ const InstructorRoute = ({ children }) => {
               Course Create           
             </Link>
           </Menu.Item>  
-          <Menu.Item key="/instructor/revenue" onClick={(e) => setCurrent(e.key)} icon={<DollarOutlined />}>
-            <Link href="/instructor/revenue" >              
-             Revenue           
+          <Menu.Item key="/instructor/quizz/create" onClick={(e) => setCurrent(e.key)} icon={<QuestionCircleOutlined  />}>
+            <Link href="/instructor/quizz/create" >              
+             Create Quizz           
             </Link>
           </Menu.Item> 
         </Menu>
