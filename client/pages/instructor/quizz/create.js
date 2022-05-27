@@ -27,7 +27,7 @@ const CreateQuizz = () => {
             ...values
           });
           toast("Great! Now you can start adding quizz");
-          router.push("/instructor");
+          router.push("/instructor/quizz");
         } catch (err) {
           toast(err.response.data);
         }

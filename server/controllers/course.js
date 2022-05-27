@@ -110,6 +110,18 @@ export const read = async (req, res) => {
   }
 };
 
+export const remove = async (req, res) => {
+  try {
+    const deleted = await Course.findOneAndRemove({
+      slug: req.params.slug,
+    }).exec();
+    res.json(deleted);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Course delete failed");
+  }
+};
+
 export const uploadVideo = async (req, res) => {
   try {
     // console.log("req.user._id", req.user._id);

@@ -65,12 +65,19 @@ const InstructorRoute = ({ children }) => {
             <Link href="/instructor">
               Dashboard
             </Link>
-            </Item>              
-            <Item key="/instructor/course/create" onClick={(e) => setCurrent(e.key)} icon={<EditOutlined />}>
-            <Link href="/instructor/course/create" >              
-              Course Create           
-            </Link>
-          </Item>  
+          </Item>
+          <SubMenu icon = {<EditOutlined />} title = "Courses">
+            <Item key="/instructor/course" onClick={(e) => setCurrent(e.key)}>
+              <Link href="/instructor/course" >              
+                My Courses           
+              </Link>
+            </Item> 
+            <Item key="/instructor/course/create" onClick={(e) => setCurrent(e.key)}>
+              <Link href="/instructor/course/create" >              
+                Create New Course           
+              </Link>
+            </Item> 
+          </SubMenu>
           <SubMenu icon = {<QuestionCircleOutlined />} title = "Quizz">
           <Item key="/instructor/quizz" onClick={(e) => setCurrent(e.key)}>
               <Link href="/instructor/quizz" >              

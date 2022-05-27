@@ -3,19 +3,19 @@ import axios from "axios";
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import { Avatar, Tooltip } from "antd";
 import Link from "next/link";
-import { CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 
-const QuizIndex = () => {
-  const [quizzs, setQuizzes] = useState([]);
+const CourseIndex = () => {
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    loadQuizzes();
+    loadCourses();
   }, []);
 
-  const loadQuizzes = async () => {
-    const { data } = await axios.get("/api/instructor-quizzes");
-    setQuizzes(data);
+  const loadCourses = async () => {
+    const { data } = await axios.get("/api/instructor-courses");
+    setCourses(data);
   };
 
   const myStyle = { marginTop: "-15px", fontSize: "10px" };
@@ -29,63 +29,61 @@ const QuizIndex = () => {
       })
       if (willDelete) {
         try {             
-          const { data } = await axios.delete(`/api/quizz/${slug}`);
-          console.log("Quizz DELETED =>", data);
-          loadQuizzes();   
+          const { data } = await axios.delete(`/api/course/${slug}`);
+          console.log("Course DELETED =>", data);
+          loadCourses();   
         } catch (err) {
-          console.log(data.err)
+          console.log(data)
         }       
       }
     };
 
- 
-
   return (
     <InstructorRoute>
-      <h1 className="text-center text-primary">Quizz Dashboard</h1>
+      <h1 className="text-center text-primary">Course Dashboard</h1>
       {/* <pre>{JSON.stringify(courses, null, 4)}</pre> */}
 
-      {quizzs &&
-        quizzs.map((quizz) => (
+      {courses &&
+        courses.map((course) => (
           <>
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src="/images/quizz.png"
+                src={course.image ? course.image.Location : "/course.png"}
               />
 
               <div className="media-body pl-2">
                 <div className="row">
                   <div className="col">
                     <Link
-                      href={`/instructor/quizz/view/${quizz.slug}`}
+                      href={`/instructor/course/view/${course.slug}`}
                       className="pointer"
                     >
                       <a className="mt-2 text-primary">
-                        <h5 className="pt-2">{quizz.title}</h5>
+                        <h5 className="pt-2">{course.name}</h5>
                       </a>
                     </Link>
                     <p style={{ marginTop: "-10px" }}>
-                      {quizz.questions.length} Questions
+                      {course.lessons.length} Lessons
                     </p>
 
-                    {quizz.questions.length < 5 ? (
+                    {course.lessons.length < 5 ? (
                       <p style={myStyle} className="text-warning">
-                        At least 5 questions are required to publish a quezz
+                        At least 5 lessons are required to publish a course
                       </p>
-                    ) : quizz.published ? (
+                    ) : course.published ? (
                       <p style={myStyle} className="text-success">
-                        Your quizz is live in the marketplace
+                        Your course is live in the marketplace
                       </p>
                     ) : (
                       <p style={myStyle} className="text-success">
-                        Your quizz is ready to be published
+                        Your course is ready to be published
                       </p>
                     )}
                   </div>
 
                   <div className="col-md-3 mt-3 text-center">
-                    {quizz.published ? (
+                    {course.published ? (
                       <Tooltip title="Published">
                         <CheckCircleOutlined className="h5 pointer text-success" />
                       </Tooltip>
@@ -93,9 +91,9 @@ const QuizIndex = () => {
                       <Tooltip title="Unpublished">
                         <CloseCircleOutlined className="h5 pointer text-warning" />
                       </Tooltip>
-                    )}                    
+                    )}
                     <Link
-                      href={`/instructor/quizz/view/${quizz.slug}`}
+                      href={`/instructor/course/view/${course.slug}`}
                       className="pointer"
                     >
                       <Tooltip title="Edit ?">
@@ -106,7 +104,7 @@ const QuizIndex = () => {
                     </Link>                    
                     <Tooltip title="Delete ?">
                      <DeleteOutlined
-                      onClick={() => handleDelete(quizz.slug)}
+                      onClick={() => handleDelete(course.slug)}
                       className="text-danger h5 pointer ml-4"
                     />
                     </Tooltip>
@@ -120,4 +118,4 @@ const QuizIndex = () => {
   );
 };
 
-export default QuizIndex;
+export default CourseIndex;

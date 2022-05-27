@@ -1,15 +1,25 @@
-import { Button, Progress, Tooltip } from "antd";
+import { Badge, Button, Progress, Tooltip } from "antd";
 import React, { useState, useEffect } from "react";
 
 const UpdateQuestionForm = ({
     current,
-    setCurrent,    
+    setCurrent,   
+    answer,
+    setAnswer, 
     handleUpdateQuestion, 
   }) => {
+    
 
     const handleChange = (e) => {
       setValues({ ...current, [e.target.name]: e.target.value });
     };
+
+    const del = (index) => {
+      let allAswers = current.answers;
+      console.log("all", allAswers);
+      allAswers.splice(index, 1);
+      setCurrent({ ...current, answers: allAswers });      
+    }
 
     return(
         <div className="container pt-3">
@@ -37,14 +47,15 @@ const UpdateQuestionForm = ({
             />  
             </div>
             <div className="form-group pt-3">      
-            <label>Answers</label>     
-            {current.answers && current.answers.map((a) => (
-                <input
-                  type="text"
-                  className="form-control alert alert-secondary"              
-                  defaultValue={a.answer}                             
-                  onChange={(e) => setCurrent({ ...current, a: e.target.value })}                  
-                /> 
+            <label>Delete Answers</label>     
+            {current.answers && current.answers.map((a, index) => (
+              <Button 
+                key={index}
+                onClick={() => del(index)} className="form-control col mt-3"
+                size="medium"
+                type="danger"            
+                shape="round">{a.answer}
+              </Button>                
             ))}
             </div>
           
@@ -64,7 +75,7 @@ const UpdateQuestionForm = ({
     )
 }
 
-//<pre>{JSON.stringify(values, null, 4)}</pre>
+//<pre>{JSON.stringify(current, null, 4)}</pre>
 
 export default UpdateQuestionForm;
 

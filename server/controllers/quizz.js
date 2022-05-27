@@ -45,6 +45,18 @@ export const create = async (req, res) => {
       return res.status(400).send(err.message);
     }
   };
+
+  export const remove = async (req, res) => {
+    try {
+      const deleted = await Quizz.findOneAndRemove({
+        slug: req.params.slug,
+      }).exec();
+      res.json(deleted);
+    } catch (err) {
+      console.log(err);
+      return res.staus(400).send("Quizz delete failed");
+    }
+  };
   
   export const read = async (req, res) => {
     console.log(req.params.slug);

@@ -29,6 +29,21 @@
   padding: 15px;
 }
 
+.p-100 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.p-80 {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.p-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 .section-footer-logo {
   background-color: white;
   display: flex;

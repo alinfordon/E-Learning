@@ -24,6 +24,7 @@ const QuizzEdit = () => {
   // state for lessons update
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState({}); 
+  const [answer, setAnswer] = useState({});
 
   // router
   const router = useRouter();
@@ -82,17 +83,27 @@ const QuizzEdit = () => {
     toast("Questions rearranged successfully");
   };
 
-  const handleDelete = async (index) => {
-    const answer = window.confirm("Are you sure you want to delete?");
-    if (!answer) return;
-    let allQuestions = values.questions;
-    const removed = allQuestions.splice(index, 1);
-    // console.log("removed", removed[0]._id);
-    setValues({ ...values, questions: allQuestions });
-    // send request to server
-    const { data } = await axios.put(`/api/quizz/${slug}/${removed[0]._id}`);
-    //console.log("Question DELETED =>", data);
-  };
+  const handleDelete = async (index) => {    
+    const willDelete = await swal({
+        title: "Are you sure?",
+        icon: "warning",
+        buttons: ["Cancel", true],
+        dangerMode: true,
+      })
+      if (willDelete) {
+        try {  
+          let allQuestions = values.questions;
+          const removed = allQuestions.splice(index, 1);
+          // console.log("removed", removed[0]._id);
+          setValues({ ...values, questions: allQuestions });
+          // send request to server
+          const { data } = await axios.put(`/api/quizz/${slug}/${removed[0]._id}`);
+          //console.log("Question DELETED =>", data);  
+        } catch (err) {
+          console.log(data.err)
+        }       
+      }
+    };
  
   const handleUpdateQuestion = async (e) => {
     // console.log("handle update lesson");
@@ -121,7 +132,9 @@ const QuizzEdit = () => {
           handleSubmit={handleSubmit}         
           handleChange={handleChange}
           values={values}
-          setValues={setValues}          
+          setValues={setValues}   
+          answer={answer}       
+          setAnswer={setAnswer}
           editPage={true}
         />
       </div>      
@@ -141,19 +154,20 @@ const QuizzEdit = () => {
               >
                 <Item.Meta                 
                   avatar={<Avatar>{index + 1}</Avatar>}
-                  title={<span className="qizz-title">{item.question}</span>}
+                  title={<span className="qizz-title">{item.question}</span>}                  
                 ></Item.Meta>
 
                 <EditOutlined
                    onClick={() => {
                     setVisible(true);
                     setCurrent(item);
+                    setAnswer(item.answers);
                   }}
-                  className="text-info float-right mr-4"
+                  className="h5 text-info float-right mr-4"
                 />
                 <DeleteOutlined
                   onClick={() => handleDelete(index)}
-                  className="text-danger float-right"
+                  className="h5 text-danger float-right"
                 />
               </Item>
             )}

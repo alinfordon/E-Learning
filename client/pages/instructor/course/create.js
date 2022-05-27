@@ -77,7 +77,7 @@ const CourseCreate = () => {
         image,
       });
       toast("Great! Now you can start adding lessons");
-      router.push("/instructor");
+      router.push("/instructor/course");
     } catch (err) {
       toast(err.response.data);
     }
