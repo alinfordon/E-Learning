@@ -19,6 +19,7 @@ export async function getStaticProps({locale}) {
 }
 
 const { Content, Footer, Header, Sider } = Layout;
+const { Item, SubMenu, ItemGroup } = Menu;
 
 const InstructorRoute = ({ children }) => {
   // state
@@ -60,21 +61,28 @@ const InstructorRoute = ({ children }) => {
           <div className="mt-2" />
           <div style={{minHeight: "60px"}}>{!collapsed && <h4 className="text-light text-center pt-2">Instructor</h4>}</div>
         <Menu theme="dark" defaultSelectedKeys={[current]} mode="inline" >
-          <Menu.Item key="/instructor" onClick={(e) => setCurrent(e.key)}  icon={<PieChartOutlined />}>
+          <Item key="/instructor" onClick={(e) => setCurrent(e.key)}  icon={<PieChartOutlined />}>
             <Link href="/instructor">
               Dashboard
             </Link>
-            </Menu.Item>              
-            <Menu.Item key="/instructor/course/create" onClick={(e) => setCurrent(e.key)} icon={<EditOutlined />}>
+            </Item>              
+            <Item key="/instructor/course/create" onClick={(e) => setCurrent(e.key)} icon={<EditOutlined />}>
             <Link href="/instructor/course/create" >              
               Course Create           
             </Link>
-          </Menu.Item>  
-          <Menu.Item key="/instructor/quizz/create" onClick={(e) => setCurrent(e.key)} icon={<QuestionCircleOutlined  />}>
-            <Link href="/instructor/quizz/create" >              
-             Create Quizz           
-            </Link>
-          </Menu.Item> 
+          </Item>  
+          <SubMenu icon = {<QuestionCircleOutlined />} title = "Quizz">
+          <Item key="/instructor/quizz" onClick={(e) => setCurrent(e.key)}>
+              <Link href="/instructor/quizz" >              
+                My Quizz           
+              </Link>
+            </Item> 
+            <Item key="/instructor/quizz/create" onClick={(e) => setCurrent(e.key)}>
+              <Link href="/instructor/quizz/create" >              
+                Create New Quizz           
+              </Link>
+            </Item> 
+          </SubMenu>
         </Menu>
       </Sider> 
       <Layout className="site-layout">

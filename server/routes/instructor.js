@@ -11,6 +11,7 @@ import {
   getAccountStatus,
   currentInstructor,
   instructorCourses,
+  instructorQuizzes,
   studentCount,
   instructorBalance,
   instructorPayoutSettings,
@@ -25,6 +26,7 @@ router.post("/get-account-status", requireSignin, getAccountStatus);
 router.get("/current-instructor", requireSignin, currentInstructor);
 
 router.get("/instructor-courses", requireSignin, instructorCourses);
+router.get("/instructor-quizzes", requireSignin, instructorQuizzes);
 
 router.post("/instructor/student-count", requireSignin, studentCount);
 

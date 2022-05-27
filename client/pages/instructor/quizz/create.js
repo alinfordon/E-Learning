@@ -35,17 +35,15 @@ const CreateQuizz = () => {
 
     return (
         <InstructorRoute>
-        <h1 className="text-center text-primary">Create Quizz</h1>
-        <div className="pt-3 pb-3 col-md-6">
-            <QuizzCreateForm
-                handleSubmit={handleSubmit}          
-                handleChange={handleChange}
-                values={values}
-                setValues={setValues} 
-            />
-        </div>   
-      <hr/>
-      <pre>{JSON.stringify(values, null, 4)}</pre>
+          <h1 className="text-center text-primary">Create Quizz</h1>
+          <div className="pt-3 pb-3">
+              <QuizzCreateForm
+                  handleSubmit={handleSubmit}          
+                  handleChange={handleChange}
+                  values={values}
+                  setValues={setValues} 
+              />
+          </div>   
         </InstructorRoute>
     )
 }

@@ -172,6 +172,11 @@ button:focus {
   outline: 0;
 }
 
+.qizz-title {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  color: #393953;
+}
 
 .ptb-100 {
   padding-top: 100px;

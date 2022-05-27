@@ -15,13 +15,14 @@ const QuizzCreateForm = ({
             <input
               type="text"
               className="form-control square"              
-              value={values.name}
+              value={values.title}
               placeholder="Title"
               autoFocus
               onChange={(e) => setValues({ ...values, title: e.target.value })}
               required
             />       
            <div className="form-group pt-3">
+           <label>Quizz Description</label>
               <textarea
                 name="description"
                 cols="7"
@@ -42,8 +43,7 @@ const QuizzCreateForm = ({
               Save
           </Button>
           </form>
-          }        
-        <pre>{JSON.stringify(values, null, 4)}</pre>
+          }   
       </div>
     )
 }

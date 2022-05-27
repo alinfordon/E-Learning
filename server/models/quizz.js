@@ -23,9 +23,13 @@ const questionsSchema = new mongoose.Schema(
       type: String,
       trim: true,      
       required: true,
-    },        
+    }, 
+    slug: {
+      type: String,
+      lowercase: true,
+    },       
     answers: [answersSchema],
-    pionts: {
+    points: {
         type: Number,
         default: 0,
     },    
