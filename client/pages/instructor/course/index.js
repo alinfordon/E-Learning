@@ -9,6 +9,8 @@ import swal from "sweetalert";
 const CourseIndex = () => {
   const [courses, setCourses] = useState([]);
 
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+
   useEffect(() => {
     loadCourses();
   }, []);
@@ -38,18 +40,20 @@ const CourseIndex = () => {
       }
     };
 
+    console.log(courses)
+
   return (
     <InstructorRoute>
       <h1 className="text-center text-primary">Course Dashboard</h1>
       {/* <pre>{JSON.stringify(courses, null, 4)}</pre> */}
-
+      
       {courses &&
         courses.map((course) => (
           <>
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src={course.image ? course.image.Location : "/course.png"}
+                src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"}
               />
 
               <div className="media-body pl-2">

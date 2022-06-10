@@ -16,7 +16,8 @@ const CourseEdit = () => {
   const [values, setValues] = useState({
     name: "",
     description: "",
-    price: "9.99",
+    language: "",
+    photo: "",
     uploading: false,
     paid: true,
     category: "",
@@ -40,6 +41,7 @@ const CourseEdit = () => {
   const router = useRouter();
   const { slug } = router.query;
 
+ 
   useEffect(() => {
     loadCourse();
   }, [slug]);
@@ -207,6 +209,7 @@ const CourseEdit = () => {
       {/* {JSON.stringify(values)} */}
       <div className="pt-3 pb-3">
         <CourseCreateForm
+          router={router}
           handleSubmit={handleSubmit}
           handleImageRemove={handleImageRemove}
           handleImage={handleImage}

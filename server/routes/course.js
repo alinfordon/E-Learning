@@ -4,7 +4,7 @@ import formidable from "express-formidable";
 const router = express.Router();
 
 // middleware
-import { requireSignin, isInstructor, isEnrolled } from "../middlewares";
+import { requireSignin, isInstructor, isEnrolled, uploadData, uploadPhoto } from "../middlewares";
 
 // controllers
 import {
@@ -29,11 +29,18 @@ import {
   userCourses,
   markCompleted,
   listCompleted,
-  markIncomplete,
+  markIncomplete, 
+  uploadFile, 
+  getallSingleFiles,
+  getSingleFiles,
 } from "../controllers/course";
 
 router.get("/courses", courses);
 // image
+router.post("/upload-data", uploadData.single("image"), uploadFile);
+router.post("/upload-photo", uploadPhoto.single("image"), uploadFile);
+router.get('/getSingleFiles', getallSingleFiles);
+router.get('/getSingleFile/:fileId', getSingleFiles);
 router.post("/course/upload-image", uploadImage);
 router.post("/course/remove-image", removeImage);
 // course

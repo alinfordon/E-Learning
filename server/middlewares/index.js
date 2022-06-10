@@ -1,6 +1,7 @@
 import expressJwt from "express-jwt";
 import User from "../models/user";
 import Course from "../models/course";
+const multer  = require('multer')
 
 export const requireSignin = expressJwt({
   getToken: (req, res) => req.cookies.token,
@@ -41,3 +42,24 @@ export const isEnrolled = async (req, res, next) => {
     console.log(err);
   }
 };
+
+const fileStorageData = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../client/public/data')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "_" + file.originalname);
+  }
+});
+
+const fileStoragePhoto = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public')
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "_" + file.originalname);
+  }
+});
+
+export const uploadData = multer({storage: fileStorageData});
+export const uploadPhoto = multer({storage: fileStoragePhoto});

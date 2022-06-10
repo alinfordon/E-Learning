@@ -134,7 +134,7 @@ export const instructorQuizzes = async (req, res) => {
 export const studentCount = async (req, res) => {
   try {
     const users = await User.find({ courses: req.body.courseId })
-      .select("_id")
+      .select("_id name")
       .exec();
     res.json(users);
   } catch (err) {

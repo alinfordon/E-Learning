@@ -2,9 +2,12 @@ import AWS from "aws-sdk";
 import { nanoid } from "nanoid";
 import Course from "../models/course";
 import Completed from "../models/completed";
+import SingleFile from "../models/singlefiles";
 import slugify from "slugify";
 import { readFileSync } from "fs";
 import User from "../models/user";
+const fs = require("fs");
+const multer  = require('multer')
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const awsConfig = {
@@ -13,6 +16,18 @@ const awsConfig = {
   region: process.env.AWS_REGION,
   apiVersion: process.env.AWS_API_VERSION,
 };
+
+const fileSizeFormatter = (bytes, decimal) => {
+  if(bytes === 0){
+      return '0 Bytes';
+  }
+  const dm = decimal || 2;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'YB', 'ZB'];
+  const index = Math.floor(Math.log(bytes) / Math.log(1000));
+  return parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + ' ' + sizes[index];
+
+}
+
 
 const S3 = new AWS.S3(awsConfig);
 
@@ -76,21 +91,54 @@ export const removeImage = async (req, res) => {
   }
 };
 
-export const create = async (req, res) => {
-  // console.log("CREATE COURSE", req.body);
-  // return;
+export const uploadFile = async (req, res) => {
+  try{
+    const file = await new SingleFile({
+        fileName: req.file.originalname,
+        filePath: req.file.path,
+        fileType: req.file.mimetype,
+        fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
+    }).save();
+    console.log(file)
+    //res.status(201).send('File Uploaded Successfully');
+    res.json(file);
+}catch(error) {
+    res.status(400).send(error.message);}
+};
+
+export const getallSingleFiles = async (req, res, next) => {
+  try{
+      const files = await SingleFile.find();
+      res.status(200).send(files);
+  }catch(error) {
+      res.status(400).send(error.message);
+  }
+}
+
+export const getSingleFiles = async (req, res, next) => {
+  try{
+      const file = await SingleFile.findOne({ _id: req.params.fileId });
+      res.status(200).send(file);
+  }catch(error) {
+      res.status(400).send(error.message);
+  }
+}
+
+export const create = async (req, res) => {  
+  //const {files} = req.body;
+  
+ // return;
   try {
     const alreadyExist = await Course.findOne({
       slug: slugify(req.body.name.toLowerCase()),
     });
-    if (alreadyExist) return res.status(400).send("Title is taken");
-
+    if (alreadyExist) return res.status(400).send("Title is taken"); 
+    //console.log("CREATE COURSE", final_img);    
     const course = await new Course({
       slug: slugify(req.body.name),
-      instructor: req.user._id,
+      instructor: req.user._id, 
       ...req.body,
     }).save();
-
     res.json(course);
   } catch (err) {
     console.log(err);

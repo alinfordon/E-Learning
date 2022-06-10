@@ -161,7 +161,7 @@ const CourseView = () => {
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src={course.image ? course.image.Location : "/course.png"}
+                src={course.photo ? course.photo : "/course.png"}
               />
 
               <div className="media-body pl-2">

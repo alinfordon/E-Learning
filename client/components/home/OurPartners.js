@@ -20,6 +20,7 @@ const OurPartners = () => {
     const [isAKMVisible, setIsAKMVisible] = useState(false);
     const [isSPELVisible, setIsSPELisible] = useState(false);
     const [isGALEVisible, setIsGALEVisible] = useState(false);
+    const [isNovelVisible, setIsNovelVisible] = useState(false);
     const { t } = useTranslation();
 
     return(
@@ -225,8 +226,29 @@ const OurPartners = () => {
             <img className="fake-img" src="/images/logo/GALE-150.jpg" alt="image"/>
             </a>
             </div>
-            <div className="partner-item"><a href="/">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABPCAMAAAAUXj2YAAAC3FBMVEWx5/X///+x5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/Wx5/UlJn+HAAAA83RSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDI0NTY3ODk6Ozw9PkBBQkNERUZHSElLTE1OT1BRU1RVV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ4eXp7fH1+f4CBgoOEhYaHiYqLjo+QkZKTlJWWl5iZmpucnZ6foKGio6SlpqeoqaqrrK2vsLGys7S1tri5uru8vb6/wMHCw8TGx8jJysvMzc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8/f51mN/wAAAHF0lEQVRo3sWa+19OdxzAv0Wh8lTSxa2ahGlqjZCSucVi1DC0VC7DJJtkZmaWW3PXarLcYtaYMc1oLkkiswkVMtqj1qqnUqrPP7Bzfc73e87peZ5e5zz5/PI4n+/38/28nXO+38/lhJAxeX1RSsHTFmCk/Fba8jeQmmJhZHzg2jwQS8EXPh0FMCajGWTl2JiOAHD4GdqWU37mB7DTGgCAlvXmfwS+YFCuDjb7O/CdYYLaMHMDOL4wTAALzL0N44wAwDJznwMPjRFEmBlgsjEAGG5eAJRNOylNXxkaFBQUGpd2TwKgtTUvgDdAeoiV/tJyzL4GEcFJ8wKgqECRov8+EUG4eQFkZMIjAqDSuqMBkFMOQbCmwwGQ5XkcQGfT4QAI3cUJVrwCAPcmDOD+KwBAUfgtGKE6gOO4+UmpWWfOZKVtnBeikZ1yEwPYrC6A/+qLFcRhl53gL501CZtxQ0UAzZLLckd+TkxX8cw7wmhzP7UALFc9bSvqPFgkmrsaG5yqEkD4XUOBr/AdYvJb2FCiKgCaDGOx95su2HTrZ8JAqhoAI0qMBn/4803M4FdBn6UCQHgrmCCNkwSLdEF9UTnAfDBRpuhNtgjKfMUAc8FkmczbbBJ015UChEA7ZCJnhGUmlxUC9G2UuqnPP38k88KtJsnA/WGc8U+C7rRCAEkNXpo8yYMd8grb9ZgYOq5PgO4LygxlAIki9zciOuOTrKOxZHijXu2FbZv1igA8SffNH0umdVnDD0YKygWYzUxFAGQf4I6/3MSAUnrs2UhMdQkzGqIEYDjh/1obCV7PawC5ffHuDf7KdFICcBL3f1ModDr7TIuZPdqFv7R9/Jslbvo9qBAKaID+RO5hz4/4JRezu/F0FKexJyxH4mahSgA24CsFc/ruKZgy720jdXOVlRKAB9hK6fx/vxiMlB74A4CtSrLiodhCTT1Z7YBa8cH0ucgumRj1VAKwAlsohVV2K5UezO8SZtuJsQykBOAQttJQVvm1XEMKy81dTpFjvRUBFAoLFXGRSTYEbtDbRJaTI+uUlec1wkrbWV2SLEAVewhoYnJFA0UKGxTYUtyG/0M+Cwi17hEQfUCatQ9SDyCIUfV7KQ9QWaaTU3+A1ANg38FR7UmOYAtSD6DZi1FNaY//FKQiQCvbfB7bDv+pSE0AYIP9YNP9q9CxJwDeZ6NwmYnua2ep0q6vF1ZMkhQ8huSMlzofLIqwZIirEU1x/3e0Kh9MKIAsaVTLMeq+JNEeqQWQKA26Xoa9N/8y1woh1QDw1KqCqzlmGKjPD8cORCqKBepUJhPYIkVus2YuXffF+rjIYOLFc/VghEsi8AtGnF34XFnD6Tu7ezhRPzbMzN58SrYDc9TK5zbjiuRDMSFcg6IwDju/buubNXHVtVe4f64EOMiEGR2k6c/axutJfRgAf+KzrL4ci+eDYt1B/zZun76d9hF1MZ6/2MuN0i31EKGdRSfO7gCHqJ9p/NR/xzN1AVGZHhXWH7Vs596Uz8L5wqCTlfQO6Ia6eSe0QAl7B7b5BiyoAPAV0vYM/R2Aym74HdgRGvbhFUrbnwYIJftQbb0uV/OlADVsy7ScBaDrxoXs/UAoBR7mga6bHgD24wDTaPUeqtRmasNbBMEJ2drM+RzABRs5AFctnGUBFrOLL2XeyWrYTD3cORxAk5Z+Hp56gFhGXwIvGIBAUQNigtT/FCYTyu0uAmg6mHKoHLI9WYDlCPnkcoXqbLqV8x9kcwDN712GJ8i2ngTYBsD2B/aLdt1R0be4wBN8/ucmswvYzUsBtFTR+fxaZuwcVHdF3wK4c49gIFUBrqISUAIggQfo8kx83pyN8ubdDIrG+oHFAwiAhnkR4VtbYScLQKdsl9gvmb2ZcsmnFVZzAFNRJkBEIQmwhweQS8OaCo4kJX21KbOA/BsGrTcOUM1FTw8GYPYgYBxQ8gmFkpZ+BOAeBxCBNDVQ/Q8J8BSqLGS6HYalKli8C6gyaRwDEE2zhIk66cNYgBnc9ucA6Gaj3XGAffo+4QbT8yAPAaB+rP/oBCqj6MMAxCNNIzynj4sAgN9jliyJ/RJglx4AHRMADkTH7qZiQJ2r0Cndaqr/TXa8yXW8Op4I9PNeDHCYujjK5/hPoMURoU8B6OxJ0wCQSf1O5+3u+eK94rWm+Y8XLE7UaGvrdFW5TFNrdJVuIfVzXtfkh2z+quNap4k1L6kzZ3F9NdPpn1XRkEx/+Kx+rtVWlmfH25Ld8sgWE/LA6ZiBnbODg4OjE3th5eTK9PJd+zoh615u/Lnt4toDoa5uzmygd+xFn2VWtF0PjfR7gV++Mf85XkhlEX0xMfwYGlYgZGYANCS1Tfcvdr6GzA+AkO+uCjn3ZUnmcC//3dB+znGyPQ3F6eHWCHUYAJ21BS9K+zH/dtmjwrwfds8PtEJmE4v/AaAQ14ToK1+cAAAAAElFTkSuQmCC" alt="image"/>
+            <div className="partner-item">
+            <Modal title="Novel group Sarl is a Consulting Company " 
+                    className="modalStyle"
+                    visible={isNovelVisible} 
+                    onOk={() => setIsNovelVisible(false)} 
+                    onCancel={() => setIsNovelVisible(false)}
+                    footer={[   
+                        <Button
+                          key="link"
+                          href="https://www.novelgroup.lu/"
+                          type="link"    
+                          target="_blank"                      
+                          onClick={() => setIsNovelVisible(false)}
+                        >
+                          Read More
+                        </Button>,
+                      ]}
+                      >
+                <p>Novel group Sarl is a Consulting Company as well as a Vocational Training Center based in Gasperich, the new business center of Luxembourg. </p>
+                <p>Novel group provides an integrated package of vocational training services, promotion to the employment and development of entrepreneurship to European, National and local bodies, as well as to private enterprises and organizations. Indicative sectors are: Finance and Management, Informatics, Tourism, Creative Economy and Agricultural professions. The IT consulting services of Novel group provided in strategy issues support business and enterprise strategy, business reformation and company improvement, organizational design and activity internationalization. </p>
+            </Modal>
+            <a onClick={() => setIsNovelVisible(true)}>
+            <img className="fake-img" src="/images/logo/novel-150.png" alt="image"/>
             </a>
             </div>           
         </div>

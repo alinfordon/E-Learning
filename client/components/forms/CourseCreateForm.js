@@ -1,4 +1,6 @@
 import { Select, Button, Avatar, Badge } from "antd";
+import FileBase64 from 'react-file-base64';
+import UploadForm from "./UploadForm";
 
 const { Option } = Select;
 
@@ -6,35 +8,50 @@ const CourseCreateForm = ({
   handleSubmit,
   handleImage,
   handleChange,
+  fileChangeHandler,
+  handleUpload,
   values,
   setValues,
+  router,
   preview,
   uploadButtonText,
   handleImageRemove = (f) => f,
   editPage = false,
 }) => {
-  const children = [];
-  for (let i = 9.99; i <= 100.99; i++) {
-    children.push(<Option key={i.toFixed(2)}>${i.toFixed(2)}</Option>);
-  }
+  console.log(values)
   return (
     <>
       {values && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="container">
           <div className="form-group">
+          <label>Title</label>
             <input
               type="text"
               name="name"
               className="form-control"
-              placeholder="Name"
+              placeholder="Title"
               value={values.name}
               onChange={handleChange} 
             />
           </div>
 
           <div className="form-group">
+          <label>Short Description</label>
+            <input
+              type="text"
+              name="category"
+              className="form-control"
+              placeholder="Short Description"
+              value={values.category}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+          <label>Description</label>
             <textarea
               name="description"
+              placeholder="Description"
               cols="7"
               rows="7"
               value={values.description}
@@ -46,71 +63,49 @@ const CourseCreateForm = ({
           <div className="form-row">
             <div className="col">
               <div className="form-group">
+              <label>Select Language</label>
                 <Select
                   style={{ width: "100%" }}
                   size="large"
-                  value={values.paid}
-                  onChange={(v) => setValues({ ...values, paid: v, price: 0 })}
+                  defaultValue={router.locale.toString()}                  
+                  onChange={(v) => setValues({ ...values, language: v })}
                 >
-                  <Option value={true}>Paid</Option>
-                  <Option value={false}>Free</Option>
+                  {router.locales.map((locale) => (
+                    <Option value={locale} className="nav-item text-dark" key={locale}>
+                        {locale}
+                    </Option>
+                  ))} 
                 </Select>
               </div>
             </div>
-
-            {values.paid && (
-              <div className="form-group">
-                <Select
-                  defaultValue="$9.99"
-                  style={{ widht: "100%" }}
-                  onChange={(v) => setValues({ ...values, price: v })}
-                  tokenSeparators={[,]}
-                  size="large"
-                >
-                  {children}
-                </Select>
-              </div>
-            )}
           </div>
-
-          <div className="form-group">
-            <input
-              type="text"
-              name="category"
-              className="form-control"
-              placeholder="Category"
-              value={values.category}
-              onChange={handleChange}
-            />
-          </div>
-
           <div className="form-row">
             <div className="col">
-              <div className="form-group">
-                <label className="btn btn-outline-secondary btn-block text-left">
-                  {uploadButtonText}
+              <div className="form-group">              
+              <label className="btn btn-dark btn-block text-left mt-3" >
+              {uploadButtonText}
                   <input
                     type="file"
                     name="image"
-                    onChange={handleImage}
+                    onChange={handleUpload}
                     accept="image/*"
                     hidden
                   />
                 </label>
               </div>
             </div>
-
             {preview && (
-              <Badge count="X" onClick={handleImageRemove} className="pointer">
+              <Badge count="X" onClick={() => setValues({ ...values, photo: "" })} className="pointer">
                 <Avatar width={200} src={preview} />
               </Badge>
             )}
 
-            {editPage && values.image && (
-              <Avatar width={200} src={values.image.Location} />
+            {editPage && values.photo && (
+              <Avatar width={200} src={values.photo} />
             )}
-          </div>
+            </div>
 
+          <hr />
           <div className="row">
             <div className="col">
               <Button
@@ -128,6 +123,8 @@ const CourseCreateForm = ({
           </div>
         </form>
       )}
+      <pre>{JSON.stringify(values, null, 4)}</pre>
+      
     </>
   );
 };

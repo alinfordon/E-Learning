@@ -46,11 +46,18 @@ const courseSchema = new mongoose.Schema(
       minlength: 200,
       required: true,
     },
+    language: {
+      type: String,      
+      required: true,
+    },
     price: {
       type: Number,
-      default: 9.99,
+      default: 0,
     },
     image: {},
+    photo: {
+      type: String,
+    },
     category: String,
     published: {
       type: Boolean,
