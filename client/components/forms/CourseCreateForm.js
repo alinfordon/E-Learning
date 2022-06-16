@@ -19,6 +19,7 @@ const CourseCreateForm = ({
   editPage = false,
 }) => {
   console.log(values)
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   return (
     <>
       {values && (
@@ -101,7 +102,9 @@ const CourseCreateForm = ({
             )}
 
             {editPage && values.photo && (
-              <Avatar width={200} src={values.photo} />
+              <Badge count="X" onClick={() => setValues({ ...values, photo: "" })} className="pointer">
+                <Avatar width={200} src={`${API_UP}/${values.photo}`} />
+              </Badge>
             )}
             </div>
 

@@ -8,6 +8,7 @@ import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 const InstructorIndex = () => {
   const [courses, setCourses] = useState([]);
   const [quizzs, setQuizzes] = useState([]);
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
 
   useEffect(() => {
     loadCourses();
@@ -41,7 +42,7 @@ const InstructorIndex = () => {
               <div className="media pt-2">
                 <Avatar
                   size={80}
-                  src={course.photo ? course.photo : "/course.png"}
+                  src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"}
                 />
 
                 <div className="media-body pl-2">

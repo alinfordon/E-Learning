@@ -18,6 +18,7 @@ import Item from "antd/lib/list/Item";
 
 const CourseView = () => {
   const [course, setCourse] = useState({});
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   // for lessons
   const [visible, setVisible] = useState(false);
   const [values, setValues] = useState({
@@ -161,7 +162,7 @@ const CourseView = () => {
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src={course.photo ? course.photo : "/course.png"}
+                src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"} 
               />
 
               <div className="media-body pl-2">
