@@ -137,8 +137,7 @@ const CourseCreate = () => {
           handleImageRemove={handleImageRemove}
           fileChangeHandler={fileChangeHandler}
         />
-      </div>     
-      <img src={`${API_UP}/${image && image.filePath}`} height="200" className="card-img-top img-responsive" alt="img"/>
+      </div>  
     </InstructorRoute>
   );
 };

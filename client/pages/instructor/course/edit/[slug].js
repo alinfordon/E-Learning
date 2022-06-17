@@ -36,6 +36,7 @@ const CourseEdit = () => {
   );
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
+  
 
   // router
   const router = useRouter();

@@ -21,9 +21,17 @@ const CourseView = () => {
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   // for lessons
   const [visible, setVisible] = useState(false);
+  const [status, setStatus] = useState({    
+    isVideo: false,
+    isPlain: false,
+    isQuizz: false,    
+  });
   const [values, setValues] = useState({
     title: "",
-    content: "",
+    content: "",    
+    vlink: "",
+    plink: "",
+    quizz: "",
     video: {},
   });
   const [uploading, setUploading] = useState(false);
@@ -245,12 +253,14 @@ const CourseView = () => {
               <AddLessonForm
                 values={values}
                 setValues={setValues}
+                status={status}
+                setStatus={setStatus}
                 handleAddLesson={handleAddLesson}
                 uploading={uploading}
                 uploadButtonText={uploadButtonText}
                 handleVideo={handleVideo}
                 progress={progress}
-                handleVideoRemove={handleVideoRemove}
+                handleVideoRemove={handleVideoRemove} 
               />
             </Modal>
 

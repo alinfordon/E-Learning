@@ -126,10 +126,9 @@ const CourseCreateForm = ({
           </div>
         </form>
       )}
-      <pre>{JSON.stringify(values, null, 4)}</pre>
-      
     </>
   );
 };
 
 export default CourseCreateForm;
+//<pre>{JSON.stringify(values, null, 4)}</pre>
