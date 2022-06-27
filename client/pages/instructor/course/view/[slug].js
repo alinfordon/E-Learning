@@ -18,34 +18,41 @@ import Item from "antd/lib/list/Item";
 
 const CourseView = () => {
   const [course, setCourse] = useState({});
+  const [quizzes, setQuizzes] = useState({});
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   // for lessons
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState({    
     isVideo: false,
     isPlain: false,
-    isQuizz: false,    
+    isQuizz: false, 
+    uploadButtonText: "Upload Data",   
   });
   const [values, setValues] = useState({
     title: "",
     content: "",    
-    vlink: "",
-    plink: "",
+    video_link: "",
+    data_link: "",
     quizz: "",
-    video: {},
+    upload_data: {},
   });
-  const [uploading, setUploading] = useState(false);
-  const [uploadButtonText, setUploadButtonText] = useState("Upload Video");
+  const [uploading, setUploading] = useState(false);  
+  const [uploadButtonText, setUploadButtonText] = useState("Upload Data");
   const [progress, setProgress] = useState(0);
   // student count
   const [students, setStudents] = useState(0);
+  const [instructor, setInstructor] = useState(0);
 
   const router = useRouter();
   const { slug } = router.query;
 
   useEffect(() => {
-    loadCourse();
+    loadCourse();    
   }, [slug]);
+
+  useEffect(() => {    
+    loadQuizzes();
+  }, []);
 
   useEffect(() => {
     course && studentCount();
@@ -53,14 +60,18 @@ const CourseView = () => {
 
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/course/${slug}`);
-    setCourse(data);
+    setCourse(data);    
   };
 
+  const loadQuizzes = async () => {
+    const { data } = await axios.get("/api/instructor-quizzes");
+    setQuizzes(data);
+  }; 
+ 
   const studentCount = async () => {
     const { data } = await axios.post(`/api/instructor/student-count`, {
       courseId: course._id,
-    });
-    console.log("STUDENT COUNT => ", data);
+    });    
     setStudents(data.length);
   };
 
@@ -74,9 +85,9 @@ const CourseView = () => {
         values
       );
       // console.log(data)
-      setValues({ ...values, title: "", content: "", video: {} });
+      setValues({ ...values, title: "", content: "", video_link: "", data_link: "", quizz: "", upload_data: {} });
       setProgress(0);
-      setUploadButtonText("Upload video");
+      setStatus({ ...status, uploadButtonText: "Upload Data"});
       setVisible(false);
       setCourse(data);
       toast("Lesson added");
@@ -84,6 +95,28 @@ const CourseView = () => {
       console.log(err);
       toast("Lesson add failed");
     }
+  };
+
+  const handleUpload = async (e) => {
+    setValues({ ...values, photo: "" })
+    let file = e.target.files[0];
+    //setPreview(window.URL.createObjectURL(file));
+    //setUploadButtonText(file.name);
+    setStatus({ ...status, uploadButtonText: file.name});
+    const data = new FormData();
+    data.append('image', file);  
+        
+    
+    const dataUp = await fetch("/api/upload-data", {
+        method: "POST",
+        body: data,
+    }).then(response => {
+        return response.json(); 
+    }).catch((err) => {
+        console.log(err.message);
+    })    
+    console.log("data/", dataUp)    
+    setValues({ ...values, data_link: dataUp.filePath, upload_data: dataUp });
   };
 
   const handleVideo = async (e) => {
@@ -199,7 +232,7 @@ const CourseView = () => {
                       />
                     </Tooltip>
 
-                    {course.lessons && course.lessons.length < 5 ? (
+                    {course.lessons && course.lessons.length < 1 ? (
                       <Tooltip title="Min 5 lessons required to publish">
                         <QuestionOutlined className="h5 pointer text-danger" />
                       </Tooltip>
@@ -253,11 +286,14 @@ const CourseView = () => {
               <AddLessonForm
                 values={values}
                 setValues={setValues}
+                quizzes={quizzes}
+                setQuizzes={setQuizzes}
                 status={status}
                 setStatus={setStatus}
                 handleAddLesson={handleAddLesson}
+                handleUpload={handleUpload}
                 uploading={uploading}
-                uploadButtonText={uploadButtonText}
+                uploadButtonText={uploadButtonText}                
                 handleVideo={handleVideo}
                 progress={progress}
                 handleVideoRemove={handleVideoRemove} 

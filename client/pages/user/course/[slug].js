@@ -4,6 +4,7 @@ import axios from "axios";
 import StudentRoute from "../../../components/routes/StudentRoute";
 import { Button, Menu, Avatar } from "antd";
 import ReactPlayer from "react-player";
+import YouTube from 'react-youtube';
 import ReactMarkdown from "react-markdown";
 import {
   PlayCircleOutlined,
@@ -39,6 +40,15 @@ const SingleCourse = () => {
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/user/course/${slug}`);
     setCourse(data);
+  };
+
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
   };
 
   const loadCompletedLessons = async () => {
@@ -79,10 +89,15 @@ const SingleCourse = () => {
     }
   };
 
+  const onReady = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  }
+
   return (
     <StudentRoute>
       <div className="row">
-        <div style={{ maWidth: 320 }}>
+        <div style={{ maxWidth: 420 }}>
           <Button
             onClick={() => setCollapsed(!collapsed)}
             className="text-primary mt-1 btn-block mb-2"
@@ -91,9 +106,10 @@ const SingleCourse = () => {
             {!collapsed && "Lessons"}
           </Button>
           <Menu
+            theme="light"
             defaultSelectedKeys={[clicked]}
             inlineCollapsed={collapsed}
-            style={{ height: "80vh", overflow: "scroll" }}
+            style={{ height: "80vh" }}
           >
             {course.lessons.map((lesson, index) => (
               <Item
@@ -137,18 +153,12 @@ const SingleCourse = () => {
                 )}
               </div>
 
-              {course.lessons[clicked].video &&
-                course.lessons[clicked].video.Location && (
+              {course.lessons[clicked] &&
+                course.lessons[clicked].video_link && (
                   <>
                     <div className="wrapper">
-                      <ReactPlayer
-                        className="player"
-                        url={course.lessons[clicked].video.Location}
-                        width="100%"
-                        height="100%"
-                        controls
-                        onEnded={() => markCompleted()}
-                      />
+                    <YouTube videoId="dM0zAQ3_hdo" opts={opts} onReady={onReady} />
+                      
                     </div>
                   </>
                 )}
@@ -166,10 +176,13 @@ const SingleCourse = () => {
               </div>
             </div>
           )}
+          <pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre>
         </div>
       </div>
     </StudentRoute>
   );
 };
+
+
 
 export default SingleCourse;

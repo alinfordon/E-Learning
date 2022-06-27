@@ -94,7 +94,7 @@ export const removeImage = async (req, res) => {
 export const uploadFile = async (req, res) => {
   try{
     const file = await new SingleFile({
-        fileName: req.file.originalname,
+        fileName: req.file.originalname, 
         filePath: req.file.path,
         fileType: req.file.mimetype,
         fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
@@ -237,7 +237,7 @@ export const removeVideo = async (req, res) => {
 export const addLesson = async (req, res) => {
   try {
     const { slug, instructorId } = req.params;
-    const { title, content, video } = req.body;
+    const { title, content, video_link, data_link, quizz, upload_data } = req.body;
 
     if (req.user._id != instructorId) {
       return res.status(400).send("Unauthorized");
@@ -246,11 +246,10 @@ export const addLesson = async (req, res) => {
     const updated = await Course.findOneAndUpdate(
       { slug },
       {
-        $push: { lessons: { title, content, video, slug: slugify(title) } },
+        $push: { lessons: { title, content, video_link, data_link, quizz, upload_data, slug: slugify(title) } },
       },
       { new: true }
     )
-      .populate("instructor", "_id name")
       .exec();
     res.json(updated);
   } catch (err) {

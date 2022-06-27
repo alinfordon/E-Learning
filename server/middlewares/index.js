@@ -45,7 +45,7 @@ export const isEnrolled = async (req, res, next) => {
 
 const fileStorageData = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../client/public/data')
+    cb(null, './public/data')
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "_" + file.originalname);

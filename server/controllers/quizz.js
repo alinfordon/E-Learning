@@ -59,9 +59,21 @@ export const create = async (req, res) => {
   };
   
   export const read = async (req, res) => {
-    console.log(req.params.slug);
+    console.log(req.body.slug);
     try {
       const quizz = await Quizz.findOne({ slug: req.params.slug })
+        .populate("instructor", "_id name")
+        .exec();
+      res.json(quizz);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const instructorQuizz = async (req, res) => {
+    console.log(req.params.instructor);    
+    try {
+      const quizz = await Quizz.find({ _id: req.params.instructor })
         .populate("instructor", "_id name")
         .exec();
       res.json(quizz);

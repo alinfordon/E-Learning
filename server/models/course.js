@@ -19,7 +19,17 @@ const lessonSchema = new mongoose.Schema(
       type: {},
       minlength: 200,
     },
-    video: {},
+    video_link: {
+      type: String,
+    },
+    data_link: {
+      type: String,
+    },
+    quizz: {
+      type: ObjectId,
+      ref: "Quizz",      
+    },
+    upload_data: {},
     free_preview: {
       type: Boolean,
       default: false,
