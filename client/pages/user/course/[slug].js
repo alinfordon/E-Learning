@@ -47,7 +47,7 @@ const SingleCourse = () => {
     width: '640',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 
@@ -88,11 +88,13 @@ const SingleCourse = () => {
       console.log(err);
     }
   };
-
+  
   const onReady = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
+
+  //console.log(clicked && course.lessons[clicked])
 
   return (
     <StudentRoute>
@@ -156,9 +158,8 @@ const SingleCourse = () => {
               {course.lessons[clicked] &&
                 course.lessons[clicked].video_link && (
                   <>
-                    <div className="wrapper">
-                    <YouTube videoId="dM0zAQ3_hdo" opts={opts} onReady={onReady} />
-                      
+                    <div className="wrapper">                   
+                    <YouTube videoId={course.lessons[clicked].video_link.split("=", 2)[1]} opts={opts} onReady={onReady} />                     
                     </div>
                   </>
                 )}
@@ -182,7 +183,5 @@ const SingleCourse = () => {
     </StudentRoute>
   );
 };
-
-
 
 export default SingleCourse;

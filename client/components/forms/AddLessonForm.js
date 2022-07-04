@@ -103,7 +103,7 @@ const AddLessonForm = ({
               <Select
                 style={{ width: "100%" }}
                 size="large"   
-                defaultValue={values.quizz}                               
+                defaultValue="Select Quizz"                               
                 onChange={(v) => setValues({ ...values, quizz: v })}
               >
                 {quizzes.map((q) => (
@@ -127,7 +127,7 @@ const AddLessonForm = ({
           Save
         </Button>
       </form>
-      <pre>{JSON.stringify(status, null, 4)}</pre>
+      <pre>{JSON.stringify(quizzes, null, 4)}</pre>
     </div>
   );
 };

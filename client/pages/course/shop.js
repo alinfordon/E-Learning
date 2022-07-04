@@ -43,7 +43,7 @@ const Shop = ({courses}) => {
               createCourse={t("home:create-course")}
         />
       </Header>      
-      <h1 className="jumbotron text-center bg-primary square">
+      <h1 className="jumbotron text-center ">
       {t("home:online-education-marketplace")}
       </h1>
       <Content style={{ padding: '0 50px'}}>    
@@ -68,7 +68,7 @@ const Shop = ({courses}) => {
                 </li>
               ))}
         </ul>
-        --© {(new Date().getFullYear())} WebNode, All Rights Reserved
+        --© {(new Date().getFullYear())} Rainbo Project, All Rights Reserved
       </Footer>
     </Layout>    
   );

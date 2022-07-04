@@ -60,9 +60,9 @@ const InstructorIndex = () => {
                         {course.lessons.length} Lessons
                       </p>
 
-                      {course.lessons.length < 5 ? (
+                      {course.lessons.length < 1 ? (
                         <p style={myStyle} className="text-warning">
-                          At least 5 lessons are required to publish a course
+                          At least 1 lessons are required to publish a course
                         </p>
                       ) : course.published ? (
                         <p style={myStyle} className="text-success">
@@ -119,9 +119,9 @@ const InstructorIndex = () => {
                           {quizz.questions.length} Questions
                         </p>
 
-                        {quizz.questions.length < 5 ? (
+                        {quizz.questions.length < 1 ? (
                           <p style={myStyle} className="text-warning">
-                            At least 5 questions are required to publish a quezz
+                            At least 1 questions are required to publish a quezz
                           </p>
                         ) : quizz.published ? (
                           <p style={myStyle} className="text-success">

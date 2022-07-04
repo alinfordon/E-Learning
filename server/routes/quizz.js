@@ -18,6 +18,8 @@ import {
     addAnswer,
     updateQuestion,
     removeQuestion,
+    publishQuizz,
+    unpublishQuizz,
   } from "../controllers/quizz";
 
 //Quizz
@@ -31,6 +33,9 @@ router.post("/quizz/question/:slug/:instructorId", requireSignin, addQuestion);
 router.put("/quizz/answer/:slug/:instructorId", requireSignin, addAnswer);
 router.put("/quizz/question/:slug/:instructorId", requireSignin, updateQuestion);
 router.put("/quizz/:slug/:questionId", requireSignin, removeQuestion);
+// publish unpublish
+router.put("/publish-quizz/:quizzId", requireSignin, isInstructor, publishQuizz);
+router.put("/unpublish-quizz/:quizzId", requireSignin, unpublishQuizz);
 
 
 module.exports = router;

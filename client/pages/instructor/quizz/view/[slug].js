@@ -93,10 +93,10 @@ const QuizzView = () => {
   const handlePublish = async (e, quizzId) => {
     try {
       let answer = window.confirm(
-        "Once you publsih your quizz, it will be live in the marketplace for users to enroll"
+        "Once you publish your quizz, it will be live in the marketplace for users to enroll"
       );
       if (!answer) return;
-      const { data } = await axios.put(`/api/quizz/publish/${quizzId}`);
+      const { data } = await axios.put(`/api/publish-quizz/${quizzId}`);
       setQuizz(data);
       toast("Congrats! Your quizz is live");
     } catch (err) {
@@ -110,7 +110,7 @@ const QuizzView = () => {
         "Once you unpublsih your quizz, it will no be available for users to enroll"
       );
       if (!answer) return;
-      const { data } = await axios.put(`/api/quizz/unpublish/${quizzId}`);
+      const { data } = await axios.put(`/api/unpublish-quizz/${quizzId}`);
       setQuizz(data);
       toast("Your quizz is unpublished");
     } catch (err) {
@@ -153,8 +153,8 @@ const QuizzView = () => {
                       />
                     </Tooltip>
 
-                    {quizz.questions && quizz.questions.length < 5 ? (
-                      <Tooltip title="Min 5 questions required to publish">
+                    {quizz.questions && quizz.questions.length < 1 ? (
+                      <Tooltip title="Min 1 questions required to publish">
                         <QuestionOutlined className="h5 pointer text-danger" />
                       </Tooltip>
                     ) : quizz.published ? (

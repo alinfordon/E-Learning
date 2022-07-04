@@ -20,6 +20,7 @@ export async function getStaticProps({locale}) {
 
 const UserIndex = () => {
   const { t } = useTranslation();
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   const {
     state: { user },
   } = useContext(Context);
@@ -60,7 +61,7 @@ const UserIndex = () => {
             <Avatar
               size={80}
               shape="square"
-              src={course.image ? course.image.Location : "/course.png"}
+              src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"}
             />
 
             <div className="media-body pl-2">

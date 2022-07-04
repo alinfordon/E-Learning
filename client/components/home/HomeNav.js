@@ -36,7 +36,7 @@ const HomeNav = () => {
                                     </li>
                                 </ul>
                                 <div className="others-options">
-                                <Link href="/user"><a className="default-btn">E-Learnig Platform<span></span></a></Link>
+                                <Link href="/course/shop"><a className="default-btn">E-Learnig Platform<span></span></a></Link>
                                 </div>
                             </div>
                         </nav>

@@ -24,7 +24,7 @@ const HomeBaner = () => {
                                     <h1>RAINBO PROJECT</h1>
                                     <p> {t('homepage:home-title')}</p>
                                     <div className="banner-btn">
-                                        <a className="default-btn-one" href="/user">{t('homepage:e-learning')}<span></span></a>                                        
+                                        <a className="default-btn-one" href="/course/shop">{t('homepage:e-learning')}<span></span></a>                                        
                                     </div>
                                 </div>
                             </div>

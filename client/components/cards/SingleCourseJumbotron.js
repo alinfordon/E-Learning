@@ -25,40 +25,34 @@ const SingleCourseJumbotron = ({
     updatedAt,
     lessons,
     image,
+    photo,
+    language,
     price,
     paid,
     category,
   } = course;
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
 
   return (
     <div className="jumbotron bg-primary square">
       <div className="row">
         <div className="col-md-8">
           {/* title */}
-          <h1 className="text-light font-weight-bold">{name}</h1>
+          <h1 className="text-light font-weight-bold mb-4">{name}</h1>          
           {/* description */}
-          <p className="lead">
+          <p className="lead text-light">
             {description && description.substring(0, 160)}...
-          </p>
+          </p>          
+          {/* author */}
+          <p className="lead text-light">Created by: {instructor.name}</p>
+          {/* updated at */}
+          <p className="text-light">Last udpated: {new Date(updatedAt).toLocaleDateString()}</p> 
           {/* category */}
           <Badge
-            count={category}
+            count={`Language: ${language}`}
             style={{ backgroundColor: "#03a9f4" }}
             className="pb-4 mr-2"
-          />
-          {/* author */}
-          <p>Created by {instructor.name}</p>
-          {/* updated at */}
-          <p>Last udpated {new Date(updatedAt).toLocaleDateString()}</p>
-          {/* price */}
-          <h4 className="text-light">
-            {paid
-              ? currencyFormatter({
-                  amount: price,
-                  currency: "usd",
-                })
-              : "Free"}
-          </h4>
+          />        
         </div>
         <div className="col-md-4">
           {/* {JSON.stringify(lessons[0])} */}
@@ -80,7 +74,7 @@ const SingleCourseJumbotron = ({
             </div>
           ) : (
             <>
-              <img src={image.Location} alt={name} className="img img-fluid" />
+              <img src={photo ? `${API_UP}/${photo}` : "/course.png"} alt={name} style={{ height: "200px", width: "100%", objectFit: "cover" }} className="p-1" />
             </>
           )}
           {/* enroll button */}

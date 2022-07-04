@@ -3,8 +3,9 @@
 }
 
 .jumbotron {
-  /* background-image: linear-gradient(to right, #007bff, #000); */
-  background-image: linear-gradient(to right, #ff0000, #ff9900);
+  /* background-image: linear-gradient(to right, #007bff, #000); */ 
+ 
+  background: linear-gradient(to bottom, #001529, #00429b, #006dba, #0095ce, #2dbcdc);
   color: #fff;
 }
 

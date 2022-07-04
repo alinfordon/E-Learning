@@ -122,7 +122,7 @@ export const instructorCourses = async (req, res) => {
 
 export const instructorQuizzes = async (req, res) => {
   try {
-    const quizzes = await Quizz.find({ instructor: req.user._id })
+    const quizzes = await Quizz.find({ instructor: req.user._id, published: true })
       .sort({ createdAt: -1 })
       .exec();
     res.json(quizzes);

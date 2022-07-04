@@ -169,7 +169,7 @@ export const create = async (req, res) => {
   };
 
   export const removeQuestion = async (req, res) => {
-    const { slug, questionId } = req.params;
+    const { slug, questionId } = req.params;    
     const quizz = await Quizz.findOne({ slug }).exec();
     if (req.user._id != quizz.instructor) {
       return res.status(400).send("Unauthorized");
@@ -180,4 +180,45 @@ export const create = async (req, res) => {
     }).exec();
   
     res.json({ ok: true });
+  };
+
+  export const publishQuizz = async (req, res) => {
+    try {
+      const { quizzId } = req.params;
+      const quizz = await Quizz.findById(quizzId).select("instructor").exec();      
+      if (quizz.instructor != req.user._id) {
+        return res.status(400).send("Unauthorized");
+      }
+  
+      const updated = await Quizz.findByIdAndUpdate(
+        quizzId,
+        { published: true },
+        { new: true }
+      ).exec();
+      res.json(updated);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send("Publish quizz failed");
+    }
+  };
+  
+  export const unpublishQuizz = async (req, res) => {
+    try {
+      const { quizzId } = req.params;
+      const quizz = await Quizz.findById(quizzId).select("instructor").exec();
+  
+      if (quizz.instructor._id != req.user._id) {
+        return res.status(400).send("Unauthorized");
+      }
+  
+      const updated = await Quizz.findByIdAndUpdate(
+        quizzId,
+        { published: false },
+        { new: true }
+      ).exec();
+      res.json(updated);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send("Unpublish quizz failed");
+    }
   };

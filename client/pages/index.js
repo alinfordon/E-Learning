@@ -94,7 +94,7 @@ const Index = ({courses}) => {
                                     </li>
                                 </ul>
                                 <div className="others-options">
-                                <Link href="/login"><a className="default-btn">{t('homepage:e-learning')}<span></span></a></Link>
+                                <Link href="/course/shop"><a className="default-btn">{t('homepage:e-learning')}<span></span></a></Link>
                                 </div>
                             </div>
                         </nav>
