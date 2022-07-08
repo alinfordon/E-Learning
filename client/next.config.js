@@ -9,6 +9,9 @@ module.exports = {
         }
         return config;
       },
+      images: {
+        domains: ['rainboprojectlgbtqi.eu'],        
+      },
 };
 
 /*

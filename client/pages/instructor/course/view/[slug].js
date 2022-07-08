@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from 'next/image';
 import InstructorRoute from "../../../../components/routes/InstructorRoute";
 import axios from "axios";
 import { Avatar, Tooltip, Button, Modal, List } from "antd";
@@ -46,6 +47,11 @@ const CourseView = () => {
   const router = useRouter();
   const { slug } = router.query;
 
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
+
+
   useEffect(() => {
     loadCourse();    
   }, [slug]);
@@ -89,7 +95,7 @@ const CourseView = () => {
       setProgress(0);
       setStatus({ ...status, uploadButtonText: "Upload Data"});
       setVisible(false);
-      setCourse(data);
+      loadCourse();
       toast("Lesson added");
     } catch (err) {
       console.log(err);
@@ -203,7 +209,14 @@ const CourseView = () => {
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"} 
+                src={course.photo ? 
+                <Image
+                  loader={myLoader}
+                  src={course.photo}
+                  alt="Picture of the author"
+                  layout="fill"
+                  objectFit='cover' 
+                /> : "/course.png"} 
               />
 
               <div className="media-body pl-2">
@@ -233,7 +246,7 @@ const CourseView = () => {
                     </Tooltip>
 
                     {course.lessons && course.lessons.length < 1 ? (
-                      <Tooltip title="Min 5 lessons required to publish">
+                      <Tooltip title="Min 1 lessons required to publish">
                         <QuestionOutlined className="h5 pointer text-danger" />
                       </Tooltip>
                     ) : course.published ? (

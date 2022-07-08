@@ -14,7 +14,7 @@ const QuizIndex = () => {
   }, []);
 
   const loadQuizzes = async () => {
-    const { data } = await axios.get("/api/instructor-quizzes");
+    const { data } = await axios.get("/api/instructor-all-quizzes");
     setQuizzes(data);
   };
 
@@ -69,9 +69,9 @@ const QuizIndex = () => {
                       {quizz.questions.length} Questions
                     </p>
 
-                    {quizz.questions.length < 5 ? (
+                    {quizz.questions.length < 1 ? (
                       <p style={myStyle} className="text-warning">
-                        At least 5 questions are required to publish a quezz
+                        At least 1 questions are required to publish a quezz
                       </p>
                     ) : quizz.published ? (
                       <p style={myStyle} className="text-success">

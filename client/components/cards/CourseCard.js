@@ -1,11 +1,17 @@
 import { Card, Badge } from "antd";
 import Link from "next/link";
 import { currencyFormatter } from "../../utils/helpers";
+import Image from 'next/image'
 
 const { Meta } = Card;
 
 const CourseCard = ({ course }) => {
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
+
   const { name, instructor, price, image, photo, slug, paid, category, language } = course;
   return (
     <Link href={`/course/${slug}`}>
@@ -13,12 +19,18 @@ const CourseCard = ({ course }) => {
         <Card
           className="mb-4"
           cover={
-            <img
-              src={photo ? `${API_UP}/${photo}` : "/course.png"}
-              alt={name}
-              style={{ height: "200px", objectFit: "cover" }}
-              className="p-1"
+            <Image
+              loader={myLoader}
+              src={photo}
+              alt="Picture of the author"
+              layout="responsive"
+              objectFit='cover'
+              height={200}
+              width={500}
+              //style={{ height: "200px", objectFit: "cover" }}
+              //className="p-1"
             />
+            
           }
         >
           <h2 className="font-weight-bold">{name}</h2>
@@ -36,3 +48,12 @@ const CourseCard = ({ course }) => {
 };
 
 export default CourseCard;
+
+/*
+ <img
+              src={photo ? `../${photo}`: "/course.png"}
+              alt={name}
+              style={{ height: "200px", objectFit: "cover" }}
+              className="p-1"
+            />
+*/

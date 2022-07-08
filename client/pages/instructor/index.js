@@ -3,12 +3,17 @@ import axios from "axios";
 import InstructorRoute from "../../components/routes/InstructorRoute";
 import { Avatar, Tooltip } from "antd";
 import Link from "next/link";
+import Image from 'next/image';
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 const InstructorIndex = () => {
   const [courses, setCourses] = useState([]);
   const [quizzs, setQuizzes] = useState([]);
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
 
   useEffect(() => {
     loadCourses();
@@ -21,7 +26,7 @@ const InstructorIndex = () => {
   };
 
   const loadQuizzes = async () => {
-    const { data } = await axios.get("/api/instructor-quizzes");
+    const { data } = await axios.get("/api/instructor-all-quizzes");
     setQuizzes(data);
   };
 
@@ -42,7 +47,14 @@ const InstructorIndex = () => {
               <div className="media pt-2">
                 <Avatar
                   size={80}
-                  src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"}
+                  src={course.photo ? 
+                  <Image
+                    loader={myLoader}
+                    src={course.photo}
+                    alt="Picture of the author"
+                    layout="fill"
+                    objectFit='cover' 
+                  /> : "/course.png"}
                 />
 
                 <div className="media-body pl-2">

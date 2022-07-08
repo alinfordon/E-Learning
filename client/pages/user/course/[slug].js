@@ -28,6 +28,7 @@ const SingleCourse = () => {
   // router
   const router = useRouter();
   const { slug } = router.query;
+  const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
 
   useEffect(() => {
     if (slug) loadCourse();
@@ -95,6 +96,8 @@ const SingleCourse = () => {
   }
 
   //console.log(clicked && course.lessons[clicked])
+  const linkToPPTFile =
+  "https://rainboprojectlgbtqi.eu/public/data/1656665824872_Presentation.pptx";
 
   return (
     <StudentRoute>
@@ -163,6 +166,26 @@ const SingleCourse = () => {
                     </div>
                   </>
                 )}
+
+                {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === "application/vnd.openxmlformats-officedocument.presentationml.presentation" &&
+                    <iframe
+                    src={`https://view.officeapps.live.com/op/embed.aspx?src=https://rainboprojectlgbtqi.eu/${course.lessons[clicked].data_link}`}
+                    width="100%"
+                    height="600px"
+                    frameBorder="0"
+                    title="slides"
+                  ></iframe>
+                }
+                 {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === 'application/pdf' &&
+                    <embed
+                    style={{
+                            width: '100%',
+                      height: '100%',
+                    }}
+                    type='application/pdf'
+                    src={`${API_UP}/${course.lessons[clicked].data_link}`}
+                     />                                        
+                }
 
               <ReactMarkdown
                 source={course.lessons[clicked].content}

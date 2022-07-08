@@ -91,7 +91,7 @@ const AddLessonForm = ({
           <span className="pt-3 badge ">{status.isQuizz ? "Select quizz: " : "Quizz for lesson?"}</span>
           <Switch
             className="float-right mt-2"            
-            checked={status.isQuizz}
+            checked={status.isQuizz}            
             name="isQuizz"
             onChange={(v) => {setStatus({ ...status, isQuizz: v }), setValues({ ...values, quizz: "" })}}
           />
@@ -126,8 +126,7 @@ const AddLessonForm = ({
         >
           Save
         </Button>
-      </form>
-      <pre>{JSON.stringify(quizzes, null, 4)}</pre>
+      </form>     
     </div>
   );
 };

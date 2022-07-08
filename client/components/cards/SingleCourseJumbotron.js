@@ -3,6 +3,7 @@ import { currencyFormatter } from "../../utils/helpers";
 import { Badge, Modal, Button } from "antd";
 import ReactPlayer from "react-player";
 import { LoadingOutlined, SafetyOutlined } from "@ant-design/icons";
+import Image from 'next/image';
 
 const SingleCourseJumbotron = ({
   course,
@@ -32,6 +33,10 @@ const SingleCourseJumbotron = ({
     category,
   } = course;
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
 
   return (
     <div className="jumbotron bg-primary square">
@@ -74,7 +79,17 @@ const SingleCourseJumbotron = ({
             </div>
           ) : (
             <>
-              <img src={photo ? `${API_UP}/${photo}` : "/course.png"} alt={name} style={{ height: "200px", width: "100%", objectFit: "cover" }} className="p-1" />
+               <Image
+                loader={myLoader}
+                src={photo}
+                alt="Picture of the author"
+                layout="responsive"
+                objectFit='cover'
+                height={200}
+                width={500}
+                //style={{ height: "200px", objectFit: "cover" }}
+                //className="p-1"
+              />
             </>
           )}
           {/* enroll button */}

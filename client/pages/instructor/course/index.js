@@ -3,6 +3,7 @@ import axios from "axios";
 import InstructorRoute from "../../../components/routes/InstructorRoute";
 import { Avatar, Tooltip } from "antd";
 import Link from "next/link";
+import Image from 'next/image';
 import { CheckCircleOutlined, CloseCircleOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 
@@ -10,6 +11,10 @@ const CourseIndex = () => {
   const [courses, setCourses] = useState([]);
 
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
 
   useEffect(() => {
     loadCourses();
@@ -53,7 +58,14 @@ const CourseIndex = () => {
             <div className="media pt-2">
               <Avatar
                 size={80}
-                src={course.photo ? `${API_UP}/${course.photo}` : "/course.png"}
+                src={course.photo ?  
+                <Image
+                  loader={myLoader}
+                  src={course.photo}
+                  alt="Picture of the author"
+                  layout="fill"
+                  objectFit='cover' 
+                /> : "/course.png"}
               />
 
               <div className="media-body pl-2">
@@ -71,9 +83,9 @@ const CourseIndex = () => {
                       {course.lessons.length} Lessons
                     </p>
 
-                    {course.lessons.length < 5 ? (
+                    {course.lessons.length < 1 ? (
                       <p style={myStyle} className="text-warning">
-                        At least 5 lessons are required to publish a course
+                        At least 1 lessons are required to publish a course
                       </p>
                     ) : course.published ? (
                       <p style={myStyle} className="text-success">

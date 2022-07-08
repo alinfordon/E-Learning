@@ -12,6 +12,7 @@ import {
   currentInstructor,
   instructorCourses,
   instructorQuizzes,
+  instructorAllQuizzes,
   studentCount,
   instructorBalance,
   instructorPayoutSettings,
@@ -27,6 +28,7 @@ router.get("/current-instructor", requireSignin, currentInstructor);
 
 router.get("/instructor-courses", requireSignin, instructorCourses);
 router.get("/instructor-quizzes", requireSignin, instructorQuizzes);
+router.get("/instructor-all-quizzes", requireSignin, instructorAllQuizzes);
 
 router.post("/instructor/student-count", requireSignin, studentCount);
 

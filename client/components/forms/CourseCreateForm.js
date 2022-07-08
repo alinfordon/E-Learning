@@ -1,4 +1,5 @@
 import { Select, Button, Avatar, Badge } from "antd";
+import Image from 'next/image';
 import FileBase64 from 'react-file-base64';
 import UploadForm from "./UploadForm";
 
@@ -20,6 +21,9 @@ const CourseCreateForm = ({
 }) => {
   console.log(values)
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
+  const myLoader = ({ src, width, quality }) => {
+    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+  }
   return (
     <>
       {values && (
@@ -103,7 +107,13 @@ const CourseCreateForm = ({
 
             {editPage && values.photo && (
               <Badge count="X" onClick={() => setValues({ ...values, photo: "" })} className="pointer">
-                <Avatar width={200} src={`${API_UP}/${values.photo}`} />
+                <Avatar width={200} src={<Image
+                  loader={myLoader}
+                  src={values.photo}
+                  alt="Picture of the author"
+                  layout="fill"
+                  objectFit='cover' 
+                />} />
               </Badge>
             )}
             </div>

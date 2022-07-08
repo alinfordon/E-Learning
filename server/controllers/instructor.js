@@ -131,6 +131,17 @@ export const instructorQuizzes = async (req, res) => {
   }
 };
 
+export const instructorAllQuizzes = async (req, res) => {
+  try {
+    const quizzes = await Quizz.find({ instructor: req.user._id })
+      .sort({ createdAt: -1 })
+      .exec();
+    res.json(quizzes);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const studentCount = async (req, res) => {
   try {
     const users = await User.find({ courses: req.body.courseId })

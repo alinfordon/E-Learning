@@ -2,6 +2,14 @@ import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
 
+function ignoreEmpty (val) {
+  if ("" === val) {
+    return undefined;
+  } else {
+    return val
+  }
+}
+
 const lessonSchema = new mongoose.Schema(
   {
     title: {
@@ -27,7 +35,8 @@ const lessonSchema = new mongoose.Schema(
     },
     quizz: {
       type: ObjectId,
-      ref: "Quizz",      
+      ref: "Quizz", 
+      set: ignoreEmpty
     },
     upload_data: {},
     free_preview: {

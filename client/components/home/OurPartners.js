@@ -128,7 +128,7 @@ const OurPartners = () => {
                     footer={[   
                         <Button
                           key="link"
-                          href="https://www.akmi-kek.gr/"
+                          href="https://ueducation.gr/"
                           type="link"    
                           target="_blank"                      
                           onClick={() => setIsAKMVisible(false)}
@@ -169,7 +169,7 @@ const OurPartners = () => {
             </Modal>
             <a onClick={() => setIsAKMVisible(true)}>
                 <div className="img-container">
-                    <img className="fake-img" src="/images/logo/KEK-150.png"  alt="image" />
+                    <img className="fake-img" src="/images/logo/KEK.png"  alt="image" />
                 </div>
             </a>
             </div>
