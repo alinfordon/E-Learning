@@ -2,10 +2,12 @@ import React, { useState, useEffect, createElement } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import StudentRoute from "../../../components/routes/StudentRoute";
-import { Button, Menu, Avatar } from "antd";
+import StudentNav from "../../../components/nav/StudentNav";
+import { Layout, Button, Menu, Avatar } from "antd";
 import ReactPlayer from "react-player";
 import YouTube from 'react-youtube';
 import ReactMarkdown from "react-markdown";
+import TopNav from "../../../components/TopNav";
 import {
   PlayCircleOutlined,
   MenuFoldOutlined,
@@ -14,11 +16,15 @@ import {
   MinusCircleFilled,
 } from "@ant-design/icons";
 
-const { Item } = Menu;
 
-const SingleCourse = () => {
+const { Item } = Menu;
+const { Content, Footer, Header, Sider } = Layout;
+
+const SingleCourse = () => { 
   const [clicked, setClicked] = useState(-1);
   const [collapsed, setCollapsed] = useState(false);
+  const [isQuizz, setIsQuizz] = useState(false);
+  const [quizz, setQuizz] = useState({});
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState({ lessons: [] });
   const [completedLessons, setCompletedLessons] = useState([]);
@@ -44,13 +50,23 @@ const SingleCourse = () => {
   };
 
   const opts = {
-    height: '390',
-    width: '640',
+    height: '500px',
+    width: '100%',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
     },
   };
+
+  const loadQuizzLesson = async () => {
+    console.log(course.lessons[clicked].quizz)    
+    const { data } = await axios.put(`/api/quizzForLesson`, {
+      quizzId: course.lessons[clicked].quizz,
+    });
+    setQuizz(data[0]);    
+    setIsQuizz(true);
+    console.log(quizz)
+  }
 
   const loadCompletedLessons = async () => {
     const { data } = await axios.post(`/api/list-completed`, {
@@ -89,6 +105,8 @@ const SingleCourse = () => {
       console.log(err);
     }
   };
+
+  
   
   const onReady = (event) => {
     // access to player in all event handlers via event.target
@@ -100,46 +118,37 @@ const SingleCourse = () => {
   "https://rainboprojectlgbtqi.eu/public/data/1656665824872_Presentation.pptx";
 
   return (
-    <StudentRoute>
-      <div className="row">
-        <div style={{ maxWidth: 420 }}>
-          <Button
-            onClick={() => setCollapsed(!collapsed)}
-            className="text-primary mt-1 btn-block mb-2"
-          >
-            {createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}{" "}
-            {!collapsed && "Lessons"}
-          </Button>
-          <Menu
-            theme="light"
-            defaultSelectedKeys={[clicked]}
-            inlineCollapsed={collapsed}
-            style={{ height: "80vh" }}
-          >
-            {course.lessons.map((lesson, index) => (
-              <Item
-                onClick={() => setClicked(index)}
-                key={index}
-                icon={<Avatar>{index + 1}</Avatar>}
-              >
-                {lesson.title.substring(0, 30)}{" "}
-                {completedLessons.includes(lesson._id) ? (
-                  <CheckCircleFilled
-                    className="float-right text-primary ml-2"
-                    style={{ marginTop: "13px" }}
-                  />
-                ) : (
-                  <MinusCircleFilled
-                    className="float-right text-danger ml-2"
-                    style={{ marginTop: "13px" }}
-                  />
-                )}
-              </Item>
-            ))}
-          </Menu>
-        </div>
-
-        <div className="col">
+    <StudentRoute>   
+      <h1 className="jumbotron text-center ">
+      {course.name}
+      </h1> 
+        <div className="row">
+          <div className="col-md-3">
+          <Menu theme="light" defaultSelectedKeys={[clicked]} mode="inline" >
+                {course.lessons.map((lesson, index) => (
+                        <Item
+                            onClick={() => (setClicked(index), setIsQuizz(false))}
+                            key={index}
+                            icon={<Avatar>{index + 1}</Avatar>}
+                        >
+                            {lesson.title.substring(0, 30)}{" "}
+                            {completedLessons.includes(lesson._id) ? (
+                            <CheckCircleFilled
+                                className="float-right text-primary ml-2"
+                                style={{ marginTop: "13px" }}
+                            />
+                            ) : (
+                            <MinusCircleFilled
+                                className="float-right text-danger ml-2"
+                                style={{ marginTop: "13px" }}
+                            />
+                            )}
+                        </Item>
+                    ))}   
+            </Menu>
+            <hr/>
+          </div>
+          <div className="col-md-9" style={{ minHeight: '100vh' }}>
           {clicked !== -1 ? (
             <>
               <div className="col alert alert-primary square">
@@ -191,20 +200,45 @@ const SingleCourse = () => {
                 source={course.lessons[clicked].content}
                 className="single-post"
               />
+                <hr/>
+                {course.lessons[clicked] && course.lessons[clicked].quizz &&
+                  <div className="col alert alert-primary square">
+                    <b>{ isQuizz ? quizz.title : "This lesson have a Quizz"  }</b>
+                    {isQuizz ? 
+                    <span
+                    className="float-right pointer"
+                    onClick={()=>(setQuizz(" "), setIsQuizz(false))}
+                  >
+                     End Quizz
+                  </span> : 
+                    <span
+                    className="float-right pointer"
+                    onClick={loadQuizzLesson}
+                  >
+                     Start Quizz
+                  </span>}
+                  </div>                                 
+                }       
+                {isQuizz &&
+                  <>
+                    {quizz.description}
+                  </>
+                }         
             </>
           ) : (
             <div className="d-flex justify-content-center p-5">
               <div className="text-center p-5">
                 <PlayCircleOutlined className="text-primary display-1 p-5" />
-                <p className="lead">Clcik on the lessons to start learning</p>
+                <p className="lead">Click on the lessons to start learning</p>
               </div>
             </div>
           )}
-          <pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre>
+          
         </div>
-      </div>
+        </div>   
     </StudentRoute>
   );
 };
 
 export default SingleCourse;
+//<pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre> <StudentNav clicked={clicked} setClicked={setClicked} course={course} completedLessons={completedLessons} />

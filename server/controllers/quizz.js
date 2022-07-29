@@ -70,6 +70,17 @@ export const create = async (req, res) => {
     }
   };
 
+  export const lessonQuizz = async (req, res) => {    
+    try {
+      const quizz = await Quizz.find({ _id: req.body.quizzId })
+        .populate("instructor", "_id name")
+        .exec();
+      res.json(quizz);      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   export const instructorQuizz = async (req, res) => {
     console.log(req.params.instructor);    
     try {

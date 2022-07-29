@@ -51,8 +51,7 @@ const StudentRoute = ({ children, showNav = true }) => {
               logoutT={t("navigation:logout")}
               dashboard={t("navigation:dashboard")}
         />
-      </Header>
-      <Content style={{ padding: '0 50px'}}> 
+      </Header>      
       {!ok ? (
         <SyncOutlined
           spin
@@ -60,8 +59,7 @@ const StudentRoute = ({ children, showNav = true }) => {
         />
       ) : (
         <div className="container-fluid">{children}</div>
-      )}
-      </Content>
+      )}     
     </Layout>    
   );
 };

@@ -11,6 +11,7 @@ import { requireSignin, isInstructor, isEnrolled } from "../middlewares";
 import {    
     create,
     read,  
+    lessonQuizz,
     instructorQuizz,
     update,
     remove,  
@@ -27,6 +28,7 @@ router.post("/quizz", requireSignin, isInstructor, create);
 router.put("/quizz/:slug", requireSignin, isInstructor, update);
 router.delete("/quizz/:slug", requireSignin, isInstructor, remove);
 router.get("/quizz/:slug", read);
+router.put("/quizzForLesson", lessonQuizz);
 router.get("/quizz/:instructorId", instructorQuizz);
 //Question
 router.post("/quizz/question/:slug/:instructorId", requireSignin, addQuestion);
