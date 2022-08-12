@@ -13,6 +13,10 @@ const answersSchema = new mongoose.Schema(
         type: Boolean,
         default: false,
       },
+      chekd: {
+        type: Boolean,
+        default: false,
+      },
     },
     { timestamps: true }
   );
@@ -32,7 +36,15 @@ const questionsSchema = new mongoose.Schema(
     points: {
         type: Number,
         default: 0,
-    },    
+    },  
+    grade: {
+      type: Number,
+      default: 0,
+    },      
+    isCheck: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
@@ -56,7 +68,11 @@ const quizzSchema = new mongoose.Schema(
     published: {
       type: Boolean,
       default: false,
-    },   
+    },  
+    grade: {
+      type: Number,
+      default: 0,
+    }, 
     instructor: {
       type: ObjectId,
       ref: "User",

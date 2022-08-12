@@ -1,6 +1,7 @@
 import slugify from "slugify";
 import Quizz from "../models/quizz";
 import User from "../models/user";
+import Exams from "../models/exams";
 
 
 export const create = async (req, res) => {
@@ -231,5 +232,24 @@ export const create = async (req, res) => {
     } catch (err) {
       console.log(err);
       return res.status(400).send("Unpublish quizz failed");
+    }
+  };
+
+  export const createExam = async (req, res) => {
+    console.log("CREATE QUIZZ", req.body);
+    
+    try {        
+      const quizz = await new Exams({
+        user: req.user._id,
+        instructor: req.body.instructor,
+        title: req.body.title,
+        grade: req.body.grade,
+        questions: req.body.questions,
+      }).save();
+  
+      res.json(quizz);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send("Quizz create failed. Try again.");
     }
   };

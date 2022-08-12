@@ -97,7 +97,7 @@ export const uploadFile = async (req, res) => {
         fileName: req.file.originalname, 
         filePath: req.file.path,
         fileType: req.file.mimetype,
-        fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
+        fileSize: fileSizeFormatter(req.file.size, 2) // 0.00 
     }).save();
     console.log(file)
     //res.status(201).send('File Uploaded Successfully');

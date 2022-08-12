@@ -60,6 +60,7 @@ const StudentRoute = ({ children, showNav = true }) => {
       ) : (
         <div className="container-fluid">{children}</div>
       )}     
+      <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Rainbo Project, All Rights Reserved</Footer> 
     </Layout>    
   );
 };

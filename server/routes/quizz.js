@@ -21,6 +21,7 @@ import {
     removeQuestion,
     publishQuizz,
     unpublishQuizz,
+    createExam,
   } from "../controllers/quizz";
 
 //Quizz
@@ -38,6 +39,7 @@ router.put("/quizz/:slug/:questionId", requireSignin, removeQuestion);
 // publish unpublish
 router.put("/publish-quizz/:quizzId", requireSignin, isInstructor, publishQuizz);
 router.put("/unpublish-quizz/:quizzId", requireSignin, unpublishQuizz);
-
+// exams
+router.post("/exam", requireSignin, createExam);
 
 module.exports = router;
