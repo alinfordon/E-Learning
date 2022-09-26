@@ -179,7 +179,7 @@ const QuizzView = () => {
             <hr />
             <div className="row">
               <div className="col">
-                
+                 
               </div>
             </div>
             <div className="row p-3">
