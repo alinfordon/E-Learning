@@ -170,33 +170,12 @@ const SingleCourse = () => {
       <h1 className="jumbotron text-center ">
       {course.name}
       </h1> 
-        <div className="row">
-          <div className="col-md-3">
-          <Menu theme="light" defaultSelectedKeys={[clicked]} mode="inline" >
-                {course.lessons.map((lesson, index) => (
-                        <Item
-                            onClick={() => (setClicked(index), resetQuizz())}
-                            key={index}
-                            icon={<Avatar>{index + 1}</Avatar>}
-                        >
-                            {lesson.title.substring(0, 30)}{" "}
-                            {completedLessons.includes(lesson._id) ? (
-                            <CheckCircleFilled
-                                className="float-right text-primary ml-2"
-                                style={{ marginTop: "13px" }}
-                            />
-                            ) : (
-                            <MinusCircleFilled
-                                className="float-right text-danger ml-2"
-                                style={{ marginTop: "13px" }}
-                            />
-                            )}
-                        </Item>
-                    ))}   
-            </Menu>
+        <div className="row" style={{ minHeight: '65vh' }}>
+          <div className="col-md-3" >
+           <p className="button-q"  onClick={() => (setClicked(clicked + 1), resetQuizz())}>Next</p>
             <hr/>
           </div>
-          <div className="col-md-9" style={{ minHeight: '100vh' }}>
+          <div className="col-md-9" style={{ minHeight: '65vh' }}>
           {clicked !== -1 ? (
             <>
               <div className="col alert alert-primary square">
@@ -360,7 +339,8 @@ const SingleCourse = () => {
             <div className="d-flex justify-content-center p-5">
               <div className="text-center p-5">
                 <PlayCircleOutlined className="text-primary display-1 p-5" />
-                <p className="lead">Click on the lessons to start learning</p>
+                <p className="lead pointer" onClick={() => (setClicked(0), resetQuizz())}>Click to start learning</p>
+                
               </div>
             </div>
           )}
@@ -373,3 +353,27 @@ const SingleCourse = () => {
 
 export default SingleCourse;
 //<pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre> <StudentNav clicked={clicked} setClicked={setClicked} course={course} completedLessons={completedLessons} />
+/*
+<Menu theme="light" defaultSelectedKeys={[clicked]} mode="inline" >
+                {course.lessons.map((lesson, index) => (
+                        <Item
+                            onClick={() => (setClicked(index), resetQuizz())}
+                            key={index}
+                            icon={<Avatar>{index + 1}</Avatar>}
+                        >
+                            {lesson.title.substring(0, 30)}{" "}
+                            {completedLessons.includes(lesson._id) ? (
+                            <CheckCircleFilled
+                                className="float-right text-primary ml-2"
+                                style={{ marginTop: "13px" }}
+                            />
+                            ) : (
+                            <MinusCircleFilled
+                                className="float-right text-danger ml-2"
+                                style={{ marginTop: "13px" }}
+                            />
+                            )}
+                        </Item>
+                    ))}   
+            </Menu>
+*/
