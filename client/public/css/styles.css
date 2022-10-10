@@ -52,6 +52,14 @@
   align-content: center;
 }
 
+.section-menu-module {
+  position: fixed;
+  min-height: 65vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
 .alert-q {  
   font-size: 20px;
   padding: 5px;

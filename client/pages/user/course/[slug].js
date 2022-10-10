@@ -170,12 +170,15 @@ const SingleCourse = () => {
       <h1 className="jumbotron text-center ">
       {course.name}
       </h1> 
-        <div className="row" style={{ minHeight: '65vh' }}>
-          <div className="col-md-3" >
-           <p className="button-q"  onClick={() => (setClicked(clicked + 1), resetQuizz())}>Next</p>
+        <div className="row" >
+          <div className="col-md-2 " >
+            <div className="section-menu-module">
+              <p className="button-q"  onClick={() => (setClicked(clicked + 1), resetQuizz())}>Next</p>
+            </div>
+           
             <hr/>
           </div>
-          <div className="col-md-9" style={{ minHeight: '65vh' }}>
+          <div className="col-md-9" >
           {clicked !== -1 ? (
             <>
               <div className="col alert alert-primary square">
