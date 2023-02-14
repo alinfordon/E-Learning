@@ -13,6 +13,7 @@ const CourseCard = ({ course }) => {
   }
 
   const { name, instructor, price, image, photo, slug, paid, category, language } = course;
+  console.log(photo)
   return (
     <Link href={`/course/${slug}`}>
       <a>

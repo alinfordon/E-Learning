@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from 'next/image';
 import InstructorRoute from "../../../../components/routes/InstructorRoute";
 import axios from "axios";
+import Resizer from "react-image-file-resizer";
 import { Avatar, Tooltip, Button, Modal, List } from "antd";
 import {
   EditOutlined,
@@ -103,15 +104,45 @@ const CourseView = () => {
     }
   };
 
+  const handleImage = (e) => {
+    setValues({ ...values, photo: "" })
+    let files = e.target.files[0];
+    //setPreview(window.URL.createObjectURL(file));
+    setStatus({ ...status, uploadButtonText: files.name});    
+    // resize    
+    Resizer.imageFileResizer(files, 720, 500, "JPEG", 100, 0, async (file) => {
+      const data = new FormData();
+      data.append('image', file);  
+      console.log(file)
+      const dataUp = await fetch("/api/upload-data", {
+          method: "POST",
+          body: data,
+      }).then(response => {
+          return response.json(); 
+      }).catch((err) => {
+          console.log(err.message);
+      })    
+      console.log("data/", dataUp)    
+      setValues({ ...values, data_link: dataUp.filePath, upload_data: dataUp });
+    });
+  };
+
   const handleUpload = async (e) => {
     setValues({ ...values, photo: "" })
     let file = e.target.files[0];
     //setPreview(window.URL.createObjectURL(file));
     //setUploadButtonText(file.name);
     setStatus({ ...status, uploadButtonText: file.name});
+    const resizeFile = (file) => new Promise(resolve => {
+      Resizer.imageFileResizer(file, 800, 600, 'JPEG', 100, 0,
+      uri => {
+        resolve(uri);
+      }, 'file' );
+  });
+    const image = await resizeFile(file);
     const data = new FormData();
-    data.append('image', file);  
-        
+    data.append('image', image);  
+    //console.log(image)  
     
     const dataUp = await fetch("/api/upload-data", {
         method: "POST",
@@ -121,7 +152,7 @@ const CourseView = () => {
     }).catch((err) => {
         console.log(err.message);
     })    
-    console.log("data/", dataUp)    
+    //console.log("data/", dataUp)    
     setValues({ ...values, data_link: dataUp.filePath, upload_data: dataUp });
   };
 
@@ -304,7 +335,7 @@ const CourseView = () => {
                 status={status}
                 setStatus={setStatus}
                 handleAddLesson={handleAddLesson}
-                handleUpload={handleUpload}
+                handleUpload={handleUpload}                
                 uploading={uploading}
                 uploadButtonText={uploadButtonText}                
                 handleVideo={handleVideo}

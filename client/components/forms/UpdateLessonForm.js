@@ -1,16 +1,21 @@
-import { Button, Progress, Switch } from "antd";
+import { Button, Progress, Switch, Select } from "antd";
 import { CloseCircleFilled, CloseCircleOutlined } from "@ant-design/icons";
 import ReactPlayer from "react-player";
 
 const UpdateLessonForm = ({
   current,
   setCurrent,
+  quizzes,
   handleUpdateLesson,
+  handleUpload,
   uploading,
   uploadVideoButtonText,
   handleVideo,
   progress,
 }) => {
+
+  console.log(current)
+
   return (
     <div className="container pt-3">
       {/* {JSON.stringify(current)} */}
@@ -32,43 +37,58 @@ const UpdateLessonForm = ({
           value={current.content}
         ></textarea>
 
-        <div>
-          {!uploading && current.video && current.video.Location && (
-            <div className="pt-2 d-flex justify-content-center">
-              <ReactPlayer
-                url={current.video.Location}
-                width="410px"
-                height="240px"
-                controls
-              />
+       {current.video_link &&
+        <div className="form-group mt-2">         
+            <input
+              type="text"
+              name="vlink"
+              className="form-control"
+              placeholder="https://youtube.com/34feert"
+              value={current.video_link}
+              onChange={(e) => setCurrent({ ...current, video_link: e.target.value })}
+            />
+          </div>
+        }
+       
+       {current.data_link &&
+           <div className="form-row">
+           <div className="col">
+             <div className="form-group">              
+             <label className="btn btn-dark btn-block text-left mt-3" >
+             {current.upload_data ? current.upload_data.fileName : "Upload"}
+                 <input
+                   type="file"
+                   name="image"
+                   onChange={handleUpload}
+                   accept="data/*"
+                   hidden
+                 />
+               </label>
+             </div>
+           </div>          
+           </div>
+        }
+
+        {current.quizz &&
+          <div className="form-row mt-2">
+          <div className="col">
+            <div className="form-group">            
+              <Select
+                style={{ width: "100%" }}
+                size="large"   
+                defaultValue="Select Quizz"                               
+                onChange={(v) => setCurrent({ ...current, quizz: v })}
+              >
+                {quizzes.map((q) => (
+                  <Option value={q._id} className="nav-item text-dark" key={q._id}>
+                      {q.title}
+                  </Option>
+                ))} 
+              </Select>
             </div>
-          )}
-
-          <label className="btn btn-dark btn-block text-left mt-3">
-            {uploadVideoButtonText}
-            <input onChange={handleVideo} type="file" accept="video/*" hidden />
-          </label>
+          </div>
         </div>
-
-        {progress > 0 && (
-          <Progress
-            className="d-flex justify-content-center pt-2"
-            percent={progress}
-            steps={10}
-          />
-        )}
-
-        <div className="d-flex justify-content-between">
-          <span className="pt-3 badge">Preview</span>
-          <Switch
-            className="float-right mt-2"
-            disabled={uploading}
-            checked={current.free_preview}
-            name="fee_preview"
-            onChange={(v) => setCurrent({ ...current, free_preview: v })}
-          />
-        </div>
-
+        }
         <Button
           onClick={handleUpdateLesson}
           className="col mt-3"

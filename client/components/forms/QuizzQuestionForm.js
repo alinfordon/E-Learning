@@ -20,8 +20,28 @@ const QuizzQuestionForm = ({
               autoFocus
               onChange={(e) => setValues({ ...values, question: e.target.value })}
               required
-            />       
-           <div className="form-group pt-3">
+            />  
+            <div className="form-group pt-3">
+              <label>Positive feedback</label>
+                <input
+                  type="text"
+                  className="form-control square"              
+                  value={values.feedbackp}
+                  placeholder="Positive feedback"              
+                  onChange={(e) => setValues({ ...values, feedbackp: e.target.value })}
+                />  
+            </div>   
+            <div className="form-group ">
+              <label>Negative feedback</label>
+                <input
+                  type="text"
+                  className="form-control square"              
+                  value={values.feedbackn}
+                  placeholder="Negative feedback "              
+                  onChange={(e) => setValues({ ...values, feedbackn: e.target.value })}
+                />  
+            </div>   
+           <div className="form-group ">
            <label>Points for question</label>
             <input
               type="number"

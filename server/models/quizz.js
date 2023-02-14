@@ -13,6 +13,10 @@ const answersSchema = new mongoose.Schema(
         type: Boolean,
         default: false,
       },
+      feedback: {
+        type: String,
+        trim: true, 
+      },
       chekd: {
         type: Boolean,
         default: false,
@@ -40,7 +44,15 @@ const questionsSchema = new mongoose.Schema(
     grade: {
       type: Number,
       default: 0,
-    },      
+    },   
+    feedbackp: {
+      type: String,
+      trim: true, 
+    }, 
+    feedbackn: {
+      type: String,
+      trim: true, 
+    },  
     isCheck: {
       type: Boolean,
       default: false,

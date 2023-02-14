@@ -25,10 +25,13 @@ const QuizzView = () => {
   const [values, setValues] = useState({
     question: "",    
     points: "",
+    feedbackp: "",
+    feedbackn: "",
   });
   const [answerData, setAnswerData] = useState({
     answer: "",    
     correct: false,
+    feedback: "",
   });
  
   const router = useRouter();
@@ -74,7 +77,7 @@ const QuizzView = () => {
         answerData
       );
       // console.log(data)
-      setAnswerData({ ...answerData, answer: "", correct: false });      
+      setAnswerData({ ...answerData, answer: "", correct: false, feedback: "" });      
       setIsAnswer(false);
       loadQuizz();
       toast("Answer added");

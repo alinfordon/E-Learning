@@ -27,6 +27,7 @@ const CourseEdit = () => {
   const [image, setImage] = useState({});
   const [preview, setPreview] = useState("");
   const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
+  const [quizzes, setQuizzes] = useState({});
 
   // state for lessons update
   const [visible, setVisible] = useState(false);
@@ -47,11 +48,45 @@ const CourseEdit = () => {
     loadCourse();
   }, [slug]);
 
+  useEffect(() => {    
+    loadQuizzes();
+  }, []);
+
+
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/course/${slug}`);
     console.log(data);
     if (data) setValues(data);
     if (data && data.image) setImage(data.image);
+  };
+
+  const loadQuizzes = async () => {
+    const { data } = await axios.get("/api/instructor-quizzes");
+    setQuizzes(data);
+  };
+
+  const handleUpload = async (e) => {
+    setValues({ ...values, photo: "" })
+    let file = e.target.files[0];
+    setPreview(window.URL.createObjectURL(file));
+    setUploadButtonText(file.name);
+    
+    const data = new FormData();
+    data.append('image', file);  
+        
+    
+    const dataUp = await fetch("/api/upload-photo", {
+        method: "POST",
+        body: data,
+    }).then(response => {
+        return response.json(); 
+    }).catch((err) => {
+        console.log(err.message);
+    })
+    setImage(dataUp) 
+    console.log("data/", dataUp)
+    console.log("image/", image)
+    setValues({ ...values, photo: dataUp.filePath });
   };
 
   const handleChange = (e) => {
@@ -213,6 +248,7 @@ const CourseEdit = () => {
           router={router}
           handleSubmit={handleSubmit}
           handleImageRemove={handleImageRemove}
+          handleUpload={handleUpload}
           handleImage={handleImage}
           handleChange={handleChange}
           values={values}
@@ -270,7 +306,9 @@ const CourseEdit = () => {
         <UpdateLessonForm
           current={current}
           setCurrent={setCurrent}
+          quizzes={quizzes}
           handleVideo={handleVideo}
+          handleUpload={handleUpload}
           handleUpdateLesson={handleUpdateLesson}
           uploadVideoButtonText={uploadVideoButtonText}
           progress={progress}

@@ -97,7 +97,7 @@ export const create = async (req, res) => {
   export const addQuestion = async (req, res) => {
     try {
       const { slug, instructorId } = req.params;
-      const { question, points } = req.body;
+      const { question, points, feedbackp, feedbackn } = req.body;
   
       if (req.user._id != instructorId) {
         return res.status(400).send("Unauthorized");
@@ -106,7 +106,7 @@ export const create = async (req, res) => {
       const updated = await Quizz.findOneAndUpdate(
         { slug },
         {
-          $push: { questions: { question, points, slug: slugify(question) } },
+          $push: { questions: { question, points, feedbackp, feedbackn, slug: slugify(question) } },
         },
         { new: true }
       )
@@ -124,7 +124,7 @@ export const create = async (req, res) => {
        console.log("UPDATE Answer", req.body);
        //return;
       const { slug } = req.params;
-      const { _id, answer, correct } = req.body;
+      const { _id, answer, feedback, correct } = req.body;
       const quizz = await Quizz.findOne({ slug }).select("instructor").exec();
   
       if (quizz.instructor._id != req.user._id) {
@@ -154,7 +154,7 @@ export const create = async (req, res) => {
     try {
       //console.log("UPDATE QUESTION", req.body);       
       const { slug } = req.params;
-      const { _id, question, answers, points } = req.body;
+      const { _id, question, answers, feedbackp, feedbackn, points } = req.body;
       const quizz = await Quizz.findOne({ slug }).select("instructor").exec();
   
       if (quizz.instructor._id != req.user._id) {
@@ -167,7 +167,9 @@ export const create = async (req, res) => {
           $set: {
             "questions.$.question": question,
             "questions.$.answers": answers,
-            "questions.$.points": points,            
+            "questions.$.points": points, 
+            "questions.$.feedbackp": feedbackp,
+            "questions.$.feedbackn": feedbackn,            
           },
         },
         { new: true }

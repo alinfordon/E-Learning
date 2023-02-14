@@ -9,6 +9,18 @@
   color: #fff;
 }
 
+.student {
+  background: linear-gradient(to bottom, #001529, #00429b, #006dba, #0095ce, #2dbcdc);
+  min-height: 100px;
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center ;
+  justify-content: space-around;
+  padding: 25px;
+}
+
+
 .pointer {
   cursor: pointer;
 }
@@ -53,10 +65,11 @@
 }
 
 .section-menu-module {
-  position: fixed;
-  min-height: 65vh;
+  position: fixed;  
+  z-index: 10;
+  margin-top: -100px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 

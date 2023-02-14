@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createElement } from "react";
+import React, { useState, useEffect, createElement, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import StudentRoute from "../../../components/routes/StudentRoute";
@@ -13,7 +13,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   CheckCircleFilled,
-  MinusCircleFilled,
+  SyncOutlined,
 } from "@ant-design/icons";
 
 
@@ -24,14 +24,18 @@ const SingleCourse = () => {
   const [clicked, setClicked] = useState(-1);
   const [collapsed, setCollapsed] = useState(false);
   const [isQuizz, setIsQuizz] = useState(false);
+  const [addQuizz, setAddQuizz] = useState(false);
   const [isExam, setIsExam] = useState(false);
+  const [isEnd, setIsEnd] = useState(false);
   const [quizz, setQuizz] = useState({});
   const [exam, setExam] = useState({});
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState({ lessons: [] });
   const [completedLessons, setCompletedLessons] = useState([]);
+  const [buttonName, setButtonName] = useState("Start")
   // force state update
   const [updateState, setUpdateState] = useState(false);
+  const nodeRef = useRef(null);
 
   // router
   const router = useRouter();
@@ -42,9 +46,14 @@ const SingleCourse = () => {
     if (slug) loadCourse();
   }, [slug]);
 
+ 
   useEffect(() => {
-    if (course) loadCompletedLessons();
+    if (course) loadCompletedLessons();    
   }, [course]);
+
+  useEffect(() => {
+    if (addQuizz) loadQuizzLesson();    
+  }, [addQuizz]);
 
   const loadCourse = async () => {
     const { data } = await axios.get(`/api/user/course/${slug}`);
@@ -60,21 +69,18 @@ const SingleCourse = () => {
     },
   };
 
-  const loadQuizzLesson = async () => {
-    console.log(course.lessons[clicked].quizz)    
+  const loadQuizzLesson = async () => {      
     const { data } = await axios.put(`/api/quizzForLesson`, {
       quizzId: course.lessons[clicked].quizz,
     });
     setQuizz(data[0]);    
-    setIsQuizz(true);
-    console.log(quizz)
+    setIsQuizz(true);    
   }
 
   const loadCompletedLessons = async () => {
     const { data } = await axios.post(`/api/list-completed`, {
       courseId: course._id,
-    });
-    console.log("COMPLETED LESSONS => ", data);
+    });    
     setCompletedLessons(data);
   };
 
@@ -161,178 +167,125 @@ const SingleCourse = () => {
     event.target.pauseVideo();
   }
 
-  //console.log(clicked && course.lessons[clicked])
-  const linkToPPTFile =
-  "https://rainboprojectlgbtqi.eu/public/data/1656665824872_Presentation.pptx";
+  const nextButton = () => {
+    if(clicked + 1 === course.lessons.length){
+      setButtonName("End");
+      setIsEnd(true);
+      setClicked(-1)
+      return;
+    }else{
+      if (course.lessons[clicked + 1] && course.lessons[clicked + 1].quizz) setAddQuizz(true);
+      if (course.lessons[clicked + 1] && !course.lessons[clicked + 1].quizz) setAddQuizz(false);
+      setButtonName("Next");
+      setClicked(clicked + 1);      
+      resetQuizz();
+    }   
+  }
+ // if (course.lessons[clicked] && course.lessons[clicked].quizz) loadQuizzLesson();
 
+  //console.log(addQuizz, course.lessons[clicked])
   return (
-    <StudentRoute>   
-      <h1 className="jumbotron text-center ">
-      {course.name}
-      </h1> 
-        <div className="row" >
-          <div className="col-md-2 " >
-            <div className="section-menu-module">
-              <p className="button-q"  onClick={() => (setClicked(clicked + 1), resetQuizz())}>Next</p>
-            </div>
-           
-            <hr/>
-          </div>
-          <div className="col-md-9" >
+    <StudentRoute nodeRef={nodeRef}>   
+      <div className="student text-center ">
+      <img src="/images/rainbo_logo-194x85.png" className="white-logo" width={150} alt="logo" /> 
+      <h1 className="text-light">{clicked === -1 ? course.name : course.lessons[clicked].title.substring(0, 200)}</h1>
+      <img src="/images/eu_logo_right.png" className="white-logo" width={200} alt="logo" /> 
+      </div> 
+        <div className="culumn " style={{ minHeight: '70vh' }} >          
+          <div className="container-fluid " style={{ minHeight: '65vh', position: 'relative', zIndex: 1 }}>
           {clicked !== -1 ? (
             <>
-              <div className="col alert alert-primary square">
-                <b>{course.lessons[clicked].title.substring(0, 200)}</b>
-                {completedLessons.includes(course.lessons[clicked]._id) ? (
-                  <span
-                    className="float-right pointer"
-                    onClick={markIncompleted}
-                  >
-                    Mark as incomplete
-                  </span>
-                ) : (
-                  <span className="float-right pointer" onClick={markCompleted}>
-                    Mark as completed
-                  </span>
-                )}
-              </div>
-              <p>{getTotal()}</p>  
               {course.lessons[clicked] &&
-                course.lessons[clicked].video_link && (
+                course.lessons[clicked].upload_data && (
                   <>
-                    <div className="wrapper">                   
-                    <YouTube videoId={course.lessons[clicked].video_link.split("=", 2)[1]} opts={opts} onReady={onReady} />                     
+                    <div className="wrapper text-center mt-2">                   
+                    <img
+                    src={`${API_UP}/${course.lessons[clicked].data_link}`}
+                    width="75%"
+                    height="250px"
+                    frameBorder="0"
+                    
+                  />               
                     </div>
                   </>
                 )}
 
-                {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === "application/vnd.openxmlformats-officedocument.presentationml.presentation" &&
-                    <iframe
-                    src={`https://view.officeapps.live.com/op/embed.aspx?src=https://rainboprojectlgbtqi.eu/${course.lessons[clicked].data_link}`}
-                    width="100%"
-                    height="600px"
-                    frameBorder="0"
-                    title="slides"
-                  ></iframe>
-                }
-                 {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === 'application/pdf' &&
-                    <embed
-                    style={{
-                            width: '100%',
-                      height: '100%',
-                    }}
-                    type='application/pdf'
-                    src={`${API_UP}/${course.lessons[clicked].data_link}`}
-                     />                                        
-                }
+               
 
-              <ReactMarkdown
+              {!isQuizz && !isExam && <ReactMarkdown
                 source={course.lessons[clicked].content}
-                className="single-post"
-              />
+                className="single-post mt-4"
+              />}
                 
                 {course.lessons[clicked] && course.lessons[clicked].quizz &&
                   <div className="mt-4">
-                    {!isQuizz && !isExam && <>
-                    <h3 className="text-primary">Are you ready?</h3>
-                    <div className="d-flex justify-content-center">                    
-                    <Button
-                      onClick={loadQuizzLesson}
-                      className="col-md-8 mt-3 "
-                      size="large"
-                      type="primary"                      
-                      shape="round"
-                    >
-                      Start Quizz
-                    </Button>
-                    </div>  </>}           
+                    {!isQuizz && !isExam && <> 
+                      <SyncOutlined
+                        spin
+                        className="d-flex justify-content-center display-1 text-primary p-5"
+                      />                   
+                     </>}           
                     {isQuizz && <>
                       <hr/>
                       <h3 className="text-primary">{quizz.title}</h3>
                       <ReactMarkdown
-                        source={quizz.description}
-                        className="single-post p-2"
+                        children={quizz.description}
+                        className="single-post"
                       />
+                      <hr/>
                       {quizz && quizz.questions && quizz.questions.map((q) => (
-                        <>
-                        <h5 className="py-2" key={q._id}>{q.question}</h5>
-                       <div className="mb-4 ">                        
+                        <div key={q._id}>
+                        <h5 className="py-2" >{q.question}</h5>
+                       <div className="mb-4 text-center">                        
                         { q.answers.map((a, index)=>(
                              <div
                              key={index}
                              onClick={() => checkAnswer(q, index)}
-                             className={a.chekd ? "col-md-8 mt-4 button-q pressed" : "col-md-8 mt-4 button-q"}
+                             className={a.chekd ? "col-md-8 mt-4 button-q pressed text-left" : "col-md-8 mt-4 button-q text-left"}
                              //size="large"
                              //type={a.chekd ? "warning" : "primary"}                      
                              //shape="round"
                              
                            >
-                             {a.answer}
+                             {index + 1 + ")  "}{a.answer}
                            </div>
                         ))}
-                        <hr/>
                         </div>
-                        </>
+                        </div>
                       ))}
-                       <Button
-                          onClick={createExam}
-                          className="col-md-8 mt-4 mb-4"
-                          size="large"
-                          type="primary"                      
-                          shape="round"
-                        >
-                            Save
-                        </Button>
                     </>}   
                     <div className="row">
-                    <div className="col-md-5">
-                    {isExam && <>
+                    <div className="col p-4">
+                    {isExam && <div className="container">
                       <hr/>
-                      <h3 className="text-primary">Correct answers</h3>   
+                      <h3 className="text-primary">Feedback</h3>   
                       <hr />                   
                       {exam && exam.questions && exam.questions.map((q) => (
-                        <>
-                        <h5 className="py-2" key={q._id}>{q.question}</h5>
-                       <div className="mb-4 ">                        
+                        <div key={q._id}>
+                        <h3>Question</h3>
+                        <h5 className="py-2" >{q.question}</h5>
+                        <hr />
+                       <div className="mb-4">
+                       <h3>Answers</h3>                        
                         { q.answers.map((a, index)=>(
                              <div
                              key={index}                             
-                             className={a.correct ? "mt-4 alert-q" : "mt-4 alert-q alert-incorrect "} 
+                             //className={a.correct ? "mt-4 alert-q" : "mt-4 alert-q alert-incorrect "} 
                             
-                           >
-                             {a.answer}
+                           >                            
+                             <p>{index + 1 + ")"} <span className={a.correct ? "text-success" : "text-danger"}>{a.answer}</span></p>                             
                            </div>
                         ))}                        
                         <hr/>
                         </div>
-                        </>
-                      ))}                       
-                    </>}    
-                    </div> 
-                    <div className="col-md-5">
-                    {isExam && <>
-                      <hr/>
-                      <h3 className="text-primary">Your answers<span className="float-right text-success">You got {exam.grade} points</span></h3>  
-                      <hr/>                    
-                      {exam && exam.questions && exam.questions.map((q) => (
-                        <>
-                        <h5 className="py-2" key={q._id}>{q.question}</h5>
-                       <div className="mb-4 ">                        
-                        { q.answers.map((a, index)=>(
-                             <div
-                             key={index}                             
-                             className={a.chekd && a.correct ? "mt-4 alert-q" : a.chekd && !a.correct ? "mt-4 alert-q alert-sel-incorrect" : "mt-4 alert-q alert-sel-correct"}
-                             
-                           >
-                             {a.answer}
-                           </div>
-                        ))}                        
-                        <hr/>
+                        <h3>Feedback</h3>
+                        <h5 className="py-2 alert-q">{q.feedbackp && q.feedbackp}</h5>
+                        <h5 className="py-2 alert-q alert-incorrect">{q.feedbackn && q.feedbackn}</h5>
+                        <hr />
                         </div>
-                        </>
                       ))}                       
-                    </>}    
-                    </div> 
+                    </div>}    
+                    </div>
                     </div>  
                   </div>                                 
                 }      
@@ -340,15 +293,34 @@ const SingleCourse = () => {
             </>
           ) : (
             <div className="d-flex justify-content-center p-5">
+              {isEnd ? 
+              <div>
+              <p className="lead" >End</p>
+              </div>:
               <div className="text-center p-5">
-                <PlayCircleOutlined className="text-primary display-1 p-5" />
-                <p className="lead pointer" onClick={() => (setClicked(0), resetQuizz())}>Click to start learning</p>
-                
+                <div className="wrapper">
+                  <ReactPlayer url='https://player.vimeo.com/video/759402145?h=bf08f58a1e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
+                </div>
+              <br/>
+                <p className="lead pointer" onClick={nextButton}>Click to start learning</p>                
               </div>
+              }
             </div>
           )}
           
         </div>
+        <div className="col-md-1 section-menu-module">
+            <div className="" >
+              {course.lessons[clicked] && course.lessons[clicked].quizz ? 
+                (isExam ? 
+                  <p className="button-q"  onClick={isEnd ? router.push("/user") : nextButton}>{buttonName}</p> 
+                  : 
+                  <button className="button-q" disabled={!isQuizz} onClick={createExam}> Save </button>) 
+                  : 
+                <p className="button-q"  onClick={isEnd ? () => router.push("/user") : nextButton}>{buttonName}</p>
+              }
+            </div>
+          </div>
         </div>   
     </StudentRoute>
   );
@@ -379,4 +351,74 @@ export default SingleCourse;
                         </Item>
                     ))}   
             </Menu>
+
+            <div className="col alert alert-primary square">
+                <b>{course.lessons[clicked].title.substring(0, 200)}</b>
+                {completedLessons.includes(course.lessons[clicked]._id) ? (
+                  <span
+                    className="float-right pointer"
+                    onClick={markIncompleted}
+                  >
+                    Mark as incomplete
+                  </span>
+                ) : (
+                  <span className="float-right pointer" onClick={markCompleted}>
+                    Mark as completed
+                  </span>
+                )}
+              </div>
+
+               {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === "application/vnd.openxmlformats-officedocument.presentationml.presentation" &&
+                    <iframe
+                    src={`https://view.officeapps.live.com/op/embed.aspx?src=https://rainboprojectlgbtqi.eu/${course.lessons[clicked].data_link}`}
+                    width="100%"
+                    height="600px"
+                    frameBorder="0"
+                    title="slides"
+                  ></iframe>
+                }
+                 {course.lessons[clicked] && course.lessons[clicked].upload_data && course.lessons[clicked].upload_data.fileType === 'application/pdf' &&
+                    <embed
+                    style={{
+                            width: '100%',
+                      height: '100%',
+                    }}
+                    type='application/pdf'
+                    src={`${API_UP}/${course.lessons[clicked].data_link}`}
+                     />                                        
+                }
+
+                 {course.lessons[clicked] &&
+                course.lessons[clicked].video_link && (
+                  <>
+                    <div className="wrapper">                   
+                    <YouTube videoId={course.lessons[clicked].video_link.split("=", 2)[1]} opts={opts} onReady={onReady} />                     
+                    </div>
+                  </>
+                )}
+
+                <div className="col-md-5">
+                    {isExam && <>
+                      <hr/>
+                      <h3 className="text-primary">Your answers<span className="float-right text-success">You got {exam.grade} points</span></h3>  
+                      <hr/>                    
+                      {exam && exam.questions && exam.questions.map((q) => (
+                        <>
+                        <h5 className="py-2" key={q._id}>{q.question}</h5>
+                       <div className="mb-4 ">                        
+                        { q.answers.map((a, index)=>(
+                             <div
+                             key={index}                             
+                             className={a.chekd && a.correct ? "mt-4 alert-q" : a.chekd && !a.correct ? "mt-4 alert-q alert-sel-incorrect" : "mt-4 alert-q alert-sel-correct"}
+                             
+                           >
+                             {a.answer}
+                           </div>
+                        ))}                        
+                        <hr/>
+                        </div>
+                        </>
+                      ))}                       
+                    </>}    
+                    </div> 
 */

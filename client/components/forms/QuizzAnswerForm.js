@@ -30,6 +30,14 @@ const QuizzAnswerForm = ({
             onChange={(v) => setAnswerData({ ...answerData, correct: v })}
           />
         </div>
+        <label>Feedback</label>
+            <input
+              type="text"
+              className="form-control square"              
+              value={answerData.feedback}
+              placeholder="Feedback"              
+              onChange={(e) => setAnswerData({ ...answerData, feedback: e.target.value })}              
+            />  
           
           <Button
               onClick={handleAddAnswer}
