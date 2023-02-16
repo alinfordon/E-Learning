@@ -41,15 +41,21 @@ const CourseCreateForm = ({
           </div>
 
           <div className="form-group">
-          <label>Short Description</label>
-            <input
-              type="text"
-              name="category"
-              className="form-control"
-              placeholder="Short Description"
-              value={values.category}
-              onChange={handleChange}
-            />
+          <label>Module</label>            
+            <Select
+                  style={{ width: "100%" }}
+                  size="large"
+                  defaultValue="Module 1"   
+                  name="category"  
+                  onChange={(value) => setValues({ ...values, category: value })}
+                >           
+                <Option value="Module 1" name="category" className="nav-item text-dark">
+                        Module 1
+                </Option>      
+                <Option value="Module 2" name="category" className="nav-item text-dark">
+                        Module 2
+                </Option>
+            </Select>
           </div>
 
           <div className="form-group">
@@ -134,6 +140,7 @@ const CourseCreateForm = ({
               </Button>
             </div>
           </div>
+          
         </form>
       )}
     </>

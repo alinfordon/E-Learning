@@ -29,6 +29,13 @@ const Shop = ({courses}) => {
      fetchCourses();
    }, []);
 */
+
+const filteredByLanguage = courses.filter(filteredCourse =>{
+  return router.locale.toString() === filteredCourse.language;             
+}, []);
+
+console.log(filteredByLanguage);
+
   return (    
     <Layout style={{ minHeight: '100vh' }}>   
         <Header style={{ padding: 0}}>
@@ -50,7 +57,7 @@ const Shop = ({courses}) => {
          
       <div className="container-fluid">
         <div className="row">
-          {courses.map((course) => (
+          {filteredByLanguage.map((course) => (
             <div key={course._id} className="col-md-4">
               <CourseCard course={course} />
             </div>

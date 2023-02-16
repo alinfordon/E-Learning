@@ -12,7 +12,7 @@ const CourseCard = ({ course }) => {
     return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
   }
 
-  const { name, instructor, price, image, photo, slug, paid, category, language } = course;
+  const { name, instructor, price, image, photo, slug, paid, category, language, description } = course;
   console.log(photo)
   return (
     <Link href={`/course/${slug}`}>
@@ -20,6 +20,7 @@ const CourseCard = ({ course }) => {
         <Card
           className="mb-4"
           cover={
+            
             <Image
               loader={myLoader}
               src={photo}
@@ -34,14 +35,17 @@ const CourseCard = ({ course }) => {
             
           }
         >
-          <h2 className="font-weight-bold">{name}</h2>
-          <p>by {instructor.name}</p>
+          <h5 className="font-weight-bold">{description.substring(0, 300)}</h5>
+          <hr/>
+          <h3 className="font-weight-bold">{name}</h3>          
+          <hr/>
+          
           <Badge
             count={`Language: ${language}`}
             style={{ backgroundColor: "#03a9f4" }}
             className="pb-2 mr-2"
           />
-         <p className="font-weight-bold">{category.substring(0, 100)} ...</p>
+          
         </Card>
       </a>
     </Link>

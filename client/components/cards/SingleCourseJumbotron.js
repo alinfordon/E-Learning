@@ -46,10 +46,10 @@ const SingleCourseJumbotron = ({
           <h1 className="text-light font-weight-bold mb-4">{name}</h1>          
           {/* description */}
           <p className="lead text-light">
-            {description && description.substring(0, 160)}...
+            {description && description}
           </p>          
-          {/* author */}
-          <p className="lead text-light">Created by: {instructor.name}</p>
+          {/* author <p className="lead text-light">Created by: {instructor.name}</p> */}
+          
           {/* updated at */}
           <p className="text-light">Last udpated: {new Date(updatedAt).toLocaleDateString()}</p> 
           {/* category */}

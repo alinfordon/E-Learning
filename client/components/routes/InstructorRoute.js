@@ -72,9 +72,14 @@ const InstructorRoute = ({ children }) => {
                 My Courses           
               </Link>
             </Item> 
+            <Item key="/instructor/course/category" onClick={(e) => setCurrent(e.key)}>
+              <Link href="/instructor/course/category" >              
+                Create Module           
+              </Link>
+            </Item> 
             <Item key="/instructor/course/create" onClick={(e) => setCurrent(e.key)}>
               <Link href="/instructor/course/create" >              
-                Create New Course           
+                Create Course           
               </Link>
             </Item> 
           </SubMenu>
@@ -115,7 +120,7 @@ const InstructorRoute = ({ children }) => {
               </div>
             </Content>
         )}
-        <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} WebNode, All Rights Reserved</Footer> 
+        <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Rainbo, All Rights Reserved</Footer> 
       </Layout>
     </Layout>
   );
