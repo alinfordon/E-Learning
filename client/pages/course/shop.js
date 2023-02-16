@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Select, Layout, Menu, Breadcrumb } from 'antd';
 import axios from "axios";
 import CourseCard from "../../components/cards/CourseCard";
+import ModuleCard from "../../components/cards/ModuleCard";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import locale from "antd/lib/date-picker/locale/en_US";
@@ -18,23 +19,29 @@ const { Content, Footer, Header } = Layout;
 const Shop = ({courses}) => {
   const router = useRouter();
   const { t } = useTranslation();
-/*
-  const [courses, setCourses] = useState([]);
+
+  const [modules, setModules] = useState([]);
+  const [modul, setModul] = useState("Module 1");
+  const [isModules, isSetModules] = useState(true);
 
    useEffect(() => {
-     const fetchCourses = async () => {
-       const { data } = await axios.get("/api/courses");
-       setCourses(data);
+     const fetchModules = async () => {
+       const { data } = await axios.get("/api/categorys");
+       setModules(data);
      };
-     fetchCourses();
+     fetchModules();
    }, []);
-*/
 
-const filteredByLanguage = courses.filter(filteredCourse =>{
-  return router.locale.toString() === filteredCourse.language;             
-}, []);
+   console.log(modul)
 
-console.log(filteredByLanguage);
+  const filteredByLanguage = courses.filter(filteredCourse =>{
+    return  router.locale.toString() === filteredCourse.language;             
+  }, []);
+
+  const filteredByModule = filteredByLanguage.filter(filteredCourse =>{
+    return  modul === filteredCourse.category;             
+  }, []);
+
 
   return (    
     <Layout style={{ minHeight: '100vh' }}>   
@@ -56,8 +63,15 @@ console.log(filteredByLanguage);
       <Content style={{ padding: '0 50px'}}>    
          
       <div className="container-fluid">
-        <div className="row">
-          {filteredByLanguage.map((course) => (
+        <div className="row dflex justify-content-center">
+          {isModules ? 
+           modules.map((module) => (
+            <div key={module._id} className="col-md-4 ">
+              <ModuleCard module={module} isSetModules={isSetModules} setModul={setModul} />
+            </div>
+          ))
+          : 
+          filteredByModule.map((course) => (
             <div key={course._id} className="col-md-4">
               <CourseCard course={course} />
             </div>

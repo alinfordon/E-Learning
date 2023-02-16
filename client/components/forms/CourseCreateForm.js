@@ -45,7 +45,7 @@ const CourseCreateForm = ({
             <Select
                   style={{ width: "100%" }}
                   size="large"
-                  defaultValue="Module 1"   
+                  defaultValue="Select module"   
                   name="category"  
                   onChange={(value) => setValues({ ...values, category: value })}
                 >           
@@ -54,6 +54,9 @@ const CourseCreateForm = ({
                 </Option>      
                 <Option value="Module 2" name="category" className="nav-item text-dark">
                         Module 2
+                </Option>
+                <Option value="Module 3" name="category" className="nav-item text-dark">
+                        Module 3
                 </Option>
             </Select>
           </div>
