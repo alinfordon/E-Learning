@@ -209,7 +209,16 @@ const SingleCourse = () => {
                     </div>
                   </>
                 )}
-
+               {course.lessons[clicked] &&
+                course.lessons[clicked].video_link && (
+                  <>
+                  <div className="container col-md-6 mt-4">
+                    <div className="wrapper">                   
+                    <YouTube videoId={course.lessons[clicked].video_link.split("=", 2)[1]} opts={opts} onReady={onReady} />                     
+                    </div>
+                  </div>
+                  </>
+                )}
                
 
               {!isQuizz && !isExam && <ReactMarkdown
