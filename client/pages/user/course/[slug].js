@@ -187,7 +187,7 @@ const SingleCourse = () => {
   return (
     <StudentRoute nodeRef={nodeRef}>   
       <div className="student text-center ">
-      <img src="/images/rainbo_logo-194x85.png" className="white-logo" width={150} alt="logo" /> 
+      <img src="/images/LOGO.png" className="white-logo" width={180} alt="logo" /> 
       <h1 className="text-light">{clicked === -1 ? course.name : course.lessons[clicked].title.substring(0, 200)}</h1>
       <img src="/images/eu_logo_right.png" className="white-logo" width={200} alt="logo" /> 
       </div> 
@@ -295,11 +295,11 @@ const SingleCourse = () => {
             <div className="d-flex justify-content-center p-5">
               {isEnd ? 
               <div>
-              <p className="lead" >End</p>
+              <img src="/images/end.png" className="white-logo" width={800} alt="logo" /> 
               </div>:
               <div className="text-center p-5">
                 <div className="wrapper">
-                  <ReactPlayer url='https://player.vimeo.com/video/759402145?h=bf08f58a1e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
+                <img src="/images/LOGO.png" className="white-logo" width={400} alt="logo" /> 
                 </div>
               <br/>
                 <p className="lead pointer" onClick={nextButton}>Click to start learning</p>                
@@ -329,6 +329,7 @@ const SingleCourse = () => {
 export default SingleCourse;
 //<pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre> <StudentNav clicked={clicked} setClicked={setClicked} course={course} completedLessons={completedLessons} />
 /*
+<ReactPlayer url='https://player.vimeo.com/video/759402145?h=bf08f58a1e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
 <Menu theme="light" defaultSelectedKeys={[clicked]} mode="inline" >
                 {course.lessons.map((lesson, index) => (
                         <Item

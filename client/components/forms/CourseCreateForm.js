@@ -22,7 +22,7 @@ const CourseCreateForm = ({
   console.log(values)
   const API_UP = process.env.NEXT_PUBLIC_UPLOAD;
   const myLoader = ({ src, width, quality }) => {
-    return `${API_UP}/${src}?w=${width}&q=${quality || 75}`
+    return `${API_UP}/${src}?w=${width}&q=${quality || 100}`
   }
   return (
     <>

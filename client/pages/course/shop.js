@@ -32,7 +32,9 @@ const Shop = ({courses}) => {
      fetchModules();
    }, []);
 
-   console.log(modul)
+   const filteredModuleByLanguage = modules.filter(filteredModule =>{
+    return  router.locale.toString() === filteredModule.language;             
+  }, []);
 
   const filteredByLanguage = courses.filter(filteredCourse =>{
     return  router.locale.toString() === filteredCourse.language;             
@@ -65,7 +67,7 @@ const Shop = ({courses}) => {
       <div className="container-fluid">
         <div className="row dflex justify-content-center">
           {isModules ? 
-           modules.map((module) => (
+           filteredModuleByLanguage.map((module) => (
             <div key={module._id} className="col-md-4 ">
               <ModuleCard module={module} isSetModules={isSetModules} setModul={setModul} />
             </div>

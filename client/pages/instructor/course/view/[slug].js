@@ -134,7 +134,7 @@ const CourseView = () => {
     //setUploadButtonText(file.name);
     setStatus({ ...status, uploadButtonText: file.name});
     const resizeFile = (file) => new Promise(resolve => {
-      Resizer.imageFileResizer(file, 800, 600, 'JPEG', 100, 0,
+      Resizer.imageFileResizer(file, 1024, 720, 'JPEG', 100, 0,
       uri => {
         resolve(uri);
       }, 'file' );
