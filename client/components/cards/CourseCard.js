@@ -18,7 +18,7 @@ const CourseCard = ({ course }) => {
     <Link href={`/course/${slug}`}>
       <a>
         <Card
-          className="mb-4"
+          className="shadow p-3 mb-5 bg-white rounded"
           cover={
             
             <Image
@@ -35,9 +35,9 @@ const CourseCard = ({ course }) => {
             
           }
         >
-          <h5 className="font-weight-bold">{description.substring(0, 300)}</h5>
+          <p className="font-weight-bold">{description}</p>
           <hr/>
-          <h3 className="font-weight-bold">{name}</h3>          
+          <h5 className="font-weight-bold">{name.substring(0, 100)}...</h5>          
           <hr/>
           
           <Badge

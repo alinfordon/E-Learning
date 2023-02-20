@@ -18,7 +18,7 @@ const ModuleCard = ({ module, isSetModules, setModul }) => {
     <div>
       <a onClick={(e) => {isSetModules(false), setModul(category)}}>
         <Card
-          className="mb-4"
+          className="shadow p-3 mb-5 bg-white rounded"
           cover={
             
             <Image
@@ -35,9 +35,9 @@ const ModuleCard = ({ module, isSetModules, setModul }) => {
             
           }
         >
-          <h3 className="font-weight-bold">{name}</h3> 
+          <h5 className="font-weight-bold">{name}</h5> 
           <hr/>           
-          <p className="font-weight-bold">{description}</p>        
+          <p className="font-weight-bold">{description.substring(0, 110)}...</p>        
           <hr/>
           
           <Badge

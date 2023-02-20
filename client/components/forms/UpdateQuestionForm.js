@@ -26,9 +26,10 @@ const UpdateQuestionForm = ({
           {current &&
           <form onSubmit={handleUpdateQuestion}>
           <label>Question</label>
-            <input
-              type="text"
-              className="form-control square"              
+            <textarea
+              className="form-control mt-3"
+              cols="7"
+              rows="4"            
               value={current.question}
               placeholder="Question"
               autoFocus

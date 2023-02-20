@@ -12,9 +12,11 @@ const QuizzQuestionForm = ({
           {values &&
           <form onSubmit={handleAddQuestion}>
           <label>Question</label>
-            <input
+            <textarea
               type="text"
-              className="form-control square"              
+              className="form-control mt-3"
+              cols="7"
+              rows="4"             
               value={values.question}
               placeholder="Question"
               autoFocus

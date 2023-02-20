@@ -244,7 +244,7 @@ const SingleCourse = () => {
                       <hr/>
                       {quizz && quizz.questions && quizz.questions.map((q) => (
                         <div key={q._id}>
-                        <h5 className="py-2" >{q.question}</h5>
+                        <ReactMarkdown source={q.question} className="single-post mt-4 py-2" />
                        <div className="mb-4 text-center">                        
                         { q.answers.map((a, index)=>(
                              <div
@@ -272,7 +272,7 @@ const SingleCourse = () => {
                       {exam && exam.questions && exam.questions.map((q) => (
                         <div key={q._id}>
                         <h3>Question</h3>
-                        <h5 className="py-2" >{q.question}</h5>
+                        <ReactMarkdown source={q.question} className="single-post mt-4 py-2" />                        
                         <hr />
                        <div className="mb-4">
                        <h3>Answers</h3>                        
@@ -319,7 +319,7 @@ const SingleCourse = () => {
           
         </div>
         <div className="col-md-1 section-menu-module">
-            <div className="" >
+            <div className="" >            
               {course.lessons[clicked] && course.lessons[clicked].quizz ? 
                 (isExam ? 
                   <p className="button-q"  onClick={isEnd ? router.push("/user") : nextButton}>{buttonName}</p> 
@@ -327,10 +327,11 @@ const SingleCourse = () => {
                   <button className="button-q" disabled={!isQuizz} onClick={createExam}> Save </button>) 
                   : 
                 <p className="button-q"  onClick={isEnd ? () => router.push("/user") : nextButton}>{buttonName}</p>
-              }
+              }              
             </div>
           </div>
         </div>   
+        
     </StudentRoute>
   );
 };
@@ -338,6 +339,7 @@ const SingleCourse = () => {
 export default SingleCourse;
 //<pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre> <StudentNav clicked={clicked} setClicked={setClicked} course={course} completedLessons={completedLessons} />
 /*
+<button className="button-q float-right" onClick={(e) => setClicked(clicked - 1)}> Back </button>
 <ReactPlayer url='https://player.vimeo.com/video/759402145?h=bf08f58a1e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' />
 <Menu theme="light" defaultSelectedKeys={[clicked]} mode="inline" >
                 {course.lessons.map((lesson, index) => (
