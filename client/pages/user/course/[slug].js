@@ -201,7 +201,7 @@ const SingleCourse = () => {
                     <div className="wrapper text-center mt-2">                   
                     <img
                     src={`${API_UP}/${course.lessons[clicked].data_link}`}
-                    width="75%"
+                    width="70%"
                     height="250px"
                     frameBorder="0"
                     
@@ -221,10 +221,16 @@ const SingleCourse = () => {
                 )}
                
 
-              {!isQuizz && !isExam && <ReactMarkdown
-                source={course.lessons[clicked].content}
-                className="single-post mt-4"
-              />}
+              {!isQuizz && !isExam && 
+                <div className="container">
+                  <div className="row d-flex justify-content-center">
+                    <ReactMarkdown
+                    source={course.lessons[clicked].content}
+                    className="single-post mt-4 "
+                    />
+                  </div>
+              </div>
+              }
                 
                 {course.lessons[clicked] && course.lessons[clicked].quizz &&
                   <div className="mt-4">
@@ -282,14 +288,17 @@ const SingleCourse = () => {
                              //className={a.correct ? "mt-4 alert-q" : "mt-4 alert-q alert-incorrect "} 
                             
                            >                            
-                             <p>{index + 1 + ")"} <span className={a.correct ? "text-success" : "text-danger"}>{a.answer}</span></p>                             
+                             <p>{index + 1 + ")"} <span className={a.correct ? "text-success" : "text-danger"}>{a.answer}</span></p> 
+                            
+                             {a.feedback && <p className="py-2 text-info">Feedback {index + 1 + ") -"}  {a.feedback && a.feedback}</p>}                           
                            </div>
                         ))}                        
                         <hr/>
                         </div>
-                        <h3>Feedback</h3>
-                        <h5 className="py-2 alert-q">{q.feedbackp && q.feedbackp}</h5>
-                        <h5 className="py-2 alert-q alert-incorrect">{q.feedbackn && q.feedbackn}</h5>
+                        {q.feedbackp || q.feedbackn && <h3>Feedback</h3>}
+                        {q.feedbackp && <h5 className="py-2 alert-q">{q.feedbackp && q.feedbackp}</h5>}
+                        {q.feedbackn && <h5 className="py-2 alert-q alert-incorrect">{q.feedbackn && q.feedbackn}</h5>}
+                        
                         <hr />
                         </div>
                       ))}                       
@@ -318,7 +327,7 @@ const SingleCourse = () => {
           )}
           
         </div>
-        <div className="col-md-1 section-menu-module">
+        <div className="col-md-2 section-menu-module">
             <div className="" >            
               {course.lessons[clicked] && course.lessons[clicked].quizz ? 
                 (isExam ? 
@@ -326,7 +335,10 @@ const SingleCourse = () => {
                   : 
                   <button className="button-q" disabled={!isQuizz} onClick={createExam}> Save </button>) 
                   : 
-                <p className="button-q"  onClick={isEnd ? () => router.push("/user") : nextButton}>{buttonName}</p>
+                <div>
+                  {!isEnd && clicked !== -1 && <p className="button-q mr-2" onClick={(e) => setClicked(clicked - 1)}> Back </p>}
+                  <p className="button-q"  onClick={isEnd ? () => router.push("/user") : nextButton}>{buttonName}</p>                  
+                </div> 
               }              
             </div>
           </div>
