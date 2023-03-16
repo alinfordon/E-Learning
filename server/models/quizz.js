@@ -81,6 +81,10 @@ const quizzSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },  
+    hotspot: {
+      type: Boolean,
+      default: false,
+    },
     grade: {
       type: Number,
       default: 0,

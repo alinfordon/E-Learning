@@ -11,6 +11,7 @@ const CreateQuizz = () => {
     const [values, setValues] = useState({
         title: "",
         description: "",
+        hotspot: false,        
     });
     // router
     const router = useRouter();

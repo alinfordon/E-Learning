@@ -1,4 +1,4 @@
-import { Button, Progress, Tooltip } from "antd";
+import { Button, Progress, Tooltip, Select, Switch } from "antd";
 import React, { useState, useEffect } from "react";
 
 const QuizzCreateForm = ({
@@ -31,8 +31,16 @@ const QuizzCreateForm = ({
                 className="form-control"
                 onChange={(e) => setValues({ ...values, description: e.target.value })}
               ></textarea>
+            </div>          
+            <div className="d-flex justify-content-between">
+            <span className="pt-3 badge ">Is HotSpot?</span>
+              <Switch
+                className="float-right mt-2"            
+                checked={values.hotspot}
+                name="isPlain"
+                onChange={(v) => setValues({ ...values, hotspot: v })}
+              />
             </div>
-          
           <Button
               onClick={handleSubmit}
               className="col mt-3"
@@ -44,6 +52,7 @@ const QuizzCreateForm = ({
           </Button>
           </form>
           }   
+          <pre>{JSON.stringify(values, null, 4)}</pre>
       </div>
     )
 }

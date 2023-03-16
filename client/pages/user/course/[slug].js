@@ -2,12 +2,14 @@ import React, { useState, useEffect, createElement, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import StudentRoute from "../../../components/routes/StudentRoute";
+import UserRoute from "../../../components/routes/UserRoute";
 import StudentNav from "../../../components/nav/StudentNav";
 import { Layout, Button, Menu, Avatar, Alert } from "antd";
 import ReactPlayer from "react-player";
 import YouTube from 'react-youtube';
 import ReactMarkdown from "react-markdown";
 import TopNav from "../../../components/TopNav";
+import HotspotModal from "../../../components/modal/HotspotModal";
 import {
   PlayCircleOutlined,
   MenuFoldOutlined,
@@ -17,13 +19,19 @@ import {
 } from "@ant-design/icons";
 
 
+
+
 const { Item } = Menu;
 const { Content, Footer, Header, Sider } = Layout;
 
-const SingleCourse = () => { 
+const SingleCourse = () => {   
   const [clicked, setClicked] = useState(-1);
   const [collapsed, setCollapsed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [answerModal, setAnswerModal] = useState("");
   const [isQuizz, setIsQuizz] = useState(false);
+  const [isHotspot, setIsHotspot] = useState(false);
   const [addQuizz, setAddQuizz] = useState(false);
   const [isExam, setIsExam] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
@@ -74,7 +82,11 @@ const SingleCourse = () => {
       quizzId: course.lessons[clicked].quizz,
     });
     setQuizz(data[0]);    
-    setIsQuizz(true);    
+    if(data[0].hotspot === true){
+      setIsHotspot(true)
+    }else{
+      setIsQuizz(true); 
+    }       
   }
 
   const loadCompletedLessons = async () => {
@@ -234,11 +246,37 @@ const SingleCourse = () => {
                 
                 {course.lessons[clicked] && course.lessons[clicked].quizz &&
                   <div className="mt-4">
-                    {!isQuizz && !isExam && <> 
-                      <SyncOutlined
-                        spin
-                        className="d-flex justify-content-center display-1 text-primary p-5"
-                      />                   
+                    {!isQuizz && !isExam && <>                       
+                      <h3 className="text-primary">{quizz.title}</h3>     
+                      <ReactMarkdown
+                        children={quizz.description}
+                        className="single-post"
+                      />
+                      <hr/>
+                      <div className="container">  
+                        <div className="row d-flex justify-content-center p-4">
+                          {quizz && quizz.questions && quizz.questions.map((q) => (
+                            <div key={q._id}>  
+                            { q.answers.map((a, index)=>(
+                                <div
+                                key={index}
+                                className="col-md-6 text-center"
+                                //onClick={() => checkAnswer(q, index)}
+                                //className={a.chekd ? "col-md-8 mt-4 button-q pressed text-left" : "col-md-8 mt-4 button-q text-left"}
+                                //size="large"
+                                //type={a.chekd ? "warning" : "primary"}                      
+                                //shape="round"
+                                //Hotspot
+                              >
+                                <p onClick={() => {setShowModal(true), setTitleModal(q.question), setAnswerModal(a.answer)}} className=" mt-4 button-h text-center">{q.question}</p>
+
+                                <HotspotModal showModal={showModal} setShowModal={setShowModal} title={titleModal} answser={answerModal} />
+                              </div>
+                            ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                      </>}           
                     {isQuizz && <>
                       <hr/>
@@ -333,6 +371,7 @@ const SingleCourse = () => {
                 (isExam ? 
                   <p className="button-q"  onClick={isEnd ? router.push("/user") : nextButton}>{buttonName}</p> 
                   : 
+                  isHotspot ? <p className="button-q"  onClick={isEnd ? router.push("/user") : nextButton}>{buttonName}</p> : 
                   <button className="button-q" disabled={!isQuizz} onClick={createExam}> Save </button>) 
                   : 
                 <div>
@@ -349,6 +388,9 @@ const SingleCourse = () => {
 };
 
 export default SingleCourse;
+
+
+
 //<pre>{JSON.stringify(course.lessons[clicked], null, 4)}</pre> <StudentNav clicked={clicked} setClicked={setClicked} course={course} completedLessons={completedLessons} />
 /*
 <button className="button-q float-right" onClick={(e) => setClicked(clicked - 1)}> Back </button>

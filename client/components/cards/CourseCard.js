@@ -13,14 +13,22 @@ const CourseCard = ({ course }) => {
   }
 
   const { name, instructor, price, image, photo, slug, paid, category, language, description } = course;
-  console.log(photo)
+  
   return (
-    <Link href={`/course/${slug}`}>
+    <Link href={`/course/${slug}`} >
       <a>
         <Card
-          className="shadow p-3 mb-5 bg-white rounded"
-          cover={
-            
+          className="shadow mt-4 mb-4 card-anim pe-auto"
+          style={{ backgroundColor: "transparent", borderRadius: '5px' }}
+          bodyStyle={{
+            backgroundImage: "url('/images/papper.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "#fff",
+            minHeight: "250px",
+            borderRadius: '5px'
+          }}
+          cover={            
             <Image
               loader={myLoader}
               src={photo}
@@ -37,7 +45,7 @@ const CourseCard = ({ course }) => {
         >
           <p className="font-weight-bold">{description}</p>
           <hr/>
-          <h5 className="font-weight-bold">{name.substring(0, 100)}...</h5>          
+          <h6 className="font-weight-bold">{name.substring(0, 100)}</h6>          
           <hr/>
           
           <Badge

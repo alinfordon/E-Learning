@@ -43,6 +43,7 @@ const UserIndex = () => {
     }
   };
 
+  console.log(courses)
   return (
     <UserRoute>
       {loading && (
@@ -82,7 +83,7 @@ const UserIndex = () => {
                     className="text-muted"
                     style={{ marginTop: "-15px", fontSize: "12px" }}
                   >
-                    {t("user:instructor")}: {course.instructor.name}
+                   {course.description}
                   </p>
                 </div>
                 <div className="col-md-3 mt-3 text-center">
