@@ -26,6 +26,7 @@ const CourseCard = ({ course }) => {
             backgroundPosition: "center",
             color: "#fff",
             minHeight: "250px",
+            maxWidth: "400px",
             borderRadius: '5px'
           }}
           cover={            

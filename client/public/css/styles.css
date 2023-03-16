@@ -20,6 +20,25 @@
   padding: 25px;
 }
 
+.student-logo {
+  max-width: 12%;
+  height: auto;
+}
+
+.student-title {
+  font-size: 1rem;  
+  word-wrap: break-word;
+}
+
+@media screen and (min-width: 768px) {
+  .student-logo {
+    max-width: 12%;
+  }
+
+  .student-title  {
+    font-size: 2rem;    
+  }
+}
 
 .pointer {
   cursor: pointer;
@@ -91,11 +110,14 @@
 .card-anim {
   transition: transform 0.2s ease-in-out;
   transform-origin: center center;   
+  margin: 5%;
 }
 
 .card-anim:hover {
   transform: scale(1.05);
 }
+
+
 
 .modal-description {
   margin: 5% auto;

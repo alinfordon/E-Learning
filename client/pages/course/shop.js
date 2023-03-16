@@ -65,21 +65,21 @@ const Shop = ({courses}) => {
       <Content style={{ padding: '0 50px'}}>    
          
       <div className="container-fluid">
-        <div className="row dflex justify-content-center">
+        <div className="row dflex justify-content-around">
           {isModules ? 
            filteredModuleByLanguage.map((module) => (
-            <div key={module._id} className="col-md-3 ">
+            <div key={module._id} className=" ">
               <ModuleCard module={module} isSetModules={isSetModules} setModul={setModul} />
             </div>
           ))
           : 
           filteredByModule.map((course) => (
-            <div key={course._id} className="col-md-3">
+            <div key={course._id} className="">
               <CourseCard course={course} />
             </div>
           ))}
         </div>
-        {!isModules && <button className="button-q" onClick={(e) => isSetModules(true)}> Back to Module </button>}        
+        {!isModules && <button className="button-q mb-4 mt-4" onClick={(e) => isSetModules(true)}> Back to Module </button>}        
       </div>     
       </Content>
       <Footer style={{ textAlign: 'center' }}> 

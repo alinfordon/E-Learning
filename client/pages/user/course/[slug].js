@@ -199,9 +199,9 @@ const SingleCourse = () => {
   return (
     <StudentRoute nodeRef={nodeRef}>   
       <div className="student text-center ">
-      <img src="/images/LOGO.png" className="white-logo" width={180} alt="logo" /> 
-      <h1 className="text-light">{clicked === -1 ? course.name : course.lessons[clicked].title.substring(0, 200)}</h1>
-      <img src="/images/eu_logo_right.png" className="white-logo" width={200} alt="logo" /> 
+      <img src="/images/LOGO.png" className="student-logo"  alt="logo" /> 
+      <p className="text-light student-title">{clicked === -1 ? course.name : course.lessons[clicked].title.substring(0, 200)}</p>
+      <img src="/images/eu_logo_right.png" className="student-logo" alt="logo" /> 
       </div> 
         <div className="culumn " style={{ minHeight: '70vh' }} >          
           <div className="container-fluid " style={{ minHeight: '65vh', position: 'relative', zIndex: 1 }}>

@@ -18,9 +18,18 @@ const ModuleCard = ({ module, isSetModules, setModul }) => {
     <div>
       <a onClick={(e) => {isSetModules(false), setModul(category)}}>
         <Card
-          className="shadow p-3 mb-5 bg-white rounded"
-          cover={
-            
+          className="shadow mt-4 mb-4 card-anim pe-auto"
+          style={{ backgroundColor: "transparent", borderRadius: '5px' }}
+          bodyStyle={{
+            backgroundImage: "url('/images/papper.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "#fff",
+            minHeight: "280px",
+            maxWidth: "400px",
+            borderRadius: '5px'
+          }}
+          cover={            
             <Image
               loader={myLoader}
               src={photo && photo}
@@ -28,24 +37,13 @@ const ModuleCard = ({ module, isSetModules, setModul }) => {
               layout="responsive"
               objectFit='cover'
               height={200}
-              width={500}
-              //style={{ height: "200px", objectFit: "cover" }}
-              //className="p-1"
-            />
-            
+              width={500}              
+            />            
           }
         >
           <h5 className="font-weight-bold">{name}</h5> 
           <hr/>           
-          <p className="font-weight-bold">{description.substring(0, 110)}...</p>        
-          <hr/>
-          
-          <Badge
-            count={`Language: ${language}`}
-            style={{ backgroundColor: "#03a9f4" }}
-            className="pb-2 mr-2"
-          />
-          
+          <p className="font-weight-bold">{description}</p>    
         </Card>
       </a>
     </div>
