@@ -197,8 +197,8 @@
 }
 
 .alert-incorrect {
-  background-color: #56aff7; 
-  color: #000;  
+  background-color: #f83838; 
+  color: rgb(255, 255, 255);  
   transform: translateY(4px);
 }
 

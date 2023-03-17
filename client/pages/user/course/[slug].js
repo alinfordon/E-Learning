@@ -129,6 +129,7 @@ const SingleCourse = () => {
   const resetQuizz = () =>{    
     setIsQuizz(false);
     setIsExam(false);
+    setIsHotspot(false);
     setQuizz({});
   }
 
@@ -333,8 +334,9 @@ const SingleCourse = () => {
                         ))}                        
                         <hr/>
                         </div>
-                        {q.feedbackp || q.feedbackn && <h3>Feedback</h3>}
+                        {q.feedbackp && <h4 className="text-success">Feedback correct: </h4>}
                         {q.feedbackp && <h5 className="py-2 alert-q">{q.feedbackp && q.feedbackp}</h5>}
+                        {q.feedbackp && <h4 className="text-danger mt-4">Feedback incorrect: </h4>}
                         {q.feedbackn && <h5 className="py-2 alert-q alert-incorrect">{q.feedbackn && q.feedbackn}</h5>}
                         
                         <hr />
