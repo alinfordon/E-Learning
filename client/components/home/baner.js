@@ -39,7 +39,7 @@ const HomeBaner = () => {
                     <img src="/images/home-shape-2-45ee2697b879b410f36107f5fc7773ee.png" alt="main-image"/>
                 </div>
                 <div className="shape-img1">
-                    <img style={{borderRadius: '100%', height: '600px'}}  src="/images/happy-children.jpg" alt="main-image"/>
+                    <img style={{borderRadius: '100%', height: '600px'}}  src="/images/students1.jpg" alt="main-image"/>
                 </div>                
         </div>
     )
