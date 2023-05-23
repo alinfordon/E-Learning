@@ -230,3 +230,9 @@ export const resetPassword = async (req, res) => {
     return res.status(400).send("Error! Try again.");
   }
 };
+
+export const users = async (req, res) => {
+  const all = await User.find().select("-password")    
+    .exec();
+  res.json(all);
+};

@@ -17,12 +17,14 @@ import {
   findUser,
   addAdminRole,
   deleteAdminRole,
+  users,
 } from "../controllers/auth";
 
 router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/current-user", requireSignin, currentUser);
+router.get("/users", requireSignin, users);
 router.get("/current-admin", requireSignin, currentAdmin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);

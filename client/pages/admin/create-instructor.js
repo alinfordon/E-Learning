@@ -8,6 +8,7 @@ import { useTranslation } from 'next-i18next';
 import AdminRoute from "../../components/routes/AdminRoute";
 import { DeleteOutlined, UserSwitchOutlined } from '@ant-design/icons';
 import swal from "sweetalert";
+import LocalSearch from "../../components/forms/LocalSearch";
 
 export async function getStaticProps({locale}) {
   return {
@@ -23,6 +24,8 @@ const CreateInstructor = () => {
     const [loading, setLoading] = useState(false);
     const [userChange, setUserChange] = useState();
     const [email, setEmail] = useState();
+    const [users, setUsers] = useState([]);
+    const [keyword, setKeyword] = useState("");
     const { t } = useTranslation();
     const {
         state: { user },
@@ -35,6 +38,17 @@ const CreateInstructor = () => {
       console.log("User Find => ", data[0]);
       setUserChange(data[0]);
     };
+
+    const loadUsers = async () => {
+      const { data } = await axios.get(`/api/users`);      
+      setUsers(data);
+    };
+
+    useEffect(() => {
+      loadUsers();
+    }, []);
+
+    //console.log("Users in front => ", users);
 
     const addAdmin = async (e) => {
       e.preventDefault();
@@ -99,7 +113,7 @@ const CreateInstructor = () => {
     
 
      
-    console.log("User Find => ", email);
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
 
     return (
@@ -194,8 +208,20 @@ const CreateInstructor = () => {
                   </div>
                 }
                 <hr/>
-              </div>
-            </div>   
+              </div>               
+            </div> 
+            <div className="container mt-4">
+              <h1 className="student-title p-50">Users: {users.length}</h1>
+              <div className="col-md-12">
+            <LocalSearch keyword={keyword} setKeyword={setKeyword} />                
+                {users.filter(searched(keyword)).map((c) => (
+                  <div className="alert alert-secondary" key={c._id}>
+                    {c.name} - {c.email}                    
+                    <span className="float-right text-success">Enroled to {c.courses.length} courses</span>
+                  </div>
+                ))}
+                </div>
+              </div>            
         </AdminRoute>
     )
 }
