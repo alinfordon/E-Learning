@@ -9,6 +9,8 @@ import { requireSignin } from "../middlewares";
 import {
   register,
   login,
+  editUser,
+  updateUser,
   logout,
   currentUser,
   currentAdmin,
@@ -24,6 +26,8 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/current-user", requireSignin, currentUser);
+router.get("/update-user", requireSignin, updateUser);
+router.put("/edit-user", requireSignin, editUser);
 router.get("/users", requireSignin, users);
 router.get("/current-admin", requireSignin, currentAdmin);
 router.post("/forgot-password", forgotPassword);

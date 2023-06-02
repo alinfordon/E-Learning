@@ -25,6 +25,10 @@ const userSchema = new Schema(
       type: String,
       default: "/avatar.png",
     },
+    language: {
+      type: String,
+      default: "en",
+    },
     role: {
       type: [String],
       default: ["Subscriber"],

@@ -16,7 +16,7 @@ const SES = new AWS.SES(awsConfig);
 export const register = async (req, res) => {
   try {
     // console.log(req.body);
-    const { name, email, password } = req.body;
+    const { name, language, email, password } = req.body;
     // validation
     if (!name) return res.status(400).send("Name is required");
     if (!password || password.length < 6) {
@@ -34,6 +34,7 @@ export const register = async (req, res) => {
     const user = new User({
       name,
       email,
+      language,
       password: hashedPassword,
     });
     await user.save();
@@ -81,6 +82,32 @@ export const logout = async (req, res) => {
     return res.json({ message: "Signout success" });
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password").exec();
+    console.log("CURRENT_USER", user);
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editUser = async (req, res) => {
+  try {
+    const id = req.user._id
+    const { name, language } = req.body;      
+    const updated = await User.findOneAndUpdate(
+      { _id: id }, 
+      {$set: {name: name, language: language}  }, 
+      ).exec();
+
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err.message);
   }
 };
 

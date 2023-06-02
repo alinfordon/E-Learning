@@ -65,6 +65,11 @@ const UserRoute = ({ children, showNav = true }) => {
                 Dashboard
               </Link>
               </Menu.Item>    
+            <Menu.Item key="/user/edit" onClick={(e) => setCurrent(e.key)}  icon={<EditOutlined />}>
+              <Link href="/user/edit">
+              {t("user:edit-user")}
+              </Link>
+            </Menu.Item> 
           </Menu>
         </Sider>  
       <Layout className="site-layout">

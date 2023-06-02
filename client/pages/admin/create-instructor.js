@@ -216,8 +216,9 @@ const CreateInstructor = () => {
             <LocalSearch keyword={keyword} setKeyword={setKeyword} />                
                 {users.filter(searched(keyword)).map((c) => (
                   <div className="alert alert-secondary" key={c._id}>
-                    {c.name} - {c.email}                    
-                    <span className="float-right text-success">Enroled to {c.courses.length} courses</span>
+                    {c.name} | {c.email} | <span className="text-danger">Language: {c.language} </span>                   
+                    <span className="float-right text-success">Enroled to {c.courses.length} units</span>
+                    
                   </div>
                 ))}
                 </div>

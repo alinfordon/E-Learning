@@ -24,6 +24,7 @@ const { Content, Footer, Header } = Layout;
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [language, setLanguage] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -35,7 +36,10 @@ const Register = () => {
 
   useEffect(() => {
     if (user !== null) router.push("/");
+    setLanguage(router.locale.toString());
   }, [user]);
+
+  console.log(language)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +48,7 @@ const Register = () => {
       setLoading(true);
       const { data } = await axios.post(`/api/register`, {
         name,
+        language,
         email,
         password,
       });
@@ -51,6 +56,7 @@ const Register = () => {
       toast("Registration successful. Please login.");
       setName("");
       setEmail("");
+      setLanguage("");
       setPassword("");
       setLoading(false);
     } catch (err) {

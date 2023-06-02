@@ -32,6 +32,8 @@ const Shop = ({courses}) => {
      fetchModules();
    }, []);
 
+   console.log(modules)
+
    const filteredModuleByLanguage = modules.filter(filteredModule =>{
     return  router.locale.toString() === filteredModule.language;             
   }, []);

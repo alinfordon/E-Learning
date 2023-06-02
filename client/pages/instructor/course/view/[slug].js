@@ -76,11 +76,13 @@ const CourseView = () => {
   }; 
  
   const studentCount = async () => {
-    const { data } = await axios.post(`/api/instructor/student-count`, {
+    const { data } = await axios.post(`/api/instructor/student-count`, { 
       courseId: course._id,
     });    
     setStudents(data.length);
   };
+
+  console.log(students)
 
   // FUNCTIONS FOR ADD LESSON
   const handleAddLesson = async (e) => {
