@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context";
 import AdminRoute from "../../components/routes/AdminRoute";
 import axios from "axios";
-import { Avatar } from "antd";
+import { Avatar, Badge } from "antd";
 import { useRouter } from "next/router";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -78,12 +78,38 @@ const AdminIndex = () => {
             <h5 className="student-title">{t("user:users")}: {users.length}</h5>
             <hr/>
             <div className="row d-flex justify-content-center">
-              <h5 className="text-info p-4">{t("user:users")} EN: {filteredUsersByLanguageEn.length}</h5>
+            <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/gb.png" />}>
+              <div className="mt-2">
+              <h5 className="text-info p-4">   
+                {t("user:users")} EN: {filteredUsersByLanguageEn.length}             
+              </h5>
+              </div>
+              </Badge.Ribbon>  
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/ro.png" />}>
+              <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} RO: {filteredUsersByLanguageRo.length}</h5>
+              </div>
+              </Badge.Ribbon> 
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/fr.png" />}>
+              <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} FR: {filteredUsersByLanguagFr.length}</h5>
+              </div>
+              </Badge.Ribbon>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/gr.png" />}>
+              <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} EL: {filteredUsersByLanguagEl.length}</h5>
+              </div>
+              </Badge.Ribbon>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/pt.png" />}>
+              <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} PT: {filteredUsersByLanguagPt.length}</h5>
+              </div>
+              </Badge.Ribbon>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/nl.png" />}>
+              <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} NL: {filteredUsersByLanguagNl.length}</h5>
+              </div>
+              </Badge.Ribbon>
             </div>
             <div className="container mt-4">              
               <div className="col-md-12">

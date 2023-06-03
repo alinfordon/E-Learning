@@ -27,11 +27,11 @@ const EditUser = () => {
     dispatch,
   } = useContext(Context);     
   const [current, setCurrent] = useState({}); 
- 
+  
 
   // router
   const router = useRouter();
- 
+  const { pathname, asPath, query } = router
 
   useEffect(() => {
     loadUser(); 
@@ -42,7 +42,7 @@ const EditUser = () => {
     setCurrent(data && data);    
   };
 
-  console.log(current)
+  //console.log(current)
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +59,7 @@ const EditUser = () => {
         payload: updateUser.data,
       });
       // redirect
+      router.push({ pathname, query }, asPath, { locale: current.language })
       router.push("/user");      
     } catch (err) {
       toast("Eroare");

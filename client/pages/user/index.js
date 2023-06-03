@@ -42,8 +42,7 @@ const UserIndex = () => {
       setLoading(false);
     }
   };
-
-  console.log(courses)
+  
   return (
     <UserRoute>
       {loading && (

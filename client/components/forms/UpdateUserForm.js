@@ -17,11 +17,13 @@ const { pathname, asPath, query } = router
 
 function handleChange(value) {    
     //locale={value};       
-    router.push({ pathname, query }, asPath, { locale: value })
+    //router.push({ pathname, query }, asPath, { locale: value })
     setCurrent({ ...current, language: value })
+    //router.push({ pathname, query }, asPath, { locale: value })
+    console.log("VALUE: ", value)
   }
 
-  
+  console.log("CURENT LANGUAGE: ", current.language);
   return (
     <div className="container pt-3">
       {/* {JSON.stringify(current)} */}
@@ -40,7 +42,7 @@ function handleChange(value) {
         <label>{t("user:prefered-language")}</label>
        <Select 
             className="nav-language" 
-            defaultValue={router.locale.toString()} 
+            value={current && current.language} 
             style={{ width: 80 }} 
             onChange={handleChange}>
             {router.locales.map((locale) => (
