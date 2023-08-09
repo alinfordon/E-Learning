@@ -11,6 +11,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import TopNav from "../../components/TopNav";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import Disclaimer from "../../components/home/Disclaimer";
 
 const { Content, Footer, Header } = Layout;
 
@@ -124,6 +125,10 @@ const SingleCourse = ({ course }) => {
         />
       )}
       </Content>
+      <div>
+        <hr />
+        <Disclaimer />
+      </div>
     </Layout>
   );
 };

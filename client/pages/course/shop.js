@@ -9,6 +9,7 @@ import locale from "antd/lib/date-picker/locale/en_US";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import TopNav from "../../components/TopNav";
+import Disclaimer from "../../components/home/Disclaimer";
 
 
 
@@ -94,6 +95,10 @@ const Shop = ({courses}) => {
                 </li>
               ))}
         </ul>
+        <div className="mt-4">
+          <Disclaimer />
+          <hr/>
+        </div>
         --© {(new Date().getFullYear())} Rainbo Project, All Rights Reserved
       </Footer>
     </Layout>    

@@ -78,34 +78,34 @@ const AdminIndex = () => {
             <h5 className="student-title">{t("user:users")}: {users.length}</h5>
             <hr/>
             <div className="row d-flex justify-content-center">
-            <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/gb.png" />}>
+            <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/gb.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">   
                 {t("user:users")} EN: {filteredUsersByLanguageEn.length}             
               </h5>
               </div>
               </Badge.Ribbon>  
-              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/ro.png" />}>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/ro.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} RO: {filteredUsersByLanguageRo.length}</h5>
               </div>
               </Badge.Ribbon> 
-              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/fr.png" />}>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/fr.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} FR: {filteredUsersByLanguagFr.length}</h5>
               </div>
               </Badge.Ribbon>
-              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/gr.png" />}>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/gr.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} EL: {filteredUsersByLanguagEl.length}</h5>
               </div>
               </Badge.Ribbon>
-              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/pt.png" />}>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/pt.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} PT: {filteredUsersByLanguagPt.length}</h5>
               </div>
               </Badge.Ribbon>
-              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="images/nl.png" />}>
+              <Badge.Ribbon color="white" text={ <img className="mr-2"  src="/images/nl.png" />}>
               <div className="mt-2">
               <h5 className="text-info p-4">{t("user:users")} NL: {filteredUsersByLanguagNl.length}</h5>
               </div>

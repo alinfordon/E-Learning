@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import React from "react";
+import { useState, useEffect, useContext } from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next'
 
@@ -13,24 +13,25 @@ export async function getStaticProps({locale}) {
 
 const Contact = () => {
     const { t } = useTranslation();
+    const [send, setSend] = useState(true);
 
     return(
         <section className="project-section pt-100 pb-100 bg-white">
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6">
-                        <div className="productive-content">
-                            <span>{t('homepage:contact-us')}</span>
+                        <div className="productive-content">                            
                             <h3>{t('homepage:funding')}</h3>
                             <p>{t('homepage:funding-p')}</p>
                             <div className="section-footer-logo">
-                                <img src="/images/eramus.png" className="footer-logo" alt="logo" /> 
+                                
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <div className="">
                             <h3>{t('homepage:contact-us')}</h3>
+                            {send ?
                             <form>
                             <input
                                 type="text"
@@ -51,9 +52,14 @@ const Contact = () => {
                                     placeholder={t('homepage:content')}
                             ></textarea>
                             <div className="mt-3">                                
-                                <Button type="primary" shape="round" size="large" className="float-right ">{t('homepage:submit')}</Button>
+                                <Button onClick={() => setSend(false)} type="primary" shape="round" size="large" className="float-right ">{t('homepage:submit')}</Button>
                             </div>
-                            </form>
+                            </form>: 
+                                <>
+                                <h5 className="mt-4">Your message has been sent.</h5>
+                                <Button onClick={() => setSend(true)} type="primary" shape="round" size="large" className="float-right ">Ok</Button>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

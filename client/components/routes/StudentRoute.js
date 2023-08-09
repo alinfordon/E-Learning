@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import TopNav from "../TopNav";
 import { Layout } from "antd";
+import Disclaimer from "../home/Disclaimer";
 
 export async function getStaticProps({locale}) {
   return {
@@ -60,8 +61,14 @@ const StudentRoute = ({ children, showNav = true }) => {
         />
       ) : (
         <div className="container-fluid">{children} </div>
-      )}     
-      <Footer style={{ textAlign: 'center', marginTop: 25 }}>--© {(new Date().getFullYear())} Rainbo Project, All Rights Reserved</Footer> 
+      )}  
+       
+      <Footer style={{ textAlign: 'center', marginTop: 25 }}>
+      <Disclaimer />
+        <hr />  
+        --© {(new Date().getFullYear())} Rainbo Project, All Rights Reserved
+      
+      </Footer> 
     </Layout>    
   );
 };

@@ -14,6 +14,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import TopNav from "../TopNav";
 import { Layout, Menu } from "antd";
+import Disclaimer from "../home/Disclaimer";
 
 
 export async function getStaticProps({locale}) {
@@ -94,7 +95,10 @@ const AdminRoute = ({ children, showNav = true }) => {
               {children}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} WebNode, All Rights Reserved</Footer>   
+      <Footer style={{ textAlign: 'center' }}>
+        <Disclaimer />
+        <hr />
+        --© {(new Date().getFullYear())} Rainbo, All Rights Reserved</Footer>   
       </Layout>   
     </Layout>
   );

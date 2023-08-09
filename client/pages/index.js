@@ -14,6 +14,7 @@ import AboutUs from "../components/home/AboutUs";
 import OurProjects from "../components/home/OurProjects";
 import OurPartners from "../components/home/OurPartners";
 import Contact from "../components/home/Contact";
+import Disclaimer from "../components/home/Disclaimer";
 import HomeNav from "../components/home/HomeNav";
 import { FacebookFilled , TwitterSquareFilled , FacebookOutlined, TwitterOutlined } from "@ant-design/icons";
 
@@ -109,7 +110,8 @@ const Index = ({courses}) => {
       <Footer className="footer-root">       
       <section className="footer-section">
         <div className="container">            
-            <div className="row"><div className="col-md-2">                
+            <div className="row">
+              <div className="col-md-2">                
                 <ul className="list-unstyled">
                     <li><span className="h5"> {t('homepage:follow-us')}: </span></li>                                    
                     <li className="p-2">
@@ -119,8 +121,26 @@ const Index = ({courses}) => {
                     <hr />       
                     <li className="h6"><a href="#">Terms & Conditions</a></li>                                        
                 </ul>  
+            </div>
+            <div className="col-md-10">            
+            <div className="container">
+                <div className="row align-items-center">
+                    <div className="col-lg-4">
+                        <div className="productive-content">                            
+                            <div className="section-footer-logo">
+                                <img src="/images/eramus.png" className="footer-logo" alt="logo" /> 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-8">                        
+                            <strong>The European Commission support for the production of this publication does not constitute an endorsement of 
+                                the contents which reflects the views only of the authors, and the Commission cannot be held responsible for 
+                                any use which may be made of the information contained therein.</strong>   
+                    </div>
                 </div>
             </div>
+          </div>
+          </div>          
         </div>
         </section>               
         <hr />                 
